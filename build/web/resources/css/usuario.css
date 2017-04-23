@@ -1,0 +1,306 @@
+
+body {
+/*   background: url(../img/body-bkg.png) repeat-x scroll 0% 0% #C8CDD6;*/
+ background: url(../img/back-interno.png) repeat-y;
+ background-color: #FFFFFF;
+  background-size: 100%;
+  
+    line-height: 1;
+    font-size: 12px;
+    font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    width: 98.5%;
+/*  background: url(../img/back-interno.png) repeat-y;
+    background-color: #FFFFFF;
+    background-size: 100%;*/
+}
+/*body.interno {
+    background: url(../images/back-interno.png) repeat-y;
+    background-color: #FFFFFF;
+    background-size: 100%;
+}*/
+
+
+#header{
+    height: 120px;
+    background-color: rgb(9,33,103);
+/*background: url(../img/back-header-int1.png) no-repeat center;*/
+    box-shadow: 0px 0px 8px 2px rgba(0,0,0,0.5);
+    margin-bottom: -10px ;
+    margin: -5px -15px 5px -10px;
+}
+
+#header .con_escudo_titulo {
+    
+  position: relative;
+    top: 15px;
+    padding-left: 25px;
+/*    background: linear-gradient(to right,rgb(34,65,154)0%,rgb(34,65,154)51%,rgb(6,32,106)100%);*/
+    background: linear-gradient(to right,rgb(7,58,117)0%,rgb(7,58,117)15%,rgb(12,126,178)51%,rgb(7,58,117)100%);
+
+    box-shadow: 0px 0px 8px 2px rgba(0,0,0,0.5);
+    height: 85px;
+/*    display: block;
+    
+    background-size: 100%;
+    background-color: #0C3664;
+    margin: 0;
+    position: relative;*/
+}
+
+#header .con_escudo_titulo .borde-redondo {
+    position: absolute;
+    margin-top: -13px;
+    width: 110px;
+    height: 110px;
+    border-radius: 100px;
+/*    background-color: rgb(34,65,154);*/
+background-color: rgb(7,58,117);
+}
+
+#header .con_escudo_titulo .logo {
+    position: relative;
+    z-index: 1;
+    float: left;
+    margin-top: 8px;
+    margin-left: 13px;
+}
+#header .con_escudo_titulo .logo a {
+    width: 200px;
+    margin-top: -10px;
+    height: 110px;
+    display: block;
+    background: url(../img/logo.png) no-repeat;
+}
+
+#header .bottom{
+    height: 40px;
+    background: linear-gradient(to right,rgb(119,0,0)0%,rgb(203,0,0)51%,rgb(119,0,0)100%);
+    
+}
+
+#menu {
+    background-color: rgba(194,223,239,0.5);
+}
+
+#tituloMenu{
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgba(194,223,239,0.5);
+}
+
+#content{
+    background-color: #dddddd;
+    padding: 4px;
+    font-size: 12px !important;
+}
+
+.ui-widget .ui-widget{
+    font-size: 13px !important;
+}
+
+.ui-datatable th{
+    font-size: 13px !important;
+}
+.ui-menu{
+    min-width: 100px !important;
+}
+
+.recaudoTable td{
+    text-align: center !important;
+    font-size: 12px !important;
+    color: #000000;
+}
+
+.ui-button-text{
+    font-size: 10px !important;
+}
+
+.fechaRed{
+    background-color: rgba(255,0,0,0.35) !important;
+}
+
+.ui-panel-titlebar{
+    padding-bottom: 0px !important;
+}
+
+.CampoLabelObligatorios
+{
+    font-style: italic;
+    font-size: 15px;    
+}
+.CampoLabelEspecificacion
+{
+    font-style: italic;
+    font-size: 10px;
+}
+.panelgrid , .panelgrid tr , .panelgrid td
+{
+    border-style: none !important
+
+}
+
+.BotonesSesion
+{
+    position: absolute;
+    padding: 5px;
+    color: #FFFFFF;
+    text-align: center;
+    border: 2px  solid #ffffff;
+    border-style: dashed;
+    right: 30px;
+    top: 10px;
+    border-radius: 10px;    
+}
+
+.ui-progressbar.ui-widget-content {
+    background-color:#dddddd;
+    background-image:none;    
+}
+
+.ui-progressbar.ui-widget.ui-widget-content.ui-corner-all{
+    width: 400px;
+    height: 20px;
+    margin: -3px;
+    padding: 0px;
+}
+
+.cursor{
+    cursor:pointer
+}
+
+.ui-tabs {
+    font-size:0.5em;
+} 
+
+.ui-panelgrid .ui-panelgrid-cell{
+    vertical-align: top;
+
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    font-size: 12px;
+}
+
+
+.ui-datatable .ui-paginator {
+    background:  transparent;
+    border:0;
+}
+
+.ui-messages-error, .ui-message-error {
+    color: #b94a48 !important;
+    background-color: transparent !important;
+    border-color: rgba(238, 211, 215, 0.04) !important;
+}
+
+#desc {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 17px;
+    color: #FFFFFF;
+    margin-top: 27px;
+    width: 235px;
+    float: left;
+}
+
+.separador {
+    background: url(../img/barra.png) no-repeat;
+    width: 2px;
+    height: 40px;
+    float: left;
+    margin: 25px 10px 27px 0;
+
+}
+
+#banderaHeader{
+    background: url(../img/bandera2.png) no-repeat;
+    width: 195px;
+    height: 102px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+}
+
+.logo-SGDJISP{
+    width: 183px;
+    height: 70px;
+    background: url(../img/logo-SGDJIS-int.png) no-repeat;
+    float: right;
+    margin: 10px 190px 0 0;
+}
+
+#bandera {
+/*    position: fixed;
+    z-index: -1;
+    background: url(../img/bandera.png) no-repeat;
+    height: 412px;
+    right: 10%;
+    bottom: -179px;
+    width: 1284px;*/
+
+    background: url(../img/bandera.png) no-repeat;
+    width: 345px;
+    height: 130px;
+    position: relative;
+    z-index: -1;
+    left: 0;
+    bottom: 0;
+    margin-bottom:   -50px !important;
+    padding-left: 25px !important;
+    
+}
+
+.panel{
+    height: 620px;
+     background: transparent !important;
+}
+.noBorder tr,
+.noBorder td { border: 0 !important; }
+
+.transparentBackground tr,
+.transparentBackground td { 
+    background: transparent !important; 
+    border: 0 !important;
+}
+
+
+
+#south.ui-layout-unit,#center.ui-layout-unit,#north.ui-layout-unit,#west.ui-layout-unit{
+    background: transparent !important; 
+    border: none;
+}
+
+
+
+#south.ui-widget-content{
+      background: transparent !important; 
+
+}
+
+.ui-layout-unit{
+        background: transparent !important; 
+        border: none;
+}
+
+.southpanel{
+     position: inherit;
+   /*margin:50px auto auto auto;*/
+    
+    align-content: center;
+    text-align: center; 
+    font-size: 14px;
+     /*bottom: -80px;*/
+}
+
+
+#south{
+    
+}
+
+#plateral{
+    background: transparent !important;
+    
+}

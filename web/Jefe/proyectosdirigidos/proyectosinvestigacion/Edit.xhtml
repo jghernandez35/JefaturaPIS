@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProyectosinvestigacionEditDlg" widgetVar="ProyectosinvestigacionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleProyectosDirigidos.EditProyectosinvestigacionTitle}">
+            <h:form id="ProyectosinvestigacionEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{proyectosinvestigacionController.selected != null}">
+                        <p:outputLabel value="#{bundleProyectosDirigidos.EditProyectosinvestigacionLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{proyectosinvestigacionController.selected.id}" title="#{bundleProyectosDirigidos.EditProyectosinvestigacionTitle_id}" required="true" requiredMessage="#{bundleProyectosDirigidos.EditProyectosinvestigacionRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundleProyectosDirigidos.EditProyectosinvestigacionLabel_vri}" for="vri" />
+                        <p:inputText id="vri" value="#{proyectosinvestigacionController.selected.vri}" title="#{bundleProyectosDirigidos.EditProyectosinvestigacionTitle_vri}" />
+                        <p:outputLabel value="#{bundleProyectosDirigidos.EditProyectosinvestigacionLabel_nombre}" for="nombre" />
+                        <p:inputTextarea rows="4" cols="30" id="nombre" value="#{proyectosinvestigacionController.selected.nombre}" title="#{bundleProyectosDirigidos.EditProyectosinvestigacionTitle_nombre}" />
+                        <p:outputLabel value="#{bundleProyectosDirigidos.EditProyectosinvestigacionLabel_fechaInicio}" for="fechaInicio" />
+                        <p:calendar id="fechaInicio" pattern="MM/dd/yyyy HH:mm:ss" value="#{proyectosinvestigacionController.selected.fechaInicio}" title="#{bundleProyectosDirigidos.EditProyectosinvestigacionTitle_fechaInicio}" required="true" requiredMessage="#{bundleProyectosDirigidos.EditProyectosinvestigacionRequiredMessage_fechaInicio}" showOn="button"/>
+                        <p:outputLabel value="#{bundleProyectosDirigidos.EditProyectosinvestigacionLabel_fechaFin}" for="fechaFin" />
+                        <p:calendar id="fechaFin" pattern="MM/dd/yyyy HH:mm:ss" value="#{proyectosinvestigacionController.selected.fechaFin}" title="#{bundleProyectosDirigidos.EditProyectosinvestigacionTitle_fechaFin}" required="true" requiredMessage="#{bundleProyectosDirigidos.EditProyectosinvestigacionRequiredMessage_fechaFin}" showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{proyectosinvestigacionController.update}" value="#{bundleProyectosDirigidos.Save}" update="display,:ProyectosinvestigacionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProyectosinvestigacionEditDialog');"/>
+                    <p:commandButton value="#{bundleProyectosDirigidos.Cancel}" onclick="ProyectosinvestigacionEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

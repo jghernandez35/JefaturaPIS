@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EstudiantepregradoCreateDlg" widgetVar="EstudiantepregradoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleProyectosDirigidos.CreateEstudiantepregradoTitle}">
+            <h:form id="EstudiantepregradoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{estudiantepregradoController.selected != null}">
+                        <p:outputLabel value="#{bundleProyectosDirigidos.CreateEstudiantepregradoLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{estudiantepregradoController.selected.id}" title="#{bundleProyectosDirigidos.CreateEstudiantepregradoTitle_id}" required="true" requiredMessage="#{bundleProyectosDirigidos.CreateEstudiantepregradoRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundleProyectosDirigidos.CreateEstudiantepregradoLabel_nombreEstudiante}" for="nombreEstudiante" />
+                        <p:inputTextarea rows="4" cols="30" id="nombreEstudiante" value="#{estudiantepregradoController.selected.nombreEstudiante}" title="#{bundleProyectosDirigidos.CreateEstudiantepregradoTitle_nombreEstudiante}" required="true" requiredMessage="#{bundleProyectosDirigidos.CreateEstudiantepregradoRequiredMessage_nombreEstudiante}"/>
+                        <p:outputLabel value="#{bundleProyectosDirigidos.CreateEstudiantepregradoLabel_codigo}" for="codigo" />
+                        <p:inputText id="codigo" value="#{estudiantepregradoController.selected.codigo}" title="#{bundleProyectosDirigidos.CreateEstudiantepregradoTitle_codigo}" required="true" requiredMessage="#{bundleProyectosDirigidos.CreateEstudiantepregradoRequiredMessage_codigo}"/>
+                        <p:outputLabel value="#{bundleProyectosDirigidos.CreateEstudiantepregradoLabel_forId}" for="forId" />
+                        <p:selectOneMenu id="forId" value="#{estudiantepregradoController.selected.forId}" required="true" requiredMessage="#{bundleProyectosDirigidos.EditEstudiantepregradoRequiredMessage_forId}">
+                            <f:selectItems value="#{formatoaController.itemsAvailableSelectOne}"
+                                           var="forIdItem"
+                                           itemValue="#{forIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{estudiantepregradoController.create}" value="#{bundleProyectosDirigidos.Save}" update="display,:EstudiantepregradoListForm:datalist,:growl" oncomplete="handleSubmit(args,'EstudiantepregradoCreateDialog');"/>
+                    <p:commandButton value="#{bundleProyectosDirigidos.Cancel}" onclick="EstudiantepregradoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

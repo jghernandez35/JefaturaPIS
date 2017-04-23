@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EstudianteinvestigacionCreateDlg" widgetVar="EstudianteinvestigacionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleProyectosDirigidos.CreateEstudianteinvestigacionTitle}">
+            <h:form id="EstudianteinvestigacionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{estudianteinvestigacionController.selected != null}">
+                        <p:outputLabel value="#{bundleProyectosDirigidos.CreateEstudianteinvestigacionLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{estudianteinvestigacionController.selected.id}" title="#{bundleProyectosDirigidos.CreateEstudianteinvestigacionTitle_id}" required="true" requiredMessage="#{bundleProyectosDirigidos.CreateEstudianteinvestigacionRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundleProyectosDirigidos.CreateEstudianteinvestigacionLabel_nombreEstudiante}" for="nombreEstudiante" />
+                        <p:inputTextarea rows="4" cols="30" id="nombreEstudiante" value="#{estudianteinvestigacionController.selected.nombreEstudiante}" title="#{bundleProyectosDirigidos.CreateEstudianteinvestigacionTitle_nombreEstudiante}" required="true" requiredMessage="#{bundleProyectosDirigidos.CreateEstudianteinvestigacionRequiredMessage_nombreEstudiante}"/>
+                        <p:outputLabel value="#{bundleProyectosDirigidos.CreateEstudianteinvestigacionLabel_codigo}" for="codigo" />
+                        <p:inputText id="codigo" value="#{estudianteinvestigacionController.selected.codigo}" title="#{bundleProyectosDirigidos.CreateEstudianteinvestigacionTitle_codigo}" required="true" requiredMessage="#{bundleProyectosDirigidos.CreateEstudianteinvestigacionRequiredMessage_codigo}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{estudianteinvestigacionController.create}" value="#{bundleProyectosDirigidos.Save}" update="display,:EstudianteinvestigacionListForm:datalist,:growl" oncomplete="handleSubmit(args,'EstudianteinvestigacionCreateDialog');"/>
+                    <p:commandButton value="#{bundleProyectosDirigidos.Cancel}" onclick="EstudianteinvestigacionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

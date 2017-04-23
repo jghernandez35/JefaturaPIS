@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <!--<link href="../resources/css/styles-menu.css" rel="stylesheet" type="text/css"/>-->
+    </h:head>
+    <h:body>
+        <div id="plateral">
+<!--            <p:accordionPanel multiple="true" >
+                <p:tab title="Docentes">
+                    <h:panelGrid columns="1" cellpadding="10">
+                  
+                    <h:form class="formMenuLat">
+                        <l> <p:commandLink value="Nuevo Docente" action="#{cargarFormulariosController.cargarCrearDocente()}"  ajax="false"/>
+                        </l>
+                         
+                        <l> <p:commandLink value="Gestionar Docentes" action="#{cargarFormulariosController.cargarGestionDocente()}"  ajax="false"/>
+                        </l>                         
+                    </h:form>
+                   
+                        p:graphicImage  library="img" name="fotoDefecto.jpg" />
+
+                        <h:outputText
+                            value="The story begins as Don Vito Corleone..." /
+                    </h:panelGrid>
+                </p:tab>
+                <p:tab title="Contratacion">
+                    <h:panelGrid columns="1" cellpadding="10">
+                        <h:form class="formMenuLat">
+                            <l> <p:commandLink value="Gestionar Contrataciones" action="#{cargarFormulariosController.cargarGestionContratacion()}"  ajax="false"/>
+                            </l>
+                        </h:form>
+                    </h:panelGrid>
+                </p:tab>
+                <p:tab title="Produccion Intelectual">
+                    <h:panelGrid columns="1" cellpadding="10">
+                        <h:form class="formMenuLat">
+                            
+                        </h:form>
+                    </h:panelGrid>
+                </p:tab>
+            </p:accordionPanel>
+             -->
+            <h:form>
+    <p:growl autoUpdate="true"/>
+
+    <p:panelMenu >
+        <p:submenu label="Docentes">
+            <p:menuitem value="Nuevo Docente" actionListener="#{cargarFormulariosController.cargarCrearDocente()}" icon="ui-icon-circle-plus" ajax="false" />
+            <p:menuitem value="Gestion Docentes" actionListener="#{cargarFormulariosController.cargarGestionDocente()}"  icon="ui-icon-link" ajax="false" />
+        </p:submenu>
+        <p:submenu label="Contratacion">
+            <p:menuitem value="Gestionar Contrataciones" actionListener="#{cargarFormulariosController.cargarGestionContratacion()}"  ajax="false" icon="ui-icon-link"/>
+        </p:submenu>
+        <p:separator />
+        <p:submenu label="Produccion Intelectual" >
+            <p:menuitem value="Registrar Produccion Tipo Revista" actionListener="#{cargarFormulariosController.cargarGestionRevista()}"  ajax="false" icon="ui-icon-link"/>
+            <p:menuitem value="Gestionar Produccion" actionListener="#{cargarFormulariosController.cargarGestionProduccion()}"  ajax="false" icon="ui-icon-link"/>
+        </p:submenu>
+    </p:panelMenu>
+</h:form>
+            
+        </div>
+
+    </h:body>
+</html>
+
+

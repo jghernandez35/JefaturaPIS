@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProyectoEditDlg" widgetVar="ProyectoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleProyectosDirigidos.EditProyectoTitle}">
+            <h:form id="ProyectoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{proyectoController.selected != null}">
+                        <p:outputLabel value="#{bundleProyectosDirigidos.EditProyectoLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{proyectoController.selected.id}" title="#{bundleProyectosDirigidos.EditProyectoTitle_id}" required="true" requiredMessage="#{bundleProyectosDirigidos.EditProyectoRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundleProyectosDirigidos.EditProyectoLabel_resolucion}" for="resolucion" />
+                        <p:inputTextarea rows="4" cols="30" id="resolucion" value="#{proyectoController.selected.resolucion}" title="#{bundleProyectosDirigidos.EditProyectoTitle_resolucion}" required="true" requiredMessage="#{bundleProyectosDirigidos.EditProyectoRequiredMessage_resolucion}"/>
+                        <p:outputLabel value="#{bundleProyectosDirigidos.EditProyectoLabel_fechaResolucion}" for="fechaResolucion" />
+                        <p:calendar id="fechaResolucion" pattern="MM/dd/yyyy" value="#{proyectoController.selected.fechaResolucion}" title="#{bundleProyectosDirigidos.EditProyectoTitle_fechaResolucion}" required="true" requiredMessage="#{bundleProyectosDirigidos.EditProyectoRequiredMessage_fechaResolucion}" showOn="button"/>
+                        <p:outputLabel value="#{bundleProyectosDirigidos.EditProyectoLabel_formatoa}" for="formatoa" />
+                        <p:selectOneMenu id="formatoa" value="#{proyectoController.selected.formatoa}" required="true" requiredMessage="#{bundleProyectosDirigidos.EditProyectoRequiredMessage_formatoa}">
+                            <f:selectItem itemLabel="#{bundleProyectosDirigidos.SelectOneMessage}"/>
+                            <f:selectItems value="#{formatoaController.itemsAvailableSelectOne}"
+                                           var="formatoaItem"
+                                           itemValue="#{formatoaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{proyectoController.update}" value="#{bundleProyectosDirigidos.Save}" update="display,:ProyectoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProyectoEditDialog');"/>
+                    <p:commandButton value="#{bundleProyectosDirigidos.Cancel}" onclick="ProyectoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

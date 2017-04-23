@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RealizaEditDlg" widgetVar="RealizaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditRealizaTitle}">
+            <h:form id="RealizaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{realizaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditRealizaLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{realizaController.selected.id}" title="#{bundle.EditRealizaTitle_id}" required="true" requiredMessage="#{bundle.EditRealizaRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditRealizaLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy HH:mm:ss" value="#{realizaController.selected.fecha}" title="#{bundle.EditRealizaTitle_fecha}" required="true" requiredMessage="#{bundle.EditRealizaRequiredMessage_fecha}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditRealizaLabel_docId}" for="docId" />
+                        <p:selectOneMenu id="docId" value="#{realizaController.selected.docId}" required="true" requiredMessage="#{bundle.EditRealizaRequiredMessage_docId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{docenteController.itemsAvailableSelectOne}"
+                                           var="docIdItem"
+                                           itemValue="#{docIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditRealizaLabel_proId}" for="proId" />
+                        <p:selectOneMenu id="proId" value="#{realizaController.selected.proId}" required="true" requiredMessage="#{bundle.EditRealizaRequiredMessage_proId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{produccionintelectualController.itemsAvailableSelectOne}"
+                                           var="proIdItem"
+                                           itemValue="#{proIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{realizaController.update}" value="#{bundle.Save}" update="display,:RealizaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'RealizaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="RealizaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+ 
+        <p:growl id="growl" life="5000" />
+
+        <h:body>
+      
+            <h:form id="DocenteListForm">
+		
+                <h:panelGrid  columns="1">
+                    
+                    <p:commandButton icon="ui-icon-plus"   value="#{bundle.Create}" action="#{docenteController.prepareCreate(cargarFormulariosController )}" oncomplete="#{docenteController.limpiarDocente()}" ajax="false"/>
+                   
+                </h:panelGrid>
+             
+                <p:panel header="#{bundle.ListDocenteTitle}">
+                
+                    <!-- docenteController.items regresa una lista con todos los docentes almacenados en la base de datos
+                         y se recorre esta lista guardando un docente al tiempo en la variable item-->
+                    <p:dataTable id="datalist" value="#{docenteController.items}" var="item"
+                                 
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 emptyMessage="No hay docentes con este criterio"
+                                 widgetVar="DocenteListDialog"
+                                 >
+                        
+                       <f:facet name="header">
+                            <p:outputPanel>
+                                <h:outputText value="Buscar en todos los campos:" />
+                                <p:inputText id="globalFilter" onkeyup="PF('DocenteListDialog').filter()" style="width:150px" placeholder="Digite palabra clave"/>
+                            </p:outputPanel>
+                        </f:facet>
+                        
+                        <p:column filterBy="#{item.apellidos}" headerText="#{bundle.ListDocenteTitle_apellidos}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDocenteTitle_apellidos}"/>
+                            </f:facet>
+                            <!-- para obtener algun valor del docente actual se accede mediante la variable item y el nombre del campo -->
+                            <h:outputText value="#{item.apellidos}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.nombres}" headerText="#{bundle.ListDocenteTitle_nombres}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDocenteTitle_nombres}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombres}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.documento}" headerText="#{bundle.ListDocenteTitle_documento}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDocenteTitle_documento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.documento}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Acciones">
+                            <p:commandLink title="Ver"  action="#{docenteController.prepareView(item,cargarFormulariosController )}" ajax="false" >                                    
+                                <p:graphicImage  library="img" name="b_view.png"/>
+                            </p:commandLink>
+                            
+                            <p:commandLink title="Editar" style="margin-left: 5px;" action="#{docenteController.prepareUpdate(item, cargarFormulariosController)}" ajax="false">                                    
+                                <p:graphicImage  library="img" name="b_edit.png"/>
+                            </p:commandLink>     
+
+                            <p:commandLink id="Eliminar" style="margin-left: 5px;" title="Eliminar" action="#{docenteController.destroy(item, cargarFormulariosController)}"  ajax="false">
+                                <p:confirm header="Confirmación" message="¿Está seguro que desea eliminar?" icon="ui-icon-alert" />
+                                <p:graphicImage library="img" name="b_drop.png"/>
+                            </p:commandLink>
+
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+
+                        </p:column>
+                        
+                        <p:column headerText="Labor">
+                            <p:commandLink title="Contratacion"  action="#{contratacionController.prepareCreate(item,cargarFormulariosController )}" ajax="false" >                                    
+                                <p:graphicImage  library="img" name="contrato.png"/>
+                            </p:commandLink>
+                            
+                            
+
+                        </p:column>
+                        
+                    </p:dataTable>
+                </p:panel>
+            </h:form>    
+        </h:body>
+
+
+</html>
