@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -37,7 +39,20 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Produccionintelectual.findAll", query = "SELECT p FROM Produccionintelectual p"),
     @NamedQuery(name = "Produccionintelectual.findById", query = "SELECT p FROM Produccionintelectual p WHERE p.id = :id"),
     @NamedQuery(name = "Produccionintelectual.findByFecha", query = "SELECT p FROM Produccionintelectual p WHERE p.fecha = :fecha")})
+@NamedNativeQueries({
+    @NamedNativeQuery(name = "selectProduccionRevistaDocente", query = "SELECT r.ID, r.PRO_ID, r.DOC_ID FROM Revista rv JOIN  Produccionintelectual pi  on pi.ID=rv.ID  JOIN Realiza r  on r.PRO_ID = pi.ID   WHERE   r.DOC_ID= ?1",resultClass = Realiza.class),
+    @NamedNativeQuery(name = "selectProduccionCapituloLibroDocente", query = "SELECT r.ID, r.PRO_ID, r.DOC_ID FROM capitulo_libro cl JOIN  Produccionintelectual pi  on pi.ID=cl.CAP_LIBRO_ID  JOIN Realiza r  on r.PRO_ID = pi.ID   WHERE   r.DOC_ID= ?1",resultClass = Realiza.class),
+    @NamedNativeQuery(name = "selectProduccionLibroDocente", query = "SELECT r.ID, r.PRO_ID, r.DOC_ID FROM libro l JOIN  Produccionintelectual pi  on pi.ID=l.LIBRO_ID  JOIN Realiza r  on r.PRO_ID = pi.ID   WHERE   r.DOC_ID= ?1",resultClass = Realiza.class),
+    @NamedNativeQuery(name = "selectProduccionConferenciaDocente", query = "SELECT r.ID, r.PRO_ID, r.DOC_ID FROM conferencia c JOIN  Produccionintelectual pi  on pi.ID=c.CONFERENCIA_ID  JOIN Realiza r  on r.PRO_ID = pi.ID   WHERE   r.DOC_ID= ?1",resultClass = Realiza.class)
+})
 public class Produccionintelectual implements Serializable {
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "produccionintelectual")
+    private Libro libro;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "produccionintelectual")
+    private Conferencia conferencia;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "produccionintelectual")
+    private CapituloLibro capituloLibro;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,7 +63,7 @@ public class Produccionintelectual implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "FECHA")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date fecha;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "produccionintelectual")
     private Revista revista;
@@ -134,6 +149,94 @@ public class Produccionintelectual implements Serializable {
     @Override
     public String toString() {
         return "com.unicauca.jefatura.entidades.Produccionintelectual[ id=" + id + " ]";
+    }
+
+    public Libro getLibro() {
+        return libro;
+    }
+
+    public void setLibro(Libro libro) {
+        this.libro = libro;
+    }
+
+    public Conferencia getConferencia() {
+        return conferencia;
+    }
+
+    public void setConferencia(Conferencia conferencia) {
+        this.conferencia = conferencia;
+    }
+
+    public CapituloLibro getCapituloLibro() {
+        return capituloLibro;
+    }
+
+    public void setCapituloLibro(CapituloLibro capituloLibro) {
+        this.capituloLibro = capituloLibro;
+    }
+    
+    public String getTipoProduccion(){
+       String ret;
+        if(libro!=null){
+            ret= "Libro";          
+        }else{
+            if(capituloLibro!=null){
+            ret= "Capitulo Libro";          
+        }else{
+            if(revista!=null){
+            ret= "Revista";          
+        }else{
+                if(conferencia!=null){
+                        ret= "Conferencia";          
+            }else{
+                  ret= "Ninguna";          
+            }
+        }
+        }
+        }
+        return ret;
+    }
+    public Integer getTipoProduccion2(){
+       Integer ret;
+        if(libro!=null){
+            ret= 1;          
+        }else{
+            if(capituloLibro!=null){
+            ret=2;          
+        }else{
+            if(revista!=null){
+            ret=3;          
+        }else{
+                if(conferencia!=null){
+                        ret=4;          
+            }else{
+                  ret= -1;          
+            }
+        }
+        }
+        }
+        return ret;
+    }
+    public String getTituloPublicacion(){
+        String ret;
+        if(libro!=null){
+            ret= libro.getLibroNombre();          
+        }else{
+            if(capituloLibro!=null){
+            ret= capituloLibro.getCapLibroTitulo();          
+        }else{
+            if(revista!=null){
+            ret= revista.getTituloPublicacion();          
+        }else{
+                if(conferencia!=null){
+                        ret= conferencia.getTituloArticulo();          
+            }else{
+                  ret= "Ninguna";          
+            }
+        }
+        }
+        }
+        return ret;
     }
     
 }

@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -32,7 +34,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Revista.findById", query = "SELECT r FROM Revista r WHERE r.id = :id"),
     @NamedQuery(name = "Revista.findByNombreRevista", query = "SELECT r FROM Revista r WHERE r.nombreRevista = :nombreRevista"),
     @NamedQuery(name = "Revista.findByNumeroEdicion", query = "SELECT r FROM Revista r WHERE r.numeroEdicion = :numeroEdicion"),
-    @NamedQuery(name = "Revista.findByTituloPublicacion", query = "SELECT r FROM Revista r WHERE r.tituloPublicacion = :tituloPublicacion")})
+    @NamedQuery(name = "Revista.findByTituloPublicacion", query = "SELECT r FROM Revista r WHERE r.tituloPublicacion = :tituloPublicacion"),
+    @NamedQuery(name = "Revista.findByDocenteId", query = "SELECT r FROM Revista r WHERE r.produccionintelectual.id = :produccionId")})
+
 public class Revista implements Serializable {
 
     private static final long serialVersionUID = 1L;

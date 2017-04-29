@@ -11,10 +11,12 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -27,12 +29,16 @@ public class ContratacionController implements Serializable {
     @EJB
     private com.unicauca.jefatura.sessionbean.ContratacionFacade ejbFacade;
     private List<Contratacion> items = null;
+    private List<Contratacion> items_docente = null;
     private Contratacion selected;
+    private Docente docente;
+   
 
     public ContratacionController() {
         selected = new Contratacion();
     }
-
+   
+    
     public Contratacion getSelected() {
         return selected;
     }
@@ -41,6 +47,15 @@ public class ContratacionController implements Serializable {
         this.selected = selected;
     }
 
+    public Docente getDocente() {
+        return docente;
+    }
+
+    public void setDocente(Docente docente) {
+        this.docente = docente;
+    }
+
+    
     protected void setEmbeddableKeys() {
     }
 
@@ -49,7 +64,16 @@ public class ContratacionController implements Serializable {
     
     public void cancel(CargarFormularioController formularioController) {
         limpiarContratacion();
+        //docente = null;
         formularioController.cargarGestionContratacion();
+        
+    }
+    
+    
+    public void cancelCreate(CargarFormularioController formularioController) {
+        limpiarContratacion();
+       formularioController.cargarVerContratacionDocente();
+        
     }
     
     private ContratacionFacade getFacade() {
@@ -63,14 +87,33 @@ public class ContratacionController implements Serializable {
         formularioController.cargarCrearContratacion();
     }
 
-    public void create(CargarFormularioController formularioController) {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ContratacionCreated"));
-        if (!JsfUtil.isValidationFailed()) {
-            items = null;    // Invalidate list of items to trigger re-query.
-        }
-        formularioController.cargarGestionDocente();
+     public void prepareViewItemDocente(Docente doc, CargarFormularioController formularioController) {
+        this.docente = doc;
+        formularioController.cargarVerContratacionDocente();
+
     }
     
+    public void create(CargarFormularioController formularioController) {
+        if (selected.getFechaFin()!= null){
+            if (selected.getFechaInicio().after(selected.getFechaFin())) {
+                FacesContext.getCurrentInstance().addMessage("ContratacionCreateForm:fechaInicio", new FacesMessage(FacesMessage.SEVERITY_ERROR, "la fecha de inicio no puede ser mayor a la fecha de fin.", "la fecha de inicio no puede ser mayor a la fecha de fin."));
+            } 
+            else{
+                persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ContratacionCreated"));
+                if (!JsfUtil.isValidationFailed()) {
+                    items = null;    // Invalidate list of items to trigger re-query.
+                }
+                formularioController.cargarGestionDocente();
+
+            }
+        }else{
+            persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ContratacionCreated"));
+                if (!JsfUtil.isValidationFailed()) {
+                    items = null;    // Invalidate list of items to trigger re-query.
+                }
+                formularioController.cargarGestionDocente();
+        }
+    }
     public void prepareUpdate(Contratacion con, CargarFormularioController formularioController) {
         selected = con;
         formularioController.cargarModificarContratacion();
@@ -112,6 +155,13 @@ public class ContratacionController implements Serializable {
         return items;
     }
 
+    public List<Contratacion> getItemsDocente() {
+        items_docente = null;
+        items_docente = getFacade().obtenerProduccionIntelectual(docente.getId());
+        
+        return items_docente;
+    }
+    
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();

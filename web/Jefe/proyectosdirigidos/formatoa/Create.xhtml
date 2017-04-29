@@ -12,8 +12,7 @@
             <h:form id="FormatoaCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{formatoaController.selected != null}">
-                        <p:outputLabel value="#{bundleProyectosDirigidos.CreateFormatoaLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{formatoaController.selected.id}" title="#{bundleProyectosDirigidos.CreateFormatoaTitle_id}" required="true" requiredMessage="#{bundleProyectosDirigidos.CreateFormatoaRequiredMessage_id}"/>
+                      
                         <p:outputLabel value="#{bundleProyectosDirigidos.CreateFormatoaLabel_actaDepartamento}" for="actaDepartamento" />
                         <p:inputText id="actaDepartamento" value="#{formatoaController.selected.actaDepartamento}" title="#{bundleProyectosDirigidos.CreateFormatoaTitle_actaDepartamento}" required="true" requiredMessage="#{bundleProyectosDirigidos.CreateFormatoaRequiredMessage_actaDepartamento}"/>
                         <p:outputLabel value="#{bundleProyectosDirigidos.CreateFormatoaLabel_tituloTrabajo}" for="tituloTrabajo" />
@@ -21,11 +20,8 @@
                         <p:outputLabel value="#{bundleProyectosDirigidos.CreateFormatoaLabel_fechaActa}" for="fechaActa" />
                         <p:calendar id="fechaActa" pattern="MM/dd/yyyy" value="#{formatoaController.selected.fechaActa}" title="#{bundleProyectosDirigidos.EditFormatoaTitle_fechaActa}" required="true" requiredMessage="#{bundleProyectosDirigidos.EditFormatoaRequiredMessage_fechaActa}" showOn="button"/>
                         <p:outputLabel value="#{bundleProyectosDirigidos.CreateFormatoaLabel_proyecto}" for="proyecto" />
-                        <p:selectOneMenu id="proyecto" value="#{formatoaController.selected.proyecto}" >
-                            <f:selectItems value="#{proyectoController.itemsAvailableSelectOne}"
-                                           var="proyectoItem"
-                                           itemValue="#{proyectoItem}"/>
-                        </p:selectOneMenu>
+                        
+                        
                     </p:panelGrid>
                     <p:commandButton actionListener="#{formatoaController.create}" value="#{bundleProyectosDirigidos.Save}" update="display,:FormatoaListForm:datalist,:growl" oncomplete="handleSubmit(args,'FormatoaCreateDialog');"/>
                     <p:commandButton value="#{bundleProyectosDirigidos.Cancel}" onclick="FormatoaCreateDialog.hide()"/>

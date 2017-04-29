@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    
+    
+    
+     <p:growl id="growl" life="5000" />
+
+        <h:body>
+      
+            <h:form id="DocenteListForm">
+		
+               
+             
+                <p:panel header="#{BundleProduccion.ListDocenteTitle}">
+                
+                    <!-- docenteController.items regresa una lista con todos los docentes almacenados en la base de datos
+                         y se recorre esta lista guardando un docente al tiempo en la variable item-->
+                    <p:dataTable id="datalist" value="#{docenteController.items}" var="item"
+                                 
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 emptyMessage="No hay docentes con este criterio"
+                                 widgetVar="DocenteListDialog"
+                                 >
+                        
+                       <f:facet name="header">
+                            <p:outputPanel>
+                                <h:outputText value="Buscar en todos los campos:" />
+                                <p:inputText id="globalFilter" onkeyup="PF('DocenteListDialog').filter()" style="width:150px" placeholder="Digite palabra clave"/>
+                            </p:outputPanel>
+                        </f:facet>
+                        
+                        <p:column filterBy="#{item.apellidos}" headerText="#{bundle.ListDocenteTitle_apellidos}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDocenteTitle_apellidos}"/>
+                            </f:facet>
+                            <!-- para obtener algun valor del docente actual se accede mediante la variable item y el nombre del campo -->
+                            <h:outputText value="#{item.apellidos}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.nombres}" headerText="#{bundle.ListDocenteTitle_nombres}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDocenteTitle_nombres}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombres}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.documento}" headerText="#{bundle.ListDocenteTitle_documento}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDocenteTitle_documento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.documento}"/>
+                        </p:column>
+                        
+
+                        <p:column headerText="Produccion" style=" text-align: center;">
+
+                            <p:commandLink title="Revistas"  action="#{realizaController.prepareViewItemDocente(item, cargarFormulariosController)}" ajax="false" >                                    
+                                <p:graphicImage  library="img" name="revista2.png"/>
+                            </p:commandLink>
+                            <p:spacer width="1" height="22" style="position: relative; bottom: -5px;background-color: #A8A8A8; margin-left: 10px;margin-right: 10px" />
+                             <p:commandLink title="Conferencia"  action="#{realizaController.prepareViewConferenciaItemDocente(item, cargarFormulariosController)}" ajax="false" >                                    
+                                <p:graphicImage  library="img" name="conferencia3.png"/>
+                            </p:commandLink>
+                            <p:spacer width="1" height="22" style="position: relative; bottom: -5px;background-color: #A8A8A8; margin-left: 10px;margin-right: 10px" />
+                            <p:commandLink title="Capitulo de Libro"  action="#{realizaController.prepareViewCapLibroItemDocente(item, cargarFormulariosController)}" ajax="false" >                                    
+                                <p:graphicImage  library="img" name="capitulo_libro2.png"/>
+                            </p:commandLink>
+                            <p:spacer width="1" height="22" style="position: relative; bottom: -5px;background-color: #A8A8A8; margin-left: 10px;margin-right: 10px" />
+                            <p:commandLink title="Libro"  action="#{realizaController.prepareViewLibroItemDocente(item, cargarFormulariosController)}" ajax="false" >                                    
+                                <p:graphicImage  library="img" name="libro2.png"/>
+                            </p:commandLink>
+                            
+
+                        </p:column>
+                        
+                    </p:dataTable>
+                </p:panel>
+            </h:form>    
+        </h:body>
+
+    
+    
+    
+    
+    
+
+<!--   
+            <h:form id="RevistaListForm">
+                <p:panel header="#{BundleProduccion.ListRevistaTitle}">
+                    <p:dataTable id="datalist" value="#{revistaController.items}" var="item"
+                                 selectionMode="single" selection="#{revistaController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{BundleProduccion.ListRevistaTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{BundleProduccion.ListRevistaTitle_nombreRevista}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreRevista}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{BundleProduccion.ListRevistaTitle_numeroEdicion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.numeroEdicion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{BundleProduccion.ListRevistaTitle_tituloPublicacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tituloPublicacion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{BundleProduccion.ListRevistaTitle_claId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.claId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{BundleProduccion.ListRevistaTitle_produccionintelectual}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.produccionintelectual}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{BundleProduccion.Create}" actionListener="#{revistaController.prepareCreate}" update=":RevistaCreateForm" oncomplete="PF('RevistaCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{BundleProduccion.View}" update=":RevistaViewForm" oncomplete="PF('RevistaViewDialog').show()" disabled="#{empty revistaController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{BundleProduccion.Edit}" update=":RevistaEditForm" oncomplete="PF('RevistaEditDialog').show()" disabled="#{empty revistaController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{BundleProduccion.Delete}" actionListener="#{revistaController.destroy}" update=":growl,datalist" disabled="#{empty revistaController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>-->
+
+         
+
+</html>
+<!--                            <p:commandLink title="Revistas"  action="#{revistaController.prepareCreate(item,cargarFormulariosController )}" ajax="false" >                                    
+                                <p:graphicImage  library="img" name="revista2.png"/>
+                            </p:commandLink>-->

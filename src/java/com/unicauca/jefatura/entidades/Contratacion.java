@@ -37,9 +37,20 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Contratacion.findAll", query = "SELECT c FROM Contratacion c"),
     @NamedQuery(name = "Contratacion.findById", query = "SELECT c FROM Contratacion c WHERE c.id = :id"),
+    @NamedQuery(name = "Contratacion.findByIdDocente", query = "SELECT c FROM Contratacion c WHERE c.docId.id = :docId"),
     @NamedQuery(name = "Contratacion.findByFechaInicio", query = "SELECT c FROM Contratacion c WHERE c.fechaInicio = :fechaInicio"),
     @NamedQuery(name = "Contratacion.findByFechaFin", query = "SELECT c FROM Contratacion c WHERE c.fechaFin = :fechaFin")})
 public class Contratacion implements Serializable {
+
+    @JoinColumn(name = "CAT_CON_ID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Categoriacontratacion catConId;
+
+    
+   
+    @JoinColumn(name = "DEP_ID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Departamento depId;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -50,12 +61,11 @@ public class Contratacion implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "FECHA_INICIO")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date fechaInicio;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "FECHA_FIN")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date fechaFin;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "conId")
     private Collection<Soportecontratacion> soportecontratacionCollection;
@@ -65,12 +75,8 @@ public class Contratacion implements Serializable {
     @JoinColumn(name = "DOC_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Docente docId;
-    @JoinColumn(name = "FAC_ID", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private Facultad facId;
-    @JoinColumn(name = "TIP_ID", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private Tipocontratacion tipId;
+    
+    
 
     public Contratacion() {
     }
@@ -134,21 +140,7 @@ public class Contratacion implements Serializable {
         this.docId = docId;
     }
 
-    public Facultad getFacId() {
-        return facId;
-    }
-
-    public void setFacId(Facultad facId) {
-        this.facId = facId;
-    }
-
-    public Tipocontratacion getTipId() {
-        return tipId;
-    }
-
-    public void setTipId(Tipocontratacion tipId) {
-        this.tipId = tipId;
-    }
+  
 
     @Override
     public int hashCode() {
@@ -173,6 +165,24 @@ public class Contratacion implements Serializable {
     @Override
     public String toString() {
         return "com.unicauca.jefatura.entidades.Contratacion[ id=" + id + " ]";
+    }
+
+  
+
+    public Departamento getDepId() {
+        return depId;
+    }
+
+    public void setDepId(Departamento depId) {
+        this.depId = depId;
+    }
+
+    public Categoriacontratacion getCatConId() {
+        return catConId;
+    }
+
+    public void setCatConId(Categoriacontratacion catConId) {
+        this.catConId = catConId;
     }
     
 }

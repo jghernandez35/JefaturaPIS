@@ -78,6 +78,7 @@ public class DocenteController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+       limpiarDocente();
        formularioController.cargarGestionDocente();
     }
 
@@ -88,6 +89,7 @@ public class DocenteController implements Serializable {
     }
     
     public void gestionDocente(CargarFormularioController formularioController) {
+        limpiarDocente();
         formularioController.cargarGestionDocente();
     }
 
@@ -99,6 +101,7 @@ public class DocenteController implements Serializable {
 
     public void update(CargarFormularioController formularioController) {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("DocenteUpdated"));
+        limpiarDocente();
         formularioController.cargarGestionDocente();
     }
    
@@ -106,9 +109,9 @@ public class DocenteController implements Serializable {
     // el siguiente metodo se adiciono manualmente
     public void destroy(Docente doc,CargarFormularioController formularioController) {
         docente = doc;
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("UsuarioDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("DocenteDeleted"));
         if (!JsfUtil.isValidationFailed()) {
-            docente = null; // Remove selection
+            limpiarDocente(); // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
         
@@ -137,10 +140,11 @@ public class DocenteController implements Serializable {
         if (docente != null) {
             setEmbeddableKeys();
             try {
-                // Se borro el if debido a que ya no se encuentra el boton de eliminar en la vista
-                // por la misma cuasa se elimino el metodo distroy alojado en esta clase 
+                if (persistAction != PersistAction.DELETE) {
                     getFacade().edit(docente);
-                
+                } else {
+                    getFacade().remove(docente);
+                }
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (EJBException ex) {
                 String msg = "";

@@ -24,5 +24,13 @@
             <base-name>/BundleProyectosDirigidos</base-name>
             <var>bundleProyectosDirigidos</var>
         </resource-bundle>
+         <resource-bundle>
+            <base-name>/BundleProduccion</base-name>
+            <var>bundleProduccion</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle2</base-name>
+            <var>bundle2</var>
+        </resource-bundle>
     </application>
 </faces-config>

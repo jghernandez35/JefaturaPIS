@@ -33,14 +33,14 @@
 
                     <p:column filterBy="#{item.docId.apellidos}" headerText="#{bundle.ListContratacionTitle_docId}" filterMatchMode="contains">
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListContratacionTitle_docId}"/>
+                            <h:outputText value="Apellidos #{bundle.ListContratacionTitle_docId}"/>
                         </f:facet>
                         <h:outputText value="#{item.docId.apellidos}"/>
                     </p:column>
 
                     <p:column filterBy="#{item.docId.nombres}" headerText="#{item.docId.nombres}" filterMatchMode="contains">
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListContratacionTitle_docId}"/>
+                            <h:outputText value="Nombres #{bundle.ListContratacionTitle_docId}"/>
                         </f:facet>
                         <h:outputText value="#{item.docId.nombres}"/>
                     </p:column>
@@ -50,7 +50,7 @@
                             <h:outputText value="#{bundle.ListContratacionTitle_fechaInicio}"/>
                         </f:facet>
                         <h:outputText value="#{item.fechaInicio}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            <f:convertDateTime pattern="dd-MM-yyyy" />
                         </h:outputText>
                     </p:column>
                     <p:column>
@@ -58,14 +58,14 @@
                             <h:outputText value="#{bundle.ListContratacionTitle_fechaFin}"/>
                         </f:facet>
                         <h:outputText value="#{item.fechaFin}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            <f:convertDateTime pattern="dd-MM-yyyyy" />
                         </h:outputText>
                     </p:column>
-                    <p:column filterBy="#{item.tipId.tipo}"      headerText="#{bundle.ListContratacionTitle_tipId}" filterMatchMode="contains"> 
+                    <p:column filterBy="#{item.catConId.tipConId.tipo}"      headerText="#{bundle.ListContratacionTitle_tipId}" filterMatchMode="contains"> 
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListContratacionTitle_tipId}"/>
                         </f:facet>
-                        <h:outputText value="#{item.tipId.tipo}"/>
+                        <h:outputText value="#{item.catConId.tipConId.tipo}"/>
                     </p:column>
                     <p:column headerText="Acciones">
                         <p:commandLink title="Ver"  action="#{contratacionController.prepareView(item,cargarFormulariosController )}" ajax="false" >                                    

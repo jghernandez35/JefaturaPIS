@@ -47,8 +47,8 @@ public class Facultad implements Serializable {
     @Size(min = 1, max = 60)
     @Column(name = "NOMBRE")
     private String nombre;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "facId")
-    private Collection<Contratacion> contratacionCollection;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "facId")
+//    private Collection<Contratacion> contratacionCollection;
 
     public Facultad() {
     }
@@ -78,14 +78,14 @@ public class Facultad implements Serializable {
         this.nombre = nombre;
     }
 
-    @XmlTransient
-    public Collection<Contratacion> getContratacionCollection() {
-        return contratacionCollection;
-    }
+//    @XmlTransient
+//    public Collection<Contratacion> getContratacionCollection() {
+//        return contratacionCollection;
+//    }
 
-    public void setContratacionCollection(Collection<Contratacion> contratacionCollection) {
-        this.contratacionCollection = contratacionCollection;
-    }
+//    public void setContratacionCollection(Collection<Contratacion> contratacionCollection) {
+//        this.contratacionCollection = contratacionCollection;
+//    }
 
     @Override
     public int hashCode() {

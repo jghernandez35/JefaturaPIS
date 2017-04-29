@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+
+
+
+        <h:form id="RevistasListDocenteForm">
+            <h:panelGrid  columns="1">
+<!--                //oncomplete="#{docenteController.limpiarDocente()}"-->
+                <p:commandButton icon="ui-icon-plus"   value="#{bundleProduccion.Create}" actionListener="#{realizaController.prepareCreate(cargarFormulariosController,3)}"  ajax="false"/>
+                
+            </h:panelGrid>
+
+            <p:panel id="panel1" header="#{bundleProduccion.ListRevistaTitle} Docente #{realizaController.selectDocente.nombres} #{realizaController.selectDocente.apellidos}">
+                <p:dataTable id="datalistRevistas" value="#{realizaController.revistas}" var="item"
+                              emptyMessage="#{bundleProduccion.ListRevistaEmpty}"
+                             paginator="true"
+                             rowKey="#{item.id}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             rendered="true"
+                             >
+
+                    <p:column filterBy="#{item.proId.revista.tituloPublicacion}" headerText="#{bundleProduccion.ListRevistaTitle_tituloPublicacion}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleProduccion.ListRevistaTitle_tituloPublicacion}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.proId.revista.tituloPublicacion}"/>
+                    </p:column>
+
+                   
+
+                    <p:column filterBy="#{item.proId.revista.nombreRevista}" headerText="#{bundleProduccion.ListRevistaTitle_nombreRevista}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleProduccion.ListRevistaTitle_nombreRevista}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.proId.revista.nombreRevista}"/>
+                    </p:column>
+
+                    <p:column filterBy="#{item.proId.revista.numeroEdicion}" headerText="#{bundleProduccion.ListRevistaTitle_numeroEdicion}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleProduccion.ListRevistaTitle_numeroEdicion}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.proId.revista.numeroEdicion}"/>
+                    </p:column>
+
+                    <p:column filterBy="#{item.proId.revista.claId.clasificacion}" headerText="#{bundleProduccion.ListRevistaTitle_claId}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleProduccion.ListRevistaTitle_claId}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.proId.revista.claId.clasificacion}"/>
+                    </p:column>
+
+                     <p:column sortBy="#{item.proId.fecha}">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleProduccion.ListProduccionintelectualTitle_fecha}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.proId.fecha}">
+                            <f:convertDateTime pattern="dd-MM-yyyy" />
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column headerText="Acciones">
+
+                        <p:commandLink title="Ver"  action="#{realizaController.prepareViewVerRevista(item,cargarFormulariosController,0)}" ajax="false" >                                    
+                            <p:graphicImage  library="img" name="b_view.png"/>
+                        </p:commandLink>
+
+<!--                        <p:commandLink title="Editar"  action="#{revista.prepareUpdate(item,cargarFormulariosController )}" ajax="false" >                                    
+                            <p:graphicImage  library="img" name="b_edit.png"/>
+                        </p:commandLink>-->
+
+
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+        <h:form>
+            <p:commandButton action="#{realizaController.atras(cargarFormulariosController)}" value="#{bundleProduccion.Atras}" ajax="false"/>
+        </h:form>
+
+    </h:body>
+
+</html>

@@ -6,9 +6,11 @@
 package com.unicauca.jefatura.sessionbean;
 
 import com.unicauca.jefatura.entidades.Revista;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -33,4 +35,12 @@ public class RevistaFacade extends AbstractFacade<Revista> {
         em.refresh(this);
         
     }
+    
+//    public List<Revista> getRevistasDocente(Integer doc_id){
+//        Query q = em.createNamedQuery("selectProduccionRevistaDocente");
+//        q.setParameter("doc_id", doc_id);
+//        List<Revista> revistas = q.getResultList();
+//        return revistas;
+//    }
+            
 }

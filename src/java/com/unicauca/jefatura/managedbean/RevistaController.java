@@ -22,7 +22,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import org.omg.CORBA.MARSHAL;
+
 
 @Named("revistaController")
 @SessionScoped
@@ -41,7 +41,14 @@ public class RevistaController implements Serializable {
     private Revista selected;
     private Produccionintelectual produccionintelectual; 
     private Realiza realiza;
-    
+    private List<Docente> colaboradores;
+    public List<Docente> getColaboradores() {
+        return colaboradores;
+    }
+
+    public void setColaboradores(List<Docente> colaboradores) {
+        this.colaboradores = colaboradores;
+    }
     private int idProduccionNueva;
 
     public Produccionintelectual getProduccionintelectual() {
@@ -108,16 +115,33 @@ public class RevistaController implements Serializable {
     }
 
       public void create(CargarFormularioController formularioController) {
-       persist_produccion(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ProduccionintelectualCreated"));
+//       persist_produccion(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ProduccionintelectualCreated"));
+       ejbProduccionintelectualFacade.create(produccionintelectual);
+        //idProduccionNueva=(ejbProduccionintelectualFacade.agregarProduccion(produccionintelectual)).getId();
+		idProduccionNueva=produccionintelectual.getId();
          selected.setProduccionintelectual(produccionintelectual);
          realiza.setProId(produccionintelectual);
-         realiza.setFecha(produccionintelectual.getFecha());
          //realiza.setId(((int)(realiza.getDocId().getDocumento())/idProduccionNueva)  );
          selected.setId(idProduccionNueva);
 //        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("RevistaCreated"));
         // ejbRealizaFacade.create(realiza);
-     System.out.println("agrego"+realiza.getFecha()+"documento"+realiza.getDocId().getDocumento()+"id publicacion"+realiza.getProId().getId());
-      persist_realiza(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("RealizaCreated"));
+        ejbRealizaFacade.create(realiza);
+        for(int i=0;i<colaboradores.size();i++){
+            Docente aux=colaboradores.get(i);
+            if(!aux.getDocumento().equals(realiza.getDocId().getDocumento())){
+                Realiza realizaAux = new Realiza();
+                realizaAux.setDocId(aux);
+                realizaAux.setProId(produccionintelectual);
+                ejbRealizaFacade.create(realizaAux);
+                 System.out.println("Docentes selecionados:"+aux.getNombres());
+            }else{
+                 System.out.println("Se selecciono a el mismo:"+aux.getNombres());
+            }
+            
+        }
+     
+     
+//      persist_realiza(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("RealizaCreated"));
       persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("RevistaCreated"));
 //      ejbFacade.refrescar();
         if (!JsfUtil.isValidationFailed()) {
@@ -194,72 +218,7 @@ public class RevistaController implements Serializable {
         return items;
     }
     
-     private void persist_produccion(PersistAction persistAction, String successMessage) {
-        if (produccionintelectual != null) {
-            setEmbeddableKeys();
-            try {
-                if (persistAction != PersistAction.DELETE) {
-                   
-                  
-                    if(persistAction==PersistAction.CREATE){
-                         
-                         idProduccionNueva=(ejbProduccionintelectualFacade.agregarProduccion(produccionintelectual)).getId();
-                        // System.out.println("********************* -->"+idProduccionNueva);
-                         
-                         
-                    }else{
-                         ejbProduccionintelectualFacade.edit(produccionintelectual);
-                    }
-                    
-                } else {
-                    ejbProduccionintelectualFacade.remove(produccionintelectual);
-                }
-                JsfUtil.addSuccessMessage(successMessage);
-            } catch (EJBException ex) {
-                String msg = "";
-                Throwable cause = ex.getCause();
-                if (cause != null) {
-                    msg = cause.getLocalizedMessage();
-                }
-                if (msg.length() > 0) {
-                    JsfUtil.addErrorMessage(msg);
-                } else {
-                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-                }
-            } catch (Exception ex) {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            }
-        }
-    }
-    
- private void persist_realiza(PersistAction persistAction, String successMessage) {
-        if (realiza != null) {
-            setEmbeddableKeys();
-            try {
-                if (persistAction != PersistAction.DELETE) {
-                    ejbRealizaFacade.edit(realiza);
-                } else {
-                    ejbRealizaFacade.remove(realiza);
-                }
-                JsfUtil.addSuccessMessage(successMessage);
-            } catch (EJBException ex) {
-                String msg = "";
-                Throwable cause = ex.getCause();
-                if (cause != null) {
-                    msg = cause.getLocalizedMessage();
-                }
-                if (msg.length() > 0) {
-                    JsfUtil.addErrorMessage(msg);
-                } else {
-                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-                }
-            } catch (Exception ex) {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            }
-        }
-    }
+ 
      
      
     private void persist(PersistAction persistAction, String successMessage) {

@@ -12,32 +12,37 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{contratacionController.selected != null}">
                         
-                        <h:outputText value="#{bundle.ViewContratacionLabel_docId}"/>
+                        <h:outputText value="Apellidos #{bundle.ViewContratacionLabel_docId}"/>
                         <h:outputText value="#{contratacionController.selected.docId.apellidos}" title="#{bundle.ViewContratacionTitle_docId}"/>
                         
-                        <h:outputText value="#{bundle.ViewContratacionLabel_docId}"/>
+                        <h:outputText value="Nombres #{bundle.ViewContratacionLabel_docId}"/>
                         <h:outputText value="#{contratacionController.selected.docId.nombres}" title="#{bundle.ViewContratacionTitle_docId}"/>
                         
-                        <h:outputText value="#{bundle.ViewContratacionLabel_docId}"/>
+                        <h:outputText value="Documento #{bundle.ViewContratacionLabel_docId}"/>
                         <h:outputText value="#{contratacionController.selected.docId.documento}" title="#{bundle.ViewContratacionTitle_docId}"/>
                         
                         <h:outputText value="#{bundle.ViewContratacionLabel_facId}"/>
-                        <h:outputText value="#{contratacionController.selected.facId.nombre}" title="#{bundle.ViewContratacionTitle_facId}"/>
+                        <h:outputText value="#{contratacionController.selected.depId.facId.nombre}" title="#{bundle.ViewContratacionTitle_facId}"/>
                         
+                        <h:outputText value="#{bundle.ViewContratacionLabel_depId}"/>
+                        <h:outputText value="#{contratacionController.selected.depId.nombre}" title="#{bundle.ViewContratacionTitle_depId}"/>
                         
                         <h:outputText value="#{bundle.ViewContratacionLabel_fechaInicio}"/>
                         <h:outputText value="#{contratacionController.selected.fechaInicio}" title="#{bundle.ViewContratacionTitle_fechaInicio}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
                         </h:outputText>
                         
                         <h:outputText value="#{bundle.ViewContratacionLabel_fechaFin}"/>
                         <h:outputText value="#{contratacionController.selected.fechaFin}" title="#{bundle.ViewContratacionTitle_fechaFin}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
                         </h:outputText>
                         
                         <h:outputText value="#{bundle.ViewContratacionLabel_tipId}"/>
-                        <h:outputText value="#{contratacionController.selected.tipId.tipo}" title="#{bundle.ViewContratacionTitle_tipId}"/>
+                        <h:outputText value="#{contratacionController.selected.catConId.tipConId.tipo}" title="#{bundle.ViewContratacionTitle_tipId}"/>
                                             
+                        <h:outputText value="#{bundle.ViewContratacionLabel_catId}"/>
+                        <h:outputText value="#{contratacionController.selected.catConId.catId.nombre}" title="#{bundle.ViewContratacionTitle_catId}"/>
+                        
                         <h:outputText value="#{bundle.ViewContratacionLabel_dedId}"/>
                         <h:outputText value="#{contratacionController.selected.dedId.dedicacion}" title="#{bundle.ViewContratacionTitle_dedId}"/>
                         </p:panelGrid>

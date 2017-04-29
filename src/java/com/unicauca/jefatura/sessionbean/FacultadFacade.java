@@ -5,10 +5,13 @@
  */
 package com.unicauca.jefatura.sessionbean;
 
+
 import com.unicauca.jefatura.entidades.Facultad;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +31,24 @@ public class FacultadFacade extends AbstractFacade<Facultad> {
     public FacultadFacade() {
         super(Facultad.class);
     }
+
+    public Facultad buscarPorIdFacultad(Integer id) {
+        System.out.println(""+id);
+        Query query = getEntityManager().createNamedQuery("Facultad.findById");
+        query.setParameter("id", id);
+        List<Facultad> result = query.getResultList();
+        
+        if(result.isEmpty()){
+            System.out.println("retorno valor null");
+            return null;
+        }else{
+            System.out.println(result.get(0).getNombre());
+            return result.get(0);
+        }
+        
+        
+    }	
     
 }
+
+

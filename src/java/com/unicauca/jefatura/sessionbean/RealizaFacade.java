@@ -1,11 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.unicauca.jefatura.sessionbean;
 
+
+
 import com.unicauca.jefatura.entidades.Realiza;
+import com.unicauca.jefatura.entidades.Revista;
+import com.unicauca.jefatura.sessionbean.AbstractFacade;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -31,7 +30,7 @@ public class RealizaFacade extends AbstractFacade<Realiza> {
         super(Realiza.class);
     }
     
-    public List<Realiza> obtenerProduccionIntelectual(String numeroDocumento){
+    public List<Realiza> obtenerProduccionIntelectual(Integer numeroDocumento){
          Query buscarIden = getEntityManager().createNamedQuery("Realiza.findByDocId");
         buscarIden.setParameter("docId", numeroDocumento);
         List<Realiza> lista= buscarIden.getResultList();
@@ -51,9 +50,49 @@ public class RealizaFacade extends AbstractFacade<Realiza> {
         return lista;
         
     }
+
+    
+      public List<Realiza> getRevistasDocente(Integer doc_id){
+          System.out.println("Ingreso a hacer conuslta");
+        Query q = em.createNamedQuery("selectProduccionRevistaDocente");
+        q.setParameter(1, doc_id);
+        List<Realiza> revistas = q.getResultList();
+        
+       
+        return revistas;
+    }
+      
+       public List<Realiza> getCapituloLibroDocente(Integer doc_id){
+          System.out.println("Ingreso a hacer conuslta");
+        Query q = em.createNamedQuery("selectProduccionCapituloLibroDocente");
+        q.setParameter(1, doc_id);
+        List<Realiza> revistas = q.getResultList();
+        
+          
+        return revistas;
+    }
+           public List<Realiza> getLibroDocente(Integer doc_id){
+          System.out.println("Ingreso a hacer conuslta");
+        Query q = em.createNamedQuery("selectProduccionLibroDocente");
+        q.setParameter(1, doc_id);
+        List<Realiza> revistas = q.getResultList();
+        
+        
+        return revistas;
+    }
+               public List<Realiza> getConferenciaDocente(Integer doc_id){
+          System.out.println("Ingreso a hacer conuslta");
+        Query q = em.createNamedQuery("selectProduccionConferenciaDocente");
+        q.setParameter(1, doc_id);
+        List<Realiza> revistas = q.getResultList();
+        
+        return revistas;
+    }
+    
+    
       public void refrescar(){
           
-        em.refresh(this);
+       // em.refresh();
         
     }
     

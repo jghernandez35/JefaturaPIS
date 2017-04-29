@@ -36,6 +36,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Tipocontratacion.findByTipo", query = "SELECT t FROM Tipocontratacion t WHERE t.tipo = :tipo")})
 public class Tipocontratacion implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipConId")
+    private Collection<Categoriacontratacion> categoriacontratacionCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,8 +50,7 @@ public class Tipocontratacion implements Serializable {
     @Size(min = 1, max = 60)
     @Column(name = "TIPO")
     private String tipo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipId")
-    private Collection<Contratacion> contratacionCollection;
+  
 
     public Tipocontratacion() {
     }
@@ -78,14 +80,7 @@ public class Tipocontratacion implements Serializable {
         this.tipo = tipo;
     }
 
-    @XmlTransient
-    public Collection<Contratacion> getContratacionCollection() {
-        return contratacionCollection;
-    }
-
-    public void setContratacionCollection(Collection<Contratacion> contratacionCollection) {
-        this.contratacionCollection = contratacionCollection;
-    }
+    
 
     @Override
     public int hashCode() {
@@ -110,6 +105,15 @@ public class Tipocontratacion implements Serializable {
     @Override
     public String toString() {
         return "com.unicauca.jefatura.entidades.Tipocontratacion[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Categoriacontratacion> getCategoriacontratacionCollection() {
+        return categoriacontratacionCollection;
+    }
+
+    public void setCategoriacontratacionCollection(Collection<Categoriacontratacion> categoriacontratacionCollection) {
+        this.categoriacontratacionCollection = categoriacontratacionCollection;
     }
     
 }

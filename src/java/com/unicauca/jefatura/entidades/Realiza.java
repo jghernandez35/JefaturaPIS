@@ -33,8 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Realiza.findAll", query = "SELECT r FROM Realiza r"),
     @NamedQuery(name = "Realiza.findById", query = "SELECT r FROM Realiza r WHERE r.id = :id"),
-    @NamedQuery(name = "Realiza.findByFecha", query = "SELECT r FROM Realiza r WHERE r.fecha = :fecha"),
-    @NamedQuery(name = "Realiza.findByDocId", query = "SELECT r FROM Realiza r WHERE r.docId.documento = :docId")})
+    @NamedQuery(name = "Realiza.findByDocId", query = "SELECT r FROM Realiza r WHERE r.docId.id = :docId")})
 public class Realiza implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,11 +42,6 @@ public class Realiza implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "FECHA")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fecha;
     @JoinColumn(name = "DOC_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Docente docId;
@@ -64,7 +58,6 @@ public class Realiza implements Serializable {
 
     public Realiza(Integer id, Date fecha) {
         this.id = id;
-        this.fecha = fecha;
     }
 
     public Integer getId() {
@@ -73,14 +66,6 @@ public class Realiza implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
     }
 
     public Docente getDocId() {

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -29,8 +30,10 @@ public class TipocontratacionController implements Serializable {
     private Tipocontratacion selected;
 
     public TipocontratacionController() {
+        selected = new Tipocontratacion();
     }
 
+    
     public Tipocontratacion getSelected() {
         return selected;
     }

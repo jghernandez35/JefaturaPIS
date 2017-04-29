@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <h:body>    
+        <h:form>
+            <p:panel header="#{bundleProduccion.CreateLibroTitle}">
+                <h:panelGroup id="display">
+                              <p:panelGrid columns="3" rendered="#{realizaController.selected != null}">
+
+                      <h:outputText value="#{bundleProduccion.ViewProduccionDocenteLabel_Documento}"/>
+                        <h:outputText value="#{realizaController.selectDocente.documento}" title="#{bundleProduccion.ViewProduccionDocenteTitle_Documento}"/>
+                        <h:outputText value=""/>
+                        <h:outputText value="#{bundleProduccion.ViewProduccionDocenteLabel_Nombre}"/>
+                        <h:outputText value="#{realizaController.selectDocente.nombres}" title="#{bundleProduccion.ViewProduccionDocenteTitle_Nombre}"/>
+                        <h:outputText value=""/>
+                        <h:outputText value="#{bundleProduccion.ViewProduccionDocenteLabel_Apellido}"/>
+                        <h:outputText value="#{realizaController.selectDocente.apellidos}" title="#{bundleProduccion.ViewProduccionDocenteTitle_Apellido}"/>
+                        <h:outputText value=""/>
+                        
+                        <p:outputLabel value="#{bundleProduccion.CreateLibroLabel_ISBN}" for="libroIsbn" />
+                        <p:inputText id="libroIsbn" value="#{realizaController.libroSelect.libroIsbn}" title="#{bundleProduccion.CreateLibroTitle_ISBN}" required="true" requiredMessage="#{bundleProduccion.CreateLibroRequiredMessage_ISBN}">
+                            <f:validator validatorId="ValidarCampoObligatorio"/>
+                            <p:ajax event = "keyup" update="isbn" />
+                        </p:inputText>
+                        <p:message for="libroIsbn" id="isbn" class="message" />
+                        
+                        <p:outputLabel value="#{bundleProduccion.CreateLibroLabel_Nombre}" for="libroNombre" />
+                        <p:inputText id="libroNombre" value="#{realizaController.libroSelect.libroNombre}" title="#{bundleProduccion.CreateLibroTitle_Nombre}" required="true" requiredMessage="#{bundleProduccion.CreateLibroRequiredMessage_Nombre}">
+                            <f:validator validatorId="ValidarCampoObligatorio"/>
+                            <p:ajax event = "keyup" update="nombre" />
+                        </p:inputText>
+                        <p:message for="libroNombre" id="nombre" class="message" />
+                        
+                        <p:outputLabel value="#{bundleProduccion.CreateLibroLabel_Edicion}" for="libroEdicion" />
+                        <p:inputText id="libroEdicion" value="#{realizaController.libroSelect.libroEdicion}" title="#{bundleProduccion.CreateLibroTitle_Edicion}" required="true" requiredMessage="#{bundleProduccion.CreateLibroRequiredMessage_Edicion}">
+                            <f:validator validatorId="ValidarCampoObligatorio"/>
+                            <f:validator validatorId="ValidarCampoNumerico"/>
+                            <p:ajax event = "keyup" update="edicion" />
+                        </p:inputText>
+                        <p:message for="libroEdicion" id="edicion" class="message" />
+                        
+                        <p:outputLabel value="#{bundleProduccion.CreateLibroLabel_Editorial}" for="libroEditorial" />
+                        <p:inputText id="libroEditorial" value="#{realizaController.libroSelect.libroEditorial}" title="#{bundleProduccion.CreateLibroTitle_Editorial}" required="true" requiredMessage="#{bundleProduccion.CreateLibroRequiredMessage_Editorial}">
+                            <f:validator validatorId="ValidarCampoObligatorio"/>
+                            <p:ajax event = "keyup" update="editorial" />
+                        </p:inputText>
+                        <p:message for="libroEditorial" id="editorial" class="message" />
+                        
+                        
+                       
+                        <p:outputLabel value="#{bundleProduccion.CreateProduccionintelectualLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" placeholder="dd-mm-aaaa" pattern="dd-MM-yyyy" value="#{realizaController.produccionIntelectualSelect.fecha}" title="#{bundleProduccion.EditProduccionintelectualTitle_fecha}" required="true" requiredMessage="#{bundleProduccion.EditProduccionintelectualRequiredMessage_fecha}" showOn="button"/>
+                         <h:outputText value=""/>
+                        <h:outputLabel for="multiple" value="Colaboradores" />
+                        <p:selectCheckboxMenu id="multiple" value="#{realizaController.colaboradores}"  label="Docentes"     converter="docenteConverter"   filter="true"  filterMathMode="contains"  multiple="true"  panelStyle="width:250px" style="width:210px;">
+                            <f:selectItems value="#{docenteController.itemsAvailableSelectMany}" var="docente" itemLabel="#{docente.nombres} #{docente.apellidos}" itemValue="#{docente}"/>
+                        </p:selectCheckboxMenu>
+                    </p:panelGrid>
+                 
+                    <p:commandButton actionListener ="#{realizaController.create(cargarFormulariosController,1)}" action ="#{realizaController.recargarLibros()}" value="#{bundleProduccion.Save}" update="display,:RealizaListDocenteForm:datalist,:growl" ajax="false"/>
+
+                </h:panelGroup>
+            </p:panel> 
+        </h:form>
+        <h:form>
+            <p:commandButton action="#{realizaController.cancel(cargarFormulariosController,1)}" value="#{bundleProduccion.Cancel}" ajax="false"/>
+        </h:form>
+    </h:body>
+
+
+</html>
+
+

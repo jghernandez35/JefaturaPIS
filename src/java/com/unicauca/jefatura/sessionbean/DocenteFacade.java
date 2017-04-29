@@ -35,7 +35,7 @@ public class DocenteFacade extends AbstractFacade<Docente> {
         Query buscarIden = getEntityManager().createNamedQuery("Docente.findByDocumento");
         buscarIden.setParameter("documento", numeroDeIdentificacion);
         List<Docente> lista= buscarIden.getResultList();
-        //Docente docente =(Docente)buscarIden.getSingleResult();
+
         if(lista.size()==0){
             return false;
         }else{

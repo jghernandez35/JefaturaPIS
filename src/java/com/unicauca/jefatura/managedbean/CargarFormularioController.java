@@ -14,75 +14,135 @@ import java.io.Serializable;
 public class CargarFormularioController implements Serializable {
 
     private String ruta;
+
     public String getRuta() {
         return ruta;
     }
 
+	//DOCENTE CONTRATACION - JOSE RIVERA
     public CargarFormularioController() {
-          this.ruta="/index.xhtml";
+        this.ruta = "/index.xhtml";
     }
 
     public void cargarGestionDocente() {
         this.ruta = "/Jefe/docente/List.xhtml";
     }
-    
+	 public void  cargarGestionContratacionDocente() {
+        this.ruta = "/Jefe/contratacion/List_Docente.xhtml";
+    }
+
     public void cargarGestionContratacion() {
         this.ruta = "/Jefe/contratacion/List.xhtml";
     }
-    
+
     public void cargarVerDocente() {
         this.ruta = "/Jefe/docente/View.xhtml";
     }
+
     public void cargarVerContratacion() {
         this.ruta = "/Jefe/contratacion/View.xhtml";
     }
-    
-    
+	
+	public void cargarVerContratacionDocente(){
+        this.ruta = "/Jefe/contratacion/List_Docente_Contratacion.xhtml";
+   } 
+
     public void cargarCrearDocente() {
         this.ruta = "/Jefe/docente/Create.xhtml";
     }
-    
+
     public void cargarCrearContratacion() {
         this.ruta = "/Jefe/contratacion/Create.xhtml";
     }
-    
+
     public void cargarModificarDocente() {
         this.ruta = "/Jefe/docente/Edit.xhtml";
     }
-    
+
     public void cargarModificarContratacion() {
         this.ruta = "/Jefe/contratacion/Edit.xhtml";
     }
-     
-    
-    
-    public void cargarCrearRevista() {
-        this.ruta = "/Jefe/revista/Create.xhtml";
+	//DOCENTE CONTRATACION - JOSE RIVERA
+	//PRODUCCIÓN INTELECTUAL FABIAN MUNOZ
+    public void cargarModificarRevista() {
+        this.ruta = "/Jefe/produccionIntelectual/revista/Edit.xhtml";
     }
-     public void cargarModificarRevista() {
-        this.ruta = "/Jefe/revista/Edit.xhtml";
-    }
-      public void cargarVerRevista() {
-        this.ruta = "/Jefe/revista/View.xhtml";
-    }
-    
-      public void cargarGestionRevista() {
-        this.ruta = "/Jefe/revista/List.xhtml";
-    }
-      
-      public void cargarGestionProduccion(){
-          this.ruta = "/Jefe/realiza/List.xhtml";
-      }
-      
-         public void cargarVerRealiza() {
-        this.ruta = "/Jefe/realiza/View.xhtml";
-    }
-            public void cargarVerRevistasDocente(){
-                  this.ruta = "/Jefe/realiza/List_Docente.xhtml";
-            }
-                    
-    
-    
 
+    public void cargarGestionRevista() {
+        this.ruta = "/Jefe/produccionIntelectual/revista/List.xhtml";
+    }
+
+    public void cargarGestionProduccion() {
+        this.ruta = "/Jefe/produccionIntelectual/realiza/List.xhtml";
+    }
+
+    public void cargarVerRealiza() {
+        this.ruta = "/Jefe/produccionIntelectual/realiza/View.xhtml";
+    }
+
+    public void cargarVerRevistasDocente() {
+        this.ruta = "/Jefe/produccionIntelectual/revista/List_Docente.xhtml";
+    }
+
+    public void cargarVerConferenciasDocente() {
+        this.ruta = "/Jefe/produccionIntelectual/conferencia/List_Docente.xhtml";
+    }
+
+    public void cargarVerLibrosDocente() {
+        this.ruta = "/Jefe/produccionIntelectual/libro/List_Docente.xhtml";
+    }
+
+    public void cargarVerCapLibrosDocente() {
+        this.ruta = "/Jefe/produccionIntelectual/capitulo_libro/List_Docente.xhtml";
+    }
+
+    public void cargarVerRevista(Integer opc) {
+        if (opc == 0) {
+            this.ruta = "/Jefe/produccionIntelectual/revista/View_Docente.xhtml";
+        } else {
+            this.ruta = "/Jefe/produccionIntelectual/revista/View.xhtml";
+        }
+    }
+
+    public void cargarVerLibro(Integer opc) {
+        if (opc == 0) {
+            this.ruta = "/Jefe/produccionIntelectual/libro/View_Docente.xhtml";
+        } else {
+            this.ruta = "/Jefe/produccionIntelectual/libro/View.xhtml";
+        }
+    }
+
+    public void cargarVerCapituloLibro(Integer opc) {
+        if (opc == 0) {
+            this.ruta = "/Jefe/produccionIntelectual/capitulo_libro/View_Docente.xhtml";
+        } else {
+            this.ruta = "/Jefe/produccionIntelectual/capitulo_libro/View.xhtml";
+        }
+    }
+
+    public void cargarVerConferencia(Integer opc) {
+        if (opc == 0) {
+            this.ruta = "/Jefe/produccionIntelectual/conferencia/View_Docente.xhtml";
+        } else {
+            this.ruta = "/Jefe/produccionIntelectual/conferencia/View.xhtml";
+        }
+    }
+
+    public void cargarCrearRevista() {
+        this.ruta = "/Jefe/produccionIntelectual/revista/Create.xhtml";
+    }
+
+    public void cargarCrearLibro() {
+        this.ruta = "/Jefe/produccionIntelectual/libro/Create.xhtml";
+    }
+
+    public void cargarCrearCapituloLibro() {
+        this.ruta = "/Jefe/produccionIntelectual/capitulo_libro/Create.xhtml";
+    }
+
+    public void cargarCrearConferencia() {
+        this.ruta = "/Jefe/produccionIntelectual/conferencia/Create.xhtml";
+    }
+	//PRODUCCIÓN INTELECTUAL FABIAN MUNOZ
 
 }

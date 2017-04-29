@@ -20,36 +20,63 @@
                         <h:outputText value="#{contratacionController.selected.docId.apellidos}" title="#{bundle.ViewContratacionTitle_docId}"/>
                         <h:outputText value=""/>
                         
-                        <h:outputText value="Identificacion #{bundle.ViewContratacionLabel_docId}"/>
+                        <h:outputText value="Documento #{bundle.ViewContratacionLabel_docId}"/>
                         <h:outputText value="#{contratacionController.selected.docId.documento}" title="#{bundle.ViewContratacionTitle_docId}"/>
                         <h:outputText value=""/>
                         
                         <p:outputLabel value="#{bundle.CreateContratacionLabel_facId}" for="facId" />
-                        <p:selectOneMenu id="facId" value="#{contratacionController.selected.facId}" required="true" requiredMessage="#{bundle.EditContratacionRequiredMessage_facId}">
+                        <p:selectOneMenu filter="true" id="facId" value="#{facultadController.selected}" 
+                                         valueChangeListener="#{departamentoController.seleccionDepartamento}" required="true" requiredMessage="#{bundle.EditContratacionRequiredMessage_facId}">
                             <f:selectItems value="#{facultadController.itemsAvailableSelectOne}"
                                            var="facIdItem"
                                            itemLabel="#{facIdItem.nombre}"
                                            itemValue="#{facIdItem}"/>
+                             <f:ajax execute="facId" render="depId" />
                         </p:selectOneMenu>
                         <p:message for="facId" class="message" />
                         
+                        <p:outputLabel value="#{bundle.CreateContratacionLabel_depId}" for="depId" />
+                        <p:selectOneMenu id="depId" value="#{contratacionController.selected.depId}" required="true" requiredMessage="#{bundle.EditContratacionRequiredMessage_depId}">
+                            <f:selectItems value="#{departamentoController.items}"
+                                           var="depIdItem"
+                                           itemLabel="#{depIdItem.nombre}"
+                                           itemValue="#{depIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:message for="depId" class="message" />
+                        
                         <p:outputLabel value="#{bundle.CreateContratacionLabel_fechaInicio}" for="fechaInicio" />
-                        <p:calendar id="fechaInicio" pattern="MM/dd/yyyy HH:mm:ss" value="#{contratacionController.selected.fechaInicio}" title="#{bundle.EditContratacionTitle_fechaInicio}" required="true" requiredMessage="#{bundle.EditContratacionRequiredMessage_fechaInicio}" showOn="button"/>
+                        <p:calendar id="fechaInicio" value="#{contratacionController.selected.fechaInicio}" title="#{bundle.EditContratacionTitle_fechaInicio}" required="true" requiredMessage="#{bundle.EditContratacionRequiredMessage_fechaInicio}" showOn="button" 
+                                        navigator="true" yearRange="c-100:c" pattern="dd-MM-yyyy" 
+                                        placeholder="dd-mm-aaaa"/>
                         <p:message for="fechaInicio" class="message" />
                          
                         <p:outputLabel value="#{bundle.CreateContratacionLabel_fechaFin}" for="fechaFin" />
-                        <p:calendar id="fechaFin" pattern="MM/dd/yyyy HH:mm:ss" value="#{contratacionController.selected.fechaFin}" title="#{bundle.EditContratacionTitle_fechaFin}" required="true" requiredMessage="#{bundle.EditContratacionRequiredMessage_fechaFin}" showOn="button"/>
+                        <p:calendar id="fechaFin" value="#{contratacionController.selected.fechaFin}" title="#{bundle.EditContratacionTitle_fechaFin}"  showOn="button" 
+                                        navigator="true" yearRange="c-100:c" pattern="dd-MM-yyyy" 
+                                        placeholder="dd-mm-aaaa"/>
                         <p:message for="fechaFin" class="message" />
                          
                         <p:outputLabel value="#{bundle.CreateContratacionLabel_tipId}" for="tipId" />
-                        <p:selectOneMenu id="tipId" value="#{contratacionController.selected.tipId}" required="true" requiredMessage="#{bundle.EditContratacionRequiredMessage_tipId}">
+                        <p:selectOneMenu id="tipId" value="#{tipocontratacionController.selected}"
+                                         valueChangeListener="#{categoriacontratacionController.seleccionCategoria}" required="true" requiredMessage="#{bundle.EditContratacionRequiredMessage_tipId}">
                             <f:selectItems value="#{tipocontratacionController.itemsAvailableSelectOne}"
                                            var="tipIdItem"
                                            itemLabel="#{tipIdItem.tipo}"
                                            itemValue="#{tipIdItem}"/>
+                             <f:ajax execute="tipId" render="catId" />
                         </p:selectOneMenu>
                         <p:message for="tipId" class="message" />
-                         
+                        
+                        <p:outputLabel value="#{bundle.CreateContratacionLabel_catId}" for="catId" />
+                        <p:selectOneMenu id="catId" value="#{contratacionController.selected.catConId}" required="true" requiredMessage="#{bundle.EditContratacionRequiredMessage_catId}">
+                            <f:selectItems value="#{categoriacontratacionController.items}"
+                                           var="catIdItem"
+                                           itemLabel="#{catIdItem.catId.nombre}"
+                                           itemValue="#{catIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:message for="catId" class="message" />
+                        
+                        
                         <p:outputLabel value="#{bundle.CreateContratacionLabel_dedId}" for="dedId" />
                         <p:selectOneMenu id="dedId" value="#{contratacionController.selected.dedId}" required="true" requiredMessage="#{bundle.EditContratacionRequiredMessage_dedId}">
                             <f:selectItems value="#{dedicacionController.itemsAvailableSelectOne}"
@@ -57,7 +84,10 @@
                                            itemLabel="#{dedIdItem.dedicacion}"
                                            itemValue="#{dedIdItem}"/>
                         </p:selectOneMenu>
-                        <p:message for="dedId" class="message" />                        
+                        <p:message for="dedId" class="message" />  
+                        
+                     
+                                              
                                                
                     </p:panelGrid>
                     <p:commandButton actionListener="#{contratacionController.create(cargarFormulariosController)}" value="#{bundle.Save}" ajax="false"/>
@@ -66,7 +96,7 @@
                 </p:panel>
             </h:form>
      <h:form>
-             <p:commandButton action="#{docenteController.cancel(cargarFormulariosController)}" value="#{bundle.Cancel}" ajax="false"/>
+             <p:commandButton action="#{contratacionController.cancelCreate(cargarFormulariosController)}" value="#{bundle.Cancel}" ajax="false"/>
      </h:form>
     </h:body>
     

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+
+
+
+        <h:form id="RealizaListDocenteForm">
+            <h:panelGrid  columns="1">
+
+                  <p:commandButton icon="ui-icon-plus"   value="#{bundleProduccion.Create}" actionListener="#{realizaController.prepareCreate(cargarFormulariosController,4)}"  ajax="false"/>
+
+            </h:panelGrid>
+            <p:panel header="#{bundleProduccion.ListConferenciaTitle} Docente #{realizaController.selectDocente.nombres} #{realizaController.selectDocente.apellidos}">
+                <p:dataTable id="datalist" value="#{realizaController.conferencias}" var="item"
+                             emptyMessage="#{bundleProduccion.ListConferenciaEmpty}"
+                             paginator="true"
+                             rowKey="#{item.id}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             rendered="true"
+                             >
+
+
+                    <p:column filterBy="#{item.proId.conferencia.conferenciaNombre}" headerText="#{bundleProduccion.ListLibroTitle_Nombre}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleProduccion.ListConferenciaTitle_Nombre}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.proId.conferencia.conferenciaNombre}"/>
+                    </p:column>
+
+                    <p:column sortBy="#{item.proId.conferencia.conferenciaUbicacionTipo()}"  headerText="#{bundleProduccion.ListLibroTitle_Nombre}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleProduccion.ListConferenciaTitle_UbicacionTipo}"/>
+                        </f:facet>
+                       
+                        <h:outputText value="#{item.proId.conferencia.conferenciaUbicacionTipo()}" show="false"/>
+                    </p:column>
+
+                    <p:column filterBy="#{item.proId.conferencia.conferenciaUbicacion}" headerText="#{bundleProduccion.ListLibroTitle_Edicion}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleProduccion.ListConferenciaTitle_Ubicacion}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.proId.conferencia.conferenciaUbicacion}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.proId.conferencia.tituloArticulo}"      headerText="#{bundleProduccion.ListLibroTitle_Editorial}"  filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleProduccion.ListConferenciaTitle_tituloArticulo}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.proId.conferencia.tituloArticulo}"/>
+                    </p:column>
+
+
+
+
+                    <p:column sortBy="#{item.proId.fecha}">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleProduccion.ListProduccionintelectualTitle_fecha}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.proId.fecha}">
+                            <f:convertDateTime pattern="dd-MM-yyyy" />
+                        </h:outputText>
+                    </p:column>
+                
+
+
+
+                    <p:column headerText="Acciones">
+
+                        <p:commandLink title="Ver"  action="#{realizaController.prepareViewVerConferencia(item,cargarFormulariosController,0 )}" ajax="false" >                                    
+                            <p:graphicImage  library="img" name="b_view.png"/>
+                        </p:commandLink>
+
+<!--                        <p:commandLink title="Editar"  action="#{revista.prepareUpdate(item,cargarFormulariosController )}" ajax="false" >                                    
+                            <p:graphicImage  library="img" name="b_edit.png"/>
+                        </p:commandLink>-->
+
+
+
+
+
+
+
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+        <h:form>
+            <p:commandButton action="#{realizaController.atras(cargarFormulariosController)}" value="#{bundleProduccion.Atras}" ajax="false"/>
+        </h:form>
+
+    </h:body>
+
+</html>
