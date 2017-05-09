@@ -68,11 +68,11 @@
                         <h:outputText value="#{item.catConId.tipConId.tipo}"/>
                     </p:column>
                     <p:column headerText="Acciones">
-                        <p:commandLink title="Ver"  action="#{contratacionController.prepareView(item,cargarFormulariosController )}" ajax="false" >                                    
+                        <p:commandLink title="Ver"  action="#{contratacionController.prepareView(item,cargarFormulariosController,0 )}" ajax="false" >                                    
                             <p:graphicImage  library="img" name="b_view.png"/>
                         </p:commandLink>
 
-                        <p:commandLink title="Editar" style="margin-left: 5px;" action="#{contratacionController.prepareUpdate(item, cargarFormulariosController)}" ajax="false">                                    
+                        <p:commandLink title="Editar" style="margin-left: 5px;" action="#{contratacionController.prepareUpdate(item, cargarFormulariosController,0)}" ajax="false">                                    
                             <p:graphicImage  library="img" name="b_edit.png"/>
                         </p:commandLink>     
 

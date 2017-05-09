@@ -166,7 +166,7 @@ public class CategoriacontratacionController implements Serializable {
 
     }
 
-     public void seleccionCategoria(ValueChangeEvent e) {
+     public void seleccionTipoContracion(ValueChangeEvent e) {
 
         Tipocontratacion contratacion_seleccionada = (Tipocontratacion)e.getNewValue();
         int id = contratacion_seleccionada.getId().intValue();

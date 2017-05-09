@@ -58,7 +58,7 @@
                          
                         <p:outputLabel value="#{bundle.CreateContratacionLabel_tipId}" for="tipId" />
                         <p:selectOneMenu id="tipId" value="#{tipocontratacionController.selected}"
-                                         valueChangeListener="#{categoriacontratacionController.seleccionCategoria}" required="true" requiredMessage="#{bundle.EditContratacionRequiredMessage_tipId}">
+                                         valueChangeListener="#{categoriacontratacionController.seleccionTipoContracion}" required="true" requiredMessage="#{bundle.EditContratacionRequiredMessage_tipId}">
                             <f:selectItems value="#{tipocontratacionController.itemsAvailableSelectOne}"
                                            var="tipIdItem"
                                            itemLabel="#{tipIdItem.tipo}"

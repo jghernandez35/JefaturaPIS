@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
+
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -62,17 +62,22 @@ public class ContratacionController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
     
-    public void cancel(CargarFormularioController formularioController) {
+    public void cancel(CargarFormularioController formularioController, int vista) {
         limpiarContratacion();
         //docente = null;
-        formularioController.cargarGestionContratacion();
-        
+        if(vista == 0){
+                  formularioController.cargarGestionContratacion();
+        }else{
+                  formularioController.cargarGestionContratacionDocente();
+        }
+       
+       
     }
     
     
     public void cancelCreate(CargarFormularioController formularioController) {
         limpiarContratacion();
-       formularioController.cargarVerContratacionDocente();
+        formularioController.cargarGestionContratacionDocente();
         
     }
     
@@ -89,7 +94,7 @@ public class ContratacionController implements Serializable {
 
      public void prepareViewItemDocente(Docente doc, CargarFormularioController formularioController) {
         this.docente = doc;
-        formularioController.cargarVerContratacionDocente();
+        formularioController.cargarGestionContratacionDocente();
 
     }
     
@@ -103,27 +108,53 @@ public class ContratacionController implements Serializable {
                 if (!JsfUtil.isValidationFailed()) {
                     items = null;    // Invalidate list of items to trigger re-query.
                 }
-                formularioController.cargarGestionDocente();
-
+                formularioController.cargarGestionContratacionDocente();
             }
         }else{
             persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ContratacionCreated"));
                 if (!JsfUtil.isValidationFailed()) {
                     items = null;    // Invalidate list of items to trigger re-query.
                 }
-                formularioController.cargarGestionDocente();
+               formularioController.cargarGestionContratacionDocente();
         }
     }
-    public void prepareUpdate(Contratacion con, CargarFormularioController formularioController) {
+    public void prepareUpdate(Contratacion con, CargarFormularioController formularioController, int vista) {
         selected = con;
-        formularioController.cargarModificarContratacion();
+        if(vista == 0){
+                 formularioController.cargarModificarContratacion();
+        }else{
+                 formularioController.cargarModificarContratacionDocente();
+        }
+       
     }
-
-    public void update(CargarFormularioController formularioController) {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ContratacionUpdated"));
-        formularioController.cargarGestionContratacion();
+    
+      
+    public void update(CargarFormularioController formularioController, int vista) {
+        if (selected.getFechaFin()!= null){
+            if (selected.getFechaInicio().after(selected.getFechaFin())) {
+                FacesContext.getCurrentInstance().addMessage("ContratacionEditForm:fechaInicio", new FacesMessage(FacesMessage.SEVERITY_ERROR, "la fecha de inicio no puede ser mayor a la fecha de fin.", "la fecha de inicio no puede ser mayor a la fecha de fin."));
+            } 
+            else{
+       
+                persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ContratacionUpdated"));
+                
+                if(vista == 0){
+                      formularioController.cargarGestionContratacion();
+                }else{
+                     formularioController.cargarGestionContratacionDocente();
+                }}
+        }else{
+            persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ContratacionUpdated"));
+             if(vista == 0){
+                      formularioController.cargarGestionContratacion();
+                }else{
+                      formularioController.cargarGestionContratacionDocente();
+                }
+                 
+            }
     }
-
+    
+    
      public void gestionContratacion(CargarFormularioController formularioController) {
         formularioController.cargarGestionContratacion();
     }
@@ -138,9 +169,14 @@ public class ContratacionController implements Serializable {
         formularioController.cargarGestionContratacion();
     }
     
-    public void prepareView(Contratacion con, CargarFormularioController formularioController) {
+    public void prepareView(Contratacion con, CargarFormularioController formularioController,int vista) {
         selected = con;
-        formularioController.cargarVerContratacion();
+        if(vista == 0){
+                formularioController.cargarVerContratacion();
+        }else{
+               formularioController.cargarVerContratacionDocente();
+        }
+        
     
     }
     

@@ -173,39 +173,7 @@ public class DepartamentoController implements Serializable {
         Facultad facultad_seleccionada = (Facultad)e.getNewValue();
         int id = facultad_seleccionada.getId().intValue();
         items = getFacade().buscarPorIdFacultad(id);
-        /* facultad_seleccionada = e.getNewValue().toString();
-        System.out.println(facultad_seleccionada);
         
-        switch (facultad_seleccionada) {
-            case "1":
-                items = getFacade().buscarPorIdFacultad(1);
-                break;
-            case "2":
-                items = getFacade().buscarPorIdFacultad(2);
-                break;
-            case "3":
-                items = getFacade().buscarPorIdFacultad(3);
-                break;
-            case "4":
-                items = getFacade().buscarPorIdFacultad(4);
-                break;
-            case "5":
-                items = getFacade().buscarPorIdFacultad(5);
-                break;
-            case "6":
-                items = getFacade().buscarPorIdFacultad(6);
-                break;
-            case "7":
-                items = getFacade().buscarPorIdFacultad(7);
-                break;
-            case "8":
-                items = getFacade().buscarPorIdFacultad(8);
-                break;
-            case "9":
-                items = getFacade().buscarPorIdFacultad(9);
-                break;
-        }*/
-
     }
 
     

@@ -21,7 +21,7 @@ public class ValidarCampoMinimo6Numeros implements Validator
         
         if(texto.length()<6)
         {
-             FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"","No se permite menos de 6 digitos.");
+             FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"No se permite menos de 6 dígitos.","No se permite menos de 6 dígitos.");
              throw new ValidatorException(msg);  
         }           
         
