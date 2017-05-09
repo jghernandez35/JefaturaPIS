@@ -32,6 +32,11 @@ public class TipocontratacionController implements Serializable {
     public TipocontratacionController() {
         selected = new Tipocontratacion();
     }
+    
+    @PostConstruct
+    public void init(){
+        selected = ejbFacade.getTipoContratacion((Integer)1);
+    }
 
     
     public Tipocontratacion getSelected() {

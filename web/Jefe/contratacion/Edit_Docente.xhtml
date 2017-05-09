@@ -89,13 +89,13 @@
                         </p:selectOneMenu>
                         <p:message for="dedId" class="message" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{contratacionController.update(cargarFormulariosController,0)}" value="#{bundle.Save}" ajax="false"/>
+                    <p:commandButton actionListener="#{contratacionController.update(cargarFormulariosController,1)}" value="#{bundle.Save}" ajax="false"/>
                    
                 </h:panelGroup>
                 </p:panel>
             </h:form>
             <h:form>
-             <p:commandButton action="#{contratacionController.cancel(cargarFormulariosController,0)}" value="#{bundle.Cancel}" ajax="false"/>
+             <p:commandButton action="#{contratacionController.cancel(cargarFormulariosController,1)}" value="#{bundle.Cancel}" ajax="false"/>
             </h:form>
     </h:body>
 </html>

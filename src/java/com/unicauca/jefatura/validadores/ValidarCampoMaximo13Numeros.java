@@ -22,7 +22,7 @@ public class ValidarCampoMaximo13Numeros implements Validator
         
         if(texto.length()>13)
         {
-             FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"","No se permite mas de 13 digitos.");
+             FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,"No se permite mas de 13 dígitos.","No se permite mas de 13 dígitos.");
              throw new ValidatorException(msg);  
         }           
         

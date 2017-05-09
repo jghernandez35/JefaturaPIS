@@ -27,10 +27,15 @@ public class CargarFormularioController implements Serializable {
     public void cargarGestionDocente() {
         this.ruta = "/Jefe/docente/List.xhtml";
     }
-	 public void  cargarGestionContratacionDocente() {
+    
+    public void  cargarGestionContratacionDocentes() {
         this.ruta = "/Jefe/contratacion/List_Docente.xhtml";
     }
 
+    public void  cargarGestionContratacionDocente() {
+        this.ruta = "/Jefe/contratacion/List_Docente_Contratacion.xhtml";
+    }
+    
     public void cargarGestionContratacion() {
         this.ruta = "/Jefe/contratacion/List.xhtml";
     }
@@ -42,10 +47,12 @@ public class CargarFormularioController implements Serializable {
     public void cargarVerContratacion() {
         this.ruta = "/Jefe/contratacion/View.xhtml";
     }
+    
+    public void cargarVerContratacionDocente() {
+        this.ruta = "/Jefe/contratacion/View_Docente.xhtml";
+    }
 	
-	public void cargarVerContratacionDocente(){
-        this.ruta = "/Jefe/contratacion/List_Docente_Contratacion.xhtml";
-   } 
+   
 
     public void cargarCrearDocente() {
         this.ruta = "/Jefe/docente/Create.xhtml";
@@ -59,6 +66,10 @@ public class CargarFormularioController implements Serializable {
         this.ruta = "/Jefe/docente/Edit.xhtml";
     }
 
+    public void cargarModificarContratacionDocente() {
+        this.ruta = "/Jefe/contratacion/Edit_Docente.xhtml";
+    }
+    
     public void cargarModificarContratacion() {
         this.ruta = "/Jefe/contratacion/Edit.xhtml";
     }

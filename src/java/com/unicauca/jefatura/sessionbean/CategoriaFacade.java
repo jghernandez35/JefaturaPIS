@@ -6,9 +6,11 @@
 package com.unicauca.jefatura.sessionbean;
 
 import com.unicauca.jefatura.entidades.Categoria;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,4 +31,10 @@ public class CategoriaFacade extends AbstractFacade<Categoria> {
         super(Categoria.class);
     }
     
+     public List<Categoria> buscarPorIdTipoContratacion(int id) {
+        Query query = getEntityManager().createNamedQuery("Categoria.findById");
+        query.setParameter("id", id);
+        List<Categoria> resultList = query.getResultList();
+        return resultList;
+    }	
 }

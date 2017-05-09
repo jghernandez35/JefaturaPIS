@@ -46,16 +46,20 @@
                         
                                               
                         <p:outputLabel value="#{bundle.EditContratacionLabel_fechaInicio}" for="fechaInicio" />
-                        <p:calendar id="fechaInicio" pattern="dd-MM-yyyy" value="#{contratacionController.selected.fechaInicio}" title="#{bundle.EditContratacionTitle_fechaInicio}" required="true" requiredMessage="#{bundle.EditContratacionRequiredMessage_fechaInicio}" showOn="button"/>
+                        <p:calendar id="fechaInicio"  value="#{contratacionController.selected.fechaInicio}" title="#{bundle.EditContratacionTitle_fechaInicio}" required="true" requiredMessage="#{bundle.EditContratacionRequiredMessage_fechaInicio}" showOn="button"
+                                        navigator="true" yearRange="c-100:c" pattern="dd-MM-yyyy" 
+                                        placeholder="dd-mm-aaaa"/>
                         <p:message for="fechaInicio" class="message" />
                         
                         <p:outputLabel value="#{bundle.EditContratacionLabel_fechaFin}" for="fechaFin" />
-                        <p:calendar id="fechaFin" pattern="dd-MM-yyyy" value="#{contratacionController.selected.fechaFin}" title="#{bundle.EditContratacionTitle_fechaFin}" required="true" requiredMessage="#{bundle.EditContratacionRequiredMessage_fechaFin}" showOn="button"/>
+                        <p:calendar id="fechaFin" value="#{contratacionController.selected.fechaFin}" title="#{bundle.EditContratacionTitle_fechaFin}"  showOn="button"
+                                        navigator="true" yearRange="c-100:c" pattern="dd-MM-yyyy" 
+                                        placeholder="dd-mm-aaaa"/>
                         <p:message for="fechaFin" class="message" />
                         
                         <p:outputLabel value="#{bundle.EditContratacionLabel_tipId}" for="tipId" />
                         <p:selectOneMenu id="tipId" value="#{contratacionController.selected.catConId.tipConId}" 
-                                         valueChangeListener="#{categoriacontratacionController.seleccionCategoria}" required="true" requiredMessage="#{bundle.EditContratacionRequiredMessage_tipId}">
+                                         valueChangeListener="#{categoriacontratacionController.seleccionTipoContracion}" required="true" requiredMessage="#{bundle.EditContratacionRequiredMessage_tipId}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{tipocontratacionController.itemsAvailableSelectOne}"
                                            var="tipIdItem"
@@ -85,13 +89,13 @@
                         </p:selectOneMenu>
                         <p:message for="dedId" class="message" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{contratacionController.update(cargarFormulariosController)}" value="#{bundle.Save}" ajax="false"/>
+                    <p:commandButton actionListener="#{contratacionController.update(cargarFormulariosController,0)}" value="#{bundle.Save}" ajax="false"/>
                    
                 </h:panelGroup>
                 </p:panel>
             </h:form>
             <h:form>
-             <p:commandButton action="#{contratacionController.cancel(cargarFormulariosController)}" value="#{bundle.Cancel}" ajax="false"/>
+             <p:commandButton action="#{contratacionController.cancel(cargarFormulariosController,0)}" value="#{bundle.Cancel}" ajax="false"/>
             </h:form>
     </h:body>
 </html>

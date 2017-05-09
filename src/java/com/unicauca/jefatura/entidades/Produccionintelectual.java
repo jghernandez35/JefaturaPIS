@@ -40,10 +40,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Produccionintelectual.findById", query = "SELECT p FROM Produccionintelectual p WHERE p.id = :id"),
     @NamedQuery(name = "Produccionintelectual.findByFecha", query = "SELECT p FROM Produccionintelectual p WHERE p.fecha = :fecha")})
 @NamedNativeQueries({
-    @NamedNativeQuery(name = "selectProduccionRevistaDocente", query = "SELECT r.ID, r.PRO_ID, r.DOC_ID FROM Revista rv JOIN  Produccionintelectual pi  on pi.ID=rv.ID  JOIN Realiza r  on r.PRO_ID = pi.ID   WHERE   r.DOC_ID= ?1",resultClass = Realiza.class),
-    @NamedNativeQuery(name = "selectProduccionCapituloLibroDocente", query = "SELECT r.ID, r.PRO_ID, r.DOC_ID FROM capitulo_libro cl JOIN  Produccionintelectual pi  on pi.ID=cl.CAP_LIBRO_ID  JOIN Realiza r  on r.PRO_ID = pi.ID   WHERE   r.DOC_ID= ?1",resultClass = Realiza.class),
-    @NamedNativeQuery(name = "selectProduccionLibroDocente", query = "SELECT r.ID, r.PRO_ID, r.DOC_ID FROM libro l JOIN  Produccionintelectual pi  on pi.ID=l.LIBRO_ID  JOIN Realiza r  on r.PRO_ID = pi.ID   WHERE   r.DOC_ID= ?1",resultClass = Realiza.class),
-    @NamedNativeQuery(name = "selectProduccionConferenciaDocente", query = "SELECT r.ID, r.PRO_ID, r.DOC_ID FROM conferencia c JOIN  Produccionintelectual pi  on pi.ID=c.CONFERENCIA_ID  JOIN Realiza r  on r.PRO_ID = pi.ID   WHERE   r.DOC_ID= ?1",resultClass = Realiza.class)
+    @NamedNativeQuery(name = "selectProduccionRevistaDocente", query = "SELECT r.ID, r.PRO_ID, r.DOC_ID FROM revista rv JOIN  produccionintelectual pi  on pi.ID=rv.ID  JOIN realiza r  on r.PRO_ID = pi.ID   WHERE   r.DOC_ID= ?1",resultClass = Realiza.class),
+    @NamedNativeQuery(name = "selectProduccionCapituloLibroDocente", query = "SELECT r.ID, r.PRO_ID, r.DOC_ID FROM capitulo_libro cl JOIN  produccionintelectual pi  on pi.ID=cl.CAP_LIBRO_ID  JOIN realiza r  on r.PRO_ID = pi.ID   WHERE   r.DOC_ID= ?1",resultClass = Realiza.class),
+    @NamedNativeQuery(name = "selectProduccionLibroDocente", query = "SELECT r.ID, r.PRO_ID, r.DOC_ID FROM libro l JOIN  produccionintelectual pi  on pi.ID=l.LIBRO_ID  JOIN realiza r  on r.PRO_ID = pi.ID   WHERE   r.DOC_ID= ?1",resultClass = Realiza.class),
+    @NamedNativeQuery(name = "selectProduccionConferenciaDocente", query = "SELECT r.ID, r.PRO_ID, r.DOC_ID FROM conferencia c JOIN  produccionintelectual pi  on pi.ID=c.CONFERENCIA_ID  JOIN realiza r  on r.PRO_ID = pi.ID   WHERE   r.DOC_ID= ?1",resultClass = Realiza.class)
 })
 public class Produccionintelectual implements Serializable {
 

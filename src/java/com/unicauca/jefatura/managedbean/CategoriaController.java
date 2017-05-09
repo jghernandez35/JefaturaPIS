@@ -1,6 +1,7 @@
 package com.unicauca.jefatura.managedbean;
 
 import com.unicauca.jefatura.entidades.Categoria;
+import com.unicauca.jefatura.entidades.Tipocontratacion;
 import com.unicauca.jefatura.managedbean.util.JsfUtil;
 import com.unicauca.jefatura.managedbean.util.JsfUtil.PersistAction;
 import com.unicauca.jefatura.sessionbean.CategoriaFacade;
@@ -18,6 +19,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.event.ValueChangeEvent;
 
 @Named("categoriaController")
 @SessionScoped
@@ -159,7 +161,15 @@ public class CategoriaController implements Serializable {
                 return null;
             }
         }
-
+        
     }
 
+     public void seleccionTipoContracion(ValueChangeEvent e) {
+
+        Tipocontratacion tipo_seleccionado = (Tipocontratacion)e.getNewValue();
+        int id = tipo_seleccionado.getId().intValue();
+        items = getFacade().buscarPorIdTipoContratacion(id);
+        
+    }
+    
 }
