@@ -7,11 +7,11 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
 @Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-05-08T23:41:25")
-@StaticMetamodel(Tipocontratacion.class)
-public class Tipocontratacion_ { 
+@StaticMetamodel(Categoria.class)
+public class Categoria_ { 
 
-    public static volatile CollectionAttribute<Tipocontratacion, Categoriacontratacion> categoriacontratacionCollection;
-    public static volatile SingularAttribute<Tipocontratacion, String> tipo;
-    public static volatile SingularAttribute<Tipocontratacion, Integer> id;
+    public static volatile CollectionAttribute<Categoria, Categoriacontratacion> categoriacontratacionCollection;
+    public static volatile SingularAttribute<Categoria, Integer> id;
+    public static volatile SingularAttribute<Categoria, String> nombre;
 
 }

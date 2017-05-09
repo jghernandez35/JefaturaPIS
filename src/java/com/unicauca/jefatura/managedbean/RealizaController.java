@@ -12,6 +12,7 @@ import com.unicauca.jefatura.managedbean.util.JsfUtil.PersistAction;
 import com.unicauca.jefatura.sessionbean.RealizaFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -59,6 +60,12 @@ public class RealizaController implements Serializable {
     private List<Realiza> libros;
     private List<Realiza> capitulos_libro;
     private List<Realiza> conferencias;
+
+    private Date currentDate = new Date();
+
+    public Date getCurrentDate() {
+        return currentDate;
+    }
 
     public Produccionintelectual getProduccionIntelectualSelect() {
         return produccionIntelectualSelect;
@@ -114,9 +121,10 @@ public class RealizaController implements Serializable {
         }
         return revistas;
     }
-    public void recargarRevistas(){
+
+    public void recargarRevistas() {
         ejbRevistaFacade.findAll();
-     revistas = ejbFacade.getRevistasDocente(selectDocente.getId());   
+        revistas = ejbFacade.getRevistasDocente(selectDocente.getId());
     }
 
     public void setRevistas(List<Realiza> revistas) {
@@ -124,54 +132,54 @@ public class RealizaController implements Serializable {
     }
 
     public List<Realiza> getLibros() {
-        if(libros==null){
-              
-              libros = ejbFacade.getLibroDocente(selectDocente.getId());
+        if (libros == null) {
+
+            libros = ejbFacade.getLibroDocente(selectDocente.getId());
         }
-      
+
         return libros;
     }
-    public void recargarLibros(){
-          ejbFacade.findAll();
-      libros = ejbFacade.getLibroDocente(selectDocente.getId());
+
+    public void recargarLibros() {
+        ejbFacade.findAll();
+        libros = ejbFacade.getLibroDocente(selectDocente.getId());
     }
-    
-    
 
     public void setLibros(List<Realiza> libros) {
         this.libros = libros;
     }
 
     public List<Realiza> getCapitulos_libro() {
-        if(capitulos_libro==null){
+        if (capitulos_libro == null) {
             capitulos_libro = ejbFacade.getCapituloLibroDocente(selectDocente.getId());
         }
-        
+
         return capitulos_libro;
     }
 
     public void setCapitulos_libro(List<Realiza> capitulos_libro) {
         this.capitulos_libro = capitulos_libro;
     }
-     public void recargarCapitulosLibros(){
-      capitulos_libro = ejbFacade.getCapituloLibroDocente(selectDocente.getId());
+
+    public void recargarCapitulosLibros() {
+        capitulos_libro = ejbFacade.getCapituloLibroDocente(selectDocente.getId());
     }
 
     public List<Realiza> getConferencias() {
-        if(conferencias==null){
+        if (conferencias == null) {
             conferencias = ejbFacade.getConferenciaDocente(selectDocente.getId());
         }
-        
+
         return conferencias;
     }
 
     public void setConferencias(List<Realiza> conferencias) {
         this.conferencias = conferencias;
     }
-    public void recargarConferencias(){
-       conferencias = ejbFacade.getConferenciaDocente(selectDocente.getId());
+
+    public void recargarConferencias() {
+        conferencias = ejbFacade.getConferenciaDocente(selectDocente.getId());
     }
-    
 
     public RealizaController() {
         selected = new Realiza();
@@ -237,9 +245,8 @@ public class RealizaController implements Serializable {
     public void create(CargarFormularioController formularioController, Integer tipo) {
 
         ejbProduccionIntelectualFacade.create(produccionIntelectualSelect);
-     
+
         idProduccionNueva = produccionIntelectualSelect.getId();
-       
 
         switch (tipo) {
             case 1://crear libro
@@ -263,13 +270,13 @@ public class RealizaController implements Serializable {
             case 4://crear conferencia
                 conferenciaSelect.setConferenciaId(idProduccionNueva);
                 conferenciaSelect.setProduccionintelectual(produccionIntelectualSelect);
-                
+
                 ejbConferenciaFacade.create(conferenciaSelect);
                 produccionIntelectualSelect.setConferencia(conferenciaSelect);
                 break;
 
         }
-        
+
         selected.setProId(produccionIntelectualSelect);
         selected.setDocId(selectDocente);
         for (int i = 0; i < colaboradores.size(); i++) {
@@ -322,15 +329,19 @@ public class RealizaController implements Serializable {
         switch (tipo) {
             case 1://crear libro
                 libroSelect = new Libro();
+                libroSelect.setLibroEdicion(1);
                 formularioController.cargarCrearLibro();
 
                 break;
             case 2://crear capitulo libro
                 capLibroselect = new CapituloLibro();
+                capLibroselect.setLibroEdicion(1);
+                capLibroselect.setCapLibroNumero(1);
                 formularioController.cargarCrearCapituloLibro();
                 break;
             case 3://crear  revista
                 revistaSelect = new Revista();
+                revistaSelect.setNumeroEdicion(1);
                 System.out.println("Se creo la revista");
                 formularioController.cargarCrearRevista();
                 break;

@@ -57,6 +57,7 @@ public class Conferencia implements Serializable {
     private String conferenciaUbicacion;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 150)
     @Column(name = "TITULO_ARTICULO")
     private String tituloArticulo;
     @JoinColumn(name = "CONFERENCIA_ID", referencedColumnName = "ID", insertable = false, updatable = false)

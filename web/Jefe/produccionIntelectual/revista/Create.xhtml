@@ -11,7 +11,7 @@
         <h:form>
             <p:panel header="#{bundleProduccion.CreateRevistaTitle}">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="3" rendered="#{realizaController.selected != null}">
+                    <p:panelGrid columns="3"  rendered="#{realizaController.selected != null}">
 
                         <h:outputText value="#{bundleProduccion.ViewProduccionDocenteLabel_Documento}"/>
                         <h:outputText value="#{realizaController.selectDocente.documento}" title="#{bundleProduccion.ViewProduccionDocenteTitle_Documento}"/>
@@ -30,10 +30,12 @@
                         </p:inputText>
                         <p:message for="nombreRevista" id="nom" class="message" />
                         <p:outputLabel value="#{bundleProduccion.CreateRevistaLabel_numeroEdicion}" for="numeroEdicion" />
-                        <p:inputText id="numeroEdicion" value="#{realizaController.revistaSelect.numeroEdicion}" title="#{bundleProduccion.CreateRevistaTitle_numeroEdicion}" required="true" requiredMessage="#{bundleProduccion.CreateRevistaRequiredMessage_numeroEdicion}">
+                        <p:inputText maxlength="4" id="numeroEdicion" value="#{realizaController.revistaSelect.numeroEdicion}" title="#{bundleProduccion.CreateRevistaTitle_numeroEdicion}" required="true" requiredMessage="#{bundleProduccion.CreateRevistaRequiredMessage_numeroEdicion}">
                             <f:validator validatorId="ValidarCampoObligatorio"/>
                             <f:validator validatorId="ValidarCampoNumerico"/>
                             <p:ajax event = "keyup" update="ned" />
+                            <p:keyFilter regEx="/[\d]/" />
+                            
                         </p:inputText>
                         <p:message for="numeroEdicion" id="ned" class="message" />
                         <p:outputLabel value="#{bundleProduccion.CreateRevistaLabel_tituloPublicacion}" for="tituloPublicacion" />
@@ -50,12 +52,13 @@
                         </p:selectOneMenu>
                         <p:message for="claId" id="cla"  class="message" />
                         <p:outputLabel value="#{bundleProduccion.CreateProduccionintelectualLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" placeholder="dd-mm-aaaa" pattern="dd-MM-yyyy" value="#{realizaController.produccionIntelectualSelect.fecha}" title="#{bundleProduccion.EditProduccionintelectualTitle_fecha}" required="true" requiredMessage="#{bundleProduccion.EditProduccionintelectualRequiredMessage_fecha}" showOn="button"/>
+                        <p:calendar maxdate="#{realizaController.getCurrentDate()}" id="fecha" placeholder="dd-mm-aaaa" pattern="dd-MM-yyyy" value="#{realizaController.produccionIntelectualSelect.fecha}" title="#{bundleProduccion.EditProduccionintelectualTitle_fecha}" required="true" requiredMessage="#{bundleProduccion.EditProduccionintelectualRequiredMessage_fecha}" showOn="button"/>
                          <h:outputText value=""/>
                         <h:outputLabel for="multiple" value="Colaboradores" />
                         <p:selectCheckboxMenu id="multiple" value="#{realizaController.colaboradores}"  label="Docentes"     converter="docenteConverter"   filter="true"  filterMathMode="contains"  multiple="true"  panelStyle="width:250px" style="width:210px;">
                             <f:selectItems value="#{docenteController.itemsAvailableSelectMany}" var="docente" itemLabel="#{docente.nombres} #{docente.apellidos}" itemValue="#{docente}"/>
                         </p:selectCheckboxMenu>
+                        <h:outputText value=""/>
                     </p:panelGrid>
                  
                     <p:commandButton actionListener="#{realizaController.create(cargarFormulariosController,3)}"  action ="#{realizaController.recargarRevistas()}" value="#{bundleProduccion.Save}" update=":RevistasListDocenteForm:panel1:datalistRevistas" ajax="false"/>

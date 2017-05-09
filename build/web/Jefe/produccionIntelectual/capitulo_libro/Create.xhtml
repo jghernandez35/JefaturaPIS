@@ -24,7 +24,7 @@
                         <h:outputText value=""/>
                         
                         <p:outputLabel value="#{bundleProduccion.CreateLibroLabel_ISBN}" for="libroIsbn" />
-                        <p:inputText id="libroIsbn" value="#{realizaController.capLibroselect.libroIsbn}" title="#{bundleProduccion.CreateLibroTitle_ISBN}" required="true" requiredMessage="#{bundleProduccion.CreateLibroRequiredMessage_ISBN}">
+                        <p:inputText placeholder="978-84-92719-12-9" id="libroIsbn" value="#{realizaController.capLibroselect.libroIsbn}" title="#{bundleProduccion.CreateLibroTitle_ISBN}" required="true" requiredMessage="#{bundleProduccion.CreateLibroRequiredMessage_ISBN}">
                             <f:validator validatorId="ValidarCampoObligatorio"/>
                             <p:ajax event = "keyup" update="isbn" />
                         </p:inputText>
@@ -42,11 +42,12 @@
                             <f:validator validatorId="ValidarCampoObligatorio"/>
                             <f:validator validatorId="ValidarCampoNumerico"/>
                             <p:ajax event = "keyup" update="edicion" />
+                             <p:keyFilter regEx="/[\d]/" />
                         </p:inputText>
                         <p:message for="libroEdicion" id="edicion" class="message" />
                         
                         <p:outputLabel value="#{bundleProduccion.CreateLibroLabel_Editorial}" for="libroEditorial" />
-                        <p:inputText id="libroEditorial" value="#{realizaController.capLibroselect.libroEditorial}" title="#{bundleProduccion.CreateLibroTitle_Editorial}" required="true" requiredMessage="#{bundleProduccion.CreateLibroRequiredMessage_Editorial}">
+                        <p:inputText placeholder="norma" id="libroEditorial" value="#{realizaController.capLibroselect.libroEditorial}" title="#{bundleProduccion.CreateLibroTitle_Editorial}" required="true" requiredMessage="#{bundleProduccion.CreateLibroRequiredMessage_Editorial}">
                             <f:validator validatorId="ValidarCampoObligatorio"/>
                             <p:ajax event = "keyup" update="editorial" />
                         </p:inputText>
@@ -56,6 +57,7 @@
                         <p:inputText id="capLibroTitulo" value="#{realizaController.capLibroselect.capLibroTitulo}" title="#{bundleProduccion.CreateCapituloLibroTitle_capituloTitulo}" required="true" requiredMessage="#{bundleProduccion.CreateCapituloLibroRequiredMessage_capituloTitulo}">
                             <f:validator validatorId="ValidarCampoObligatorio"/>
                             <p:ajax event = "keyup" update="titulo" />
+                            <p:keyFilter regEx="/[\d]/" />  
                         </p:inputText>
                         <p:message for="capLibroTitulo" id="titulo" class="message" />
                         
@@ -70,7 +72,7 @@
                         
                        
                         <p:outputLabel value="#{bundleProduccion.CreateProduccionintelectualLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" placeholder="dd-mm-aaaa" pattern="dd-MM-yyyy" value="#{realizaController.produccionIntelectualSelect.fecha}" title="#{bundleProduccion.EditProduccionintelectualTitle_fecha}" required="true" requiredMessage="#{bundleProduccion.EditProduccionintelectualRequiredMessage_fecha}" showOn="button"/>
+                        <p:calendar maxdate="#{realizaController.getCurrentDate()}" id="fecha" placeholder="dd-mm-aaaa" pattern="dd-MM-yyyy" value="#{realizaController.produccionIntelectualSelect.fecha}" title="#{bundleProduccion.EditProduccionintelectualTitle_fecha}" required="true" requiredMessage="#{bundleProduccion.EditProduccionintelectualRequiredMessage_fecha}" showOn="button"/>
                          <h:outputText value=""/>
                         <h:outputLabel for="multiple" value="Colaboradores" />
                         <p:selectCheckboxMenu id="multiple" value="#{realizaController.colaboradores}"  label="Docentes"     converter="docenteConverter"   filter="true"  filterMathMode="contains"  multiple="true"  panelStyle="width:250px" style="width:210px;">

@@ -45,7 +45,7 @@
              
                         
                         <p:outputLabel value="#{bundleProduccion.CreateConferenciaLabel_Ubicacion}" for="conferenciaUbicacion" />
-                        <p:inputText id="conferenciaUbicacion" value="#{realizaController.conferenciaSelect.conferenciaUbicacion}" title="#{bundleProduccion.CreateConferenciaTitle_Ubicacion}" required="true" requiredMessage="#{bundleProduccion.CreateConferenciaRequiredMessage_Ubicacion}">
+                        <p:inputText placeholder="ciudad/país" id="conferenciaUbicacion" value="#{realizaController.conferenciaSelect.conferenciaUbicacion}" title="#{bundleProduccion.CreateConferenciaTitle_Ubicacion}" required="true" requiredMessage="#{bundleProduccion.CreateConferenciaRequiredMessage_Ubicacion}">
                             <f:validator validatorId="ValidarCampoObligatorio"/>
                             <p:ajax event = "keyup" update="ubicacion" />
                         </p:inputText>
@@ -61,12 +61,13 @@
                         
                        
                         <p:outputLabel value="#{bundleProduccion.CreateProduccionintelectualLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" placeholder="dd-mm-aaaa" pattern="dd-MM-yyyy" value="#{realizaController.produccionIntelectualSelect.fecha}" title="#{bundleProduccion.EditProduccionintelectualTitle_fecha}" required="true" requiredMessage="#{bundleProduccion.EditProduccionintelectualRequiredMessage_fecha}" showOn="button"/>
+                        <p:calendar maxdate="#{realizaController.getCurrentDate()}" id="fecha" placeholder="dd-mm-aaaa" pattern="dd-MM-yyyy" value="#{realizaController.produccionIntelectualSelect.fecha}" title="#{bundleProduccion.EditProduccionintelectualTitle_fecha}" required="true" requiredMessage="#{bundleProduccion.EditProduccionintelectualRequiredMessage_fecha}" showOn="button"/>
                          <h:outputText value=""/>
                         <h:outputLabel for="multiple" value="Colaboradores" />
                         <p:selectCheckboxMenu id="multiple" value="#{realizaController.colaboradores}"  label="Docentes"     converter="docenteConverter"   filter="true"  filterMathMode="contains"  multiple="true"  panelStyle="width:250px" style="width:210px;">
                             <f:selectItems value="#{docenteController.itemsAvailableSelectMany}" var="docente" itemLabel="#{docente.nombres} #{docente.apellidos}" itemValue="#{docente}"/>
                         </p:selectCheckboxMenu>
+                        <h:outputText value=""/>
                     </p:panelGrid>
                  
                     <p:commandButton actionListener ="#{realizaController.create(cargarFormulariosController,4)}"  action ="#{realizaController.recargarConferencias()}"  value="#{bundleProduccion.Save}" update="display,:RealizaListDocenteForm:datalist,:growl" ajax="false"/>
