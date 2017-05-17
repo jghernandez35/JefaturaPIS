@@ -155,5 +155,60 @@ public class CargarFormularioController implements Serializable {
         this.ruta = "/Jefe/produccionIntelectual/conferencia/Create.xhtml";
     }
 	//PRODUCCIÓN INTELECTUAL FABIAN MUNOZ
-
+    //GESTION DE PROYECTOS JOSE HERNANDEZ  
+    
+    public void cargarGestionProyecto() {
+        this.ruta = "/Jefe/proyectosdirigidos/proyecto/List.xhtml";
+    }   
+	
+    public void cargarVerProyecto() {
+        this.ruta = "/Jefe/proyecto/View.xhtml";
+    }
+	
+    public void cargarModificarProyecto() {
+        this.ruta = "/Jefe/proyecto/Edit.xhtml";
+    }
+	
+    public void cargarCrearProyecto() {
+        this.ruta = "/Jefe/proyectosdirigidos/proyecto/Create.xhtml";
+    }
+    
+    public void cargarGestionFormatoa() {     
+        this.ruta = "/Jefe/proyectosdirigidos/formatoa/List.xhtml";
+    }
+	
+    public void cargarVerFormatoa() {
+        this.ruta = "/Jefe/proyectosdirigidos/formatoa/View.xhtml";
+    }
+	
+    public void cargarModificarFormatoa() {
+        this.ruta = "/Jefe/proyectosdirigidos/formatoa/Edit.xhtml";
+    }
+    
+    public void cargarCrearFormatoa() {
+        this.ruta = "/Jefe/proyectosdirigidos/formatoa/Create.xhtml";
+    }    
+    
+    public void cargarGestionEstudiantes() {
+        this.ruta = "/Jefe/estudiante/List.xhtml";
+    }      
+    //FORMATOS A DE CADA DOCENTE
+	public void cargarGestionFormatoaDocente(){
+       System.out.println("llamando a siguiente vista 3");
+         this.ruta = "/Jefe/proyectosdirigidos/formatoa/List_Docentes.xhtml";
+         System.out.println("llamando a siguiente vista 4");
+    }
+	
+	public void cargarVerFormatoaDocente(){
+         this.ruta = "/Jefe/proyectosdirigidos/formatoa/View_Docentes.xhtml";
+    }
+	
+    public void cargarModificarFormatoaDocente() {
+        this.ruta = "/Jefe/proyectosdirigidos/formatoa/Edit_Docentes.xhtml";
+    }
+    
+    public void cargarCrearFormatoaDocente() {
+        this.ruta = "/Jefe/proyectosdirigidos/formatoa/Create_Docentes.xhtml";
+    }
+	//GESTION DE PROYECTOS JOSE HERNANDEZ  
 }

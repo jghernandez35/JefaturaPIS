@@ -7,35 +7,30 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:body>
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundleProyectosDirigidos.ListFormatoaTitle}"></h:outputText>
+        </ui:define>
+
+
             <h:form id="FormatoaListForm">
+                <h:panelGrid  columns="1">
+                    <p:commandButton icon="ui-icon-plus"   value="#{bundleProyectosDirigidos.Create}" action="#{formatoaController.prepareCreateFormatoa(cargarFormulariosController)}" oncomplete="#{formatoaController.limpiarFormatoa()}" ajax="false"/>
+                </h:panelGrid>                 
                 <p:panel header="#{bundleProyectosDirigidos.ListFormatoaTitle}">
                     <p:dataTable id="datalist" value="#{formatoaController.items}" var="item"
-                                 selectionMode="single" selection="#{formatoaController.selected}"
+                                 selectionMode="single" selection="#{formatoaController.formatoa}"
                                  paginator="true"
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
-
-                    
-
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundleProyectosDirigidos.ListFormatoaTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundleProyectosDirigidos.ListFormatoaTitle_actaDepartamento}"/>
                             </f:facet>
                             <h:outputText value="#{item.actaDepartamento}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundleProyectosDirigidos.ListFormatoaTitle_tituloTrabajo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.tituloTrabajo}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -45,17 +40,69 @@
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
                             </h:outputText>
                         </p:column>
+
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundleProyectosDirigidos.ListFormatoaTitle_proyecto}"/>
+                                <h:outputText value="#{bundleProyectosDirigidos.ListProyectoTitle_resolucion}"/>
                             </f:facet>
-                            <h:outputText value="#{item.proyecto}"/>
+                            <h:outputText value="#{item.proyecto.resolucion}"/>
                         </p:column>
-                       
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundleProyectosDirigidos.ListProyectoTitle_fechaResolucion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.proyecto.fechaResolucion}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>                                
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundleProyectosDirigidos.ListFormatoaTitle_tituloTrabajo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tituloTrabajo}"/>
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundleProyectosDirigidos.ListFormatoaTitle_docId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.docId.nombres} #{item.docId.apellidos}"/>
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Estudiante Nombres"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreEstudiantes}"/>
+                        </p:column>                          
+
+                        <p:column headerText="Acciones">
+                            <p:commandLink title="Ver"  action="#{formatoaController.prepareViewFormatoa(item,cargarFormulariosController )}" ajax="false" >                                    
+                                <p:graphicImage  library="img" name="b_view.png"/>
+                            </p:commandLink>
+                            
+                            <p:commandLink title="Editar" style="margin-left: 5px;" action="#{formatoaController.prepareUpdateFormatoa(item, cargarFormulariosController)}" ajax="false">                                    
+                                <p:graphicImage  library="img" name="b_edit.png"/>
+                            </p:commandLink>     
+
+                            <p:commandLink id="Eliminar" style="margin-left: 5px;" action="#{formatoaController.destroy(cargarFormulariosController)}" title="Eliminar" ajax="false">
+                                <p:confirm header="Confirmación" message="¿Está seguro que desea eliminar?" icon="ui-icon-alert" />
+                                <p:graphicImage library="img" name="b_drop.png"/>
+                            </p:commandLink>
+
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+
+                        </p:column>                         
+                        <f:facet name="footer">
+                        </f:facet>
                     </p:dataTable>
                 </p:panel>
             </h:form>
-</h:body>
-       
+
+    </h:body>
 
 </html>

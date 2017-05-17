@@ -29,7 +29,10 @@
             <p:menuitem value="Registrar Producción Docente" actionListener="#{cargarFormulariosController.cargarGestionRevista()}"  ajax="false" icon="ui-icon-link"/>
             <p:menuitem value="Gestionar Producción Docente" actionListener="#{cargarFormulariosController.cargarGestionProduccion()}"  ajax="false" icon="ui-icon-link"/>
         </p:submenu>
-        
+        <p:submenu label="Proyectos Dirigidos" >
+            <p:menuitem value="Gestionar Proyectos FormatoA" actionListener="#{cargarFormulariosController.cargarGestionFormatoa()}"  ajax="false" icon="ui-icon-link"/>
+            <p:menuitem value="Gestionar Proyectos" actionListener="#{cargarFormulariosController.cargarGestionProyecto()}"  ajax="false" icon="ui-icon-link"/>
+        </p:submenu>         
     </p:panelMenu>
 </h:form>
             

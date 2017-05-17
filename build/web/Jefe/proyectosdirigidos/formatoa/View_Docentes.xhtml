@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+
+            <h:form id="FormatoaViewForm">
+                <p:panel header="#{bundleProyectosDirigidos.ViewFormatoaTitle} - asociado a #{formatoaController.docente.nombres} #{formatoaController.docente.apellidos}">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{formatoaController.formatoa != null}">
+                        <h:outputText value="#{bundleProyectosDirigidos.ViewFormatoaLabel_actaDepartamento}"/>
+                        <h:outputText value="#{formatoaController.formatoa.actaDepartamento}" title="#{bundleProyectosDirigidos.ViewFormatoaTitle_actaDepartamento}"/>
+
+                        <h:outputText value="#{bundleProyectosDirigidos.ViewFormatoaLabel_fechaActa}"/>
+                        <h:outputText value="#{formatoaController.formatoa.fechaActa}" title="#{bundleProyectosDirigidos.ViewFormatoaTitle_fechaActa}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                         <h:outputText value="Resolucion:"/>
+                         <h:outputText value="#{formatoaController.formatoa.proyecto.resolucion}" title="#{bundleProyectosDirigidos.ViewFormatoaTitle_actaDepartamento}"/>
+
+                        <h:outputText value="Fecha Resolucion:"/>
+                        <h:outputText value="#{formatoaController.formatoa.proyecto.fechaResolucion}" title="#{bundleProyectosDirigidos.ViewFormatoaTitle_fechaActa}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        
+                        <h:outputText value="Tipo Proyecto:"/>
+                        <h:outputText value="Pregrado"/>
+
+                        <h:outputText value="#{bundleProyectosDirigidos.ViewFormatoaLabel_tituloTrabajo}"/>
+                        <h:outputText value="#{formatoaController.formatoa.tituloTrabajo}" title="#{bundleProyectosDirigidos.ViewFormatoaTitle_tituloTrabajo}"/>
+                    </p:panelGrid>
+
+                </h:panelGroup>
+                </p:panel>
+            </h:form>
+            <h:form id="FormatoaViewForm2">
+                <p:panel header="Datos Estudiantes">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{formatoaController.formatoa != null}">
+
+                        <h:outputText value="Identificacion y Nombres:"/>
+                        <h:outputText value="#{formatoaController.formatoa.nombreEstudiantes}" title="#{bundleProyectosDirigidos.ViewFormatoaTitle_docId}"/>
+                        
+                    </p:panelGrid>
+                    <p:commandButton action="#{formatoaController.preparaGestionFormatoaDocentes(formatoaController.docente,cargarFormulariosController)}" value="#{bundleProyectosDirigidos.Close}" onclick="FormatoaViewDialog.hide()"/>
+                </h:panelGroup>
+                </p:panel>
+            </h:form>
+
+    </h:body>
+</html>

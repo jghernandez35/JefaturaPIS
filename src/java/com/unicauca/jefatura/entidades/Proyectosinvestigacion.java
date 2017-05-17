@@ -15,7 +15,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -42,6 +44,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Proyectosinvestigacion.findByFechaFin", query = "SELECT p FROM Proyectosinvestigacion p WHERE p.fechaFin = :fechaFin")})
 public class Proyectosinvestigacion implements Serializable {
 
+    @JoinColumn(name = "DOC_ID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Docente docId;
+	
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -153,6 +159,14 @@ public class Proyectosinvestigacion implements Serializable {
     @Override
     public String toString() {
         return "com.unicauca.jefatura.entidades.Proyectosinvestigacion[ id=" + id + " ]";
+    }
+
+    public Docente getDocId() {
+        return docId;
+    }
+
+    public void setDocId(Docente docId) {
+        this.docId = docId;
     }
     
 }

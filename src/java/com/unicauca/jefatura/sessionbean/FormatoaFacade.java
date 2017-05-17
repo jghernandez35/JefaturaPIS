@@ -9,6 +9,8 @@ import com.unicauca.jefatura.entidades.Formatoa;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.List;
 
 /**
  *
@@ -29,4 +31,19 @@ public class FormatoaFacade extends AbstractFacade<Formatoa> {
         super(Formatoa.class);
     }
     
+    public List<Formatoa> listarFormatosADocente(Integer docId){
+        Query consulta=getEntityManager().createNamedQuery("Formatoa.findByDocIdId");
+        consulta.setParameter("docId",docId);
+        
+        List<Formatoa> lista=consulta.getResultList();
+        
+        return lista;
+        
+    }
+    
+    public Formatoa guardar(Formatoa formatoa){
+        em.persist(formatoa);
+        em.flush();
+        return formatoa;
+    }
 }

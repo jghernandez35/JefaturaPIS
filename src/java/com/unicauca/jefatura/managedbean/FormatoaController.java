@@ -1,6 +1,9 @@
 package com.unicauca.jefatura.managedbean;
 
+import com.unicauca.jefatura.entidades.Docente;
+import com.unicauca.jefatura.entidades.Estudiantepregrado;
 import com.unicauca.jefatura.entidades.Formatoa;
+import com.unicauca.jefatura.entidades.Proyecto;
 import com.unicauca.jefatura.managedbean.util.JsfUtil;
 import com.unicauca.jefatura.managedbean.util.JsfUtil.PersistAction;
 import com.unicauca.jefatura.sessionbean.FormatoaFacade;
@@ -24,19 +27,58 @@ import javax.faces.convert.FacesConverter;
 public class FormatoaController implements Serializable {
 
     @EJB
-    private com.unicauca.jefatura.sessionbean.FormatoaFacade ejbFacade;
+    private com.unicauca.jefatura.sessionbean.FormatoaFacade ejbFacadeFormatoa;
+    @EJB
+    private com.unicauca.jefatura.sessionbean.ProyectoFacade ejbFacadeProyecto; 
+    @EJB
+    private com.unicauca.jefatura.sessionbean.EstudiantepregradoFacade ejbFacadeEstudiantePregrado;    
     private List<Formatoa> items = null;
-    private Formatoa selected;
+    //fabian
+    private List<Formatoa> items_docente=null;
+    //Jose
+    private Formatoa formatoa;
+    private Proyecto proyecto;
+    private Estudiantepregrado estudiantepregrado;
+    //fabian
+    private Docente docente;
+    
+    public Proyecto getProyecto() {
+        return proyecto;
+    }
 
+    public void setProyecto(Proyecto proyecto) {
+        this.proyecto = proyecto;
+    }
+
+    public Estudiantepregrado getEstudiantepregrado() {
+        return estudiantepregrado;
+    }
+
+    public void setEstudiantepregrado(Estudiantepregrado estudiantepregrado) {
+        this.estudiantepregrado = estudiantepregrado;
+    }
+
+    public Docente getDocente() {
+        return docente;
+    }
+
+    public void setDocente(Docente docente) {
+        this.docente = docente;
+    }
+    
     public FormatoaController() {
+        formatoa = new Formatoa();        
+        proyecto = new Proyecto();
+        estudiantepregrado = new Estudiantepregrado();
+        docente = new Docente();
     }
 
-    public Formatoa getSelected() {
-        return selected;
+    public Formatoa getFormatoa() {
+        return formatoa;
     }
 
-    public void setSelected(Formatoa selected) {
-        this.selected = selected;
+    public void setFormatoa(Formatoa formatoa) {
+        this.formatoa = formatoa;
     }
 
     protected void setEmbeddableKeys() {
@@ -46,51 +88,182 @@ public class FormatoaController implements Serializable {
     }
 
     private FormatoaFacade getFacade() {
-        return ejbFacade;
+        return ejbFacadeFormatoa;
     }
-
-    public Formatoa prepareCreate() {
-        selected = new Formatoa();
+    //fabian ejecuta consulta para sacar los formatosa asociados a un docente mediante el id
+    public List<Formatoa> getItems_docente() {
+        items_docente=getFacade().listarFormatosADocente(docente.getId());
+        return items_docente;
+    }
+    //jose
+    public void gestionFormatoa(CargarFormularioController formularioController) {
+        formularioController.cargarGestionFormatoa();
+    }     
+    //jose
+    public void prepareCreateFormatoa(CargarFormularioController formularioController) {
+        formatoa = new Formatoa();
+        proyecto = new Proyecto();
+        estudiantepregrado = new Estudiantepregrado();
+        docente = new Docente();
         initializeEmbeddableKey();
-        return selected;
+        formularioController.cargarCrearFormatoa();
+    }    
+    
+    public void create(CargarFormularioController formularioController) {
+//        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleProyectosDirigidos").getString("FormatoaCreated"));
+//        if (!JsfUtil.isValidationFailed()) {
+//            items = null;    // Invalidate list of items to trigger re-query.
+//            items_docente=null;
+//        }
+        formatoa=ejbFacadeFormatoa.guardar(formatoa);
+        //formatoa=ejbFacadeFormatoa.find(9);
+        
+        System.out.println(formatoa.getId()+"+++++++++++++++++++++++++++++++++++");
+        System.out.println("termino de crear formato a");
+        estudiantepregrado.setId(formatoa.getId());
+        estudiantepregrado.setForId(formatoa);
+        System.out.println("termino de crear estudiante");
+        ejbFacadeEstudiantePregrado.create(estudiantepregrado);
+        System.out.println("guardo estudiante");
+        proyecto.setId(formatoa.getId());
+        proyecto.setFormatoa(formatoa);
+        System.out.println("termino de crear proyecto");
+        ejbFacadeProyecto.create(proyecto);
+        
+        proyecto = formatoa.getProyecto();
+        //limpiarFormatoa();
+        System.out.println("llamando a siguiente vista 1");
+        formularioController.cargarGestionFormatoaDocente();
+        System.out.println("llamando a siguiente vista 2");
     }
-
-    public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleProyectosDirigidos").getString("FormatoaCreated"));
-        if (!JsfUtil.isValidationFailed()) {
-            items = null;    // Invalidate list of items to trigger re-query.
-        }
+    
+    //jose
+    public void cancel(CargarFormularioController formularioController) {
+        limpiarFormatoa();
+        formularioController.cargarGestionFormatoa();
+    } 
+    //jose
+    public void prepareUpdateFormatoa(Formatoa fa, CargarFormularioController formularioController) {
+        formatoa = fa;
+        formularioController.cargarModificarFormatoa();
     }
-
-    public void update() {
+    
+    public void update(CargarFormularioController formularioController) {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleProyectosDirigidos").getString("FormatoaUpdated"));
+        formularioController.cargarGestionFormatoa();
     }
 
-    public void destroy() {
+    public void destroy(CargarFormularioController formularioController) {
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleProyectosDirigidos").getString("FormatoaDeleted"));
         if (!JsfUtil.isValidationFailed()) {
-            selected = null; // Remove selection
+            formatoa = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
+            items_docente=null;
+            docente = null;
+            //estudiantepregrado = null;
         }
+        formularioController.cargarGestionFormatoa();
     }
-
+    //jose
+    public void prepareViewFormatoa(Formatoa fa, CargarFormularioController formularioController) {
+        formatoa = fa;
+        formularioController.cargarVerFormatoa();
+    }    
+    //jose
+    public void limpiarFormatoa() {
+        formatoa = null;
+    }
+    //jose
     public List<Formatoa> getItems() {
-        if (items == null) {
+        //if (items == null) {
             items = getFacade().findAll();
-        }
+        //}
         return items;
     }
-
+    //fabian renderiza la vista de los formatoa de cada docente////////////////////////////////////////////////////////////////////
+    //jose
+    public void prepareCreateFormatoaDocentes(Docente doc, CargarFormularioController formularioController) {
+        formatoa = new Formatoa();
+        docente = doc;
+        formatoa.setDocId(doc);
+        proyecto = new Proyecto();
+        //proyecto.setId(formatoa.getId());
+        
+        initializeEmbeddableKey();
+        formularioController.cargarCrearFormatoaDocente();
+    }
+    //jose
+//    public void registrarFormatoaDocente(CargarFormularioController formularioController){
+//        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX registrarFormatoaDocente()");
+//        
+//        System.err.println("Formatoa Acta = "+formatoa.getActaDepartamento());
+//        System.err.println("Formatoa fecha Acta= "+formatoa.getFechaActa());
+//        System.err.println("Proyecto Resolucion = "+proyecto.getResolucion());
+//        System.err.println("Proyecto Fecha Resolucion= "+proyecto.getFechaResolucion());
+//        System.err.println("Formatoa Titulo = "+formatoa.getTituloTrabajo());
+//        System.err.println("Formatoa Docente = "+formatoa.getDocId()+docente.getNombres());
+//        // mediante al EJB creo la entrada en la BD del proyecto
+////        Formatoa formatoaAux = new Formatoa();
+////        formatoaAux.setId(formatoa.getId());
+////        formatoaAux.setDocId(formatoa.getDocId());
+////        formatoaAux.setActaDepartamento(formatoa.getActaDepartamento());
+////        formatoaAux.setTituloTrabajo(formatoa.getTituloTrabajo());
+////        formatoaAux.setFechaActa(formatoa.getFechaActa());
+//        proyecto.setId(formatoa.getId());
+//        formatoa.setDocId(docente);
+//        estudiantepregrado.setForId(formatoa);
+//        
+//        ejbFacadeFormatoa.create(formatoa);
+//        ejbFacadeProyecto.create(proyecto);
+//        ejbFacadeEstudiantePregrado.create(estudiantepregrado);
+//    }    
+   
+    //jose
+//    public void createFormatoaDocente(CargarFormularioController formularioController) {
+//        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleProyectosDirigidos").getString("FormatoaCreated"));
+//        if (!JsfUtil.isValidationFailed()) {
+//            items = null;    // Invalidate list of items to trigger re-query.
+//            items_docente=null;
+//        }
+//        limpiarFormatoaDocente();
+//        formularioController.cargarGestionFormatoaDocente();        
+//    }    
+    //jose
+    public void preparaGestionFormatoaDocentes(Docente doc, CargarFormularioController cargarformulario){
+        docente=doc;
+        cargarformulario.cargarGestionFormatoaDocente();
+    }
+    //jose
+    public void limpiarFormatoaDocente() {
+        formatoa = null;
+        docente = null;
+        estudiantepregrado = null;
+    }    
+    //jose
+    public void preparaVerFormatoaDocentes(Docente doc,Formatoa fa, CargarFormularioController cargarformulario){
+        docente=doc;
+        formatoa=fa;
+        cargarformulario.cargarVerFormatoaDocente();
+    }
+    //jose
+    public void prepareUpdateFormatoaDocentes(Docente doc,Formatoa fa, CargarFormularioController formularioController) {
+        docente=doc;
+        formatoa = fa;
+        formularioController.cargarModificarFormatoaDocente();
+    }
+    //fabian renderiza la vista de los formatoa de cada docente////////////////////////////////////////////////////////////////////   
     private void persist(PersistAction persistAction, String successMessage) {
-        if (selected != null) {
+        if (formatoa != null) {
             setEmbeddableKeys();
+            
             try {
                 if (persistAction != PersistAction.DELETE) {
-                    getFacade().edit(selected);
+                    getFacade().edit(formatoa);
                 } else {
-                    getFacade().remove(selected);
+                    getFacade().remove(formatoa);
                 }
                 JsfUtil.addSuccessMessage(successMessage);
+                System.out.println("se guardo en la bd");
             } catch (EJBException ex) {
                 String msg = "";
                 Throwable cause = ex.getCause();
@@ -161,5 +334,6 @@ public class FormatoaController implements Serializable {
         }
 
     }
+
 
 }

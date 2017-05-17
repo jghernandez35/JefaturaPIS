@@ -36,6 +36,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Estudio.findByNombreEstudio", query = "SELECT e FROM Estudio e WHERE e.nombreEstudio = :nombreEstudio")})
 public class Estudio implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estId")
+    private Collection<Trabajosinvestigacion> trabajosinvestigacionCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -111,5 +114,14 @@ public class Estudio implements Serializable {
     public String toString() {
         return "com.unicauca.jefatura.entidades.Estudio[ id=" + id + " ]";
     }
+	
+    @XmlTransient
+    public Collection<Trabajosinvestigacion> getTrabajosinvestigacionCollection() {
+        return trabajosinvestigacionCollection;
+    }
+
+    public void setTrabajosinvestigacionCollection(Collection<Trabajosinvestigacion> trabajosinvestigacionCollection) {
+        this.trabajosinvestigacionCollection = trabajosinvestigacionCollection;
+    }	
     
 }

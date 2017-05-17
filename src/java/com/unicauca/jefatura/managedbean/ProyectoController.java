@@ -26,17 +26,17 @@ public class ProyectoController implements Serializable {
     @EJB
     private com.unicauca.jefatura.sessionbean.ProyectoFacade ejbFacade;
     private List<Proyecto> items = null;
-    private Proyecto selected;
+    private Proyecto proyecto;
 
     public ProyectoController() {
     }
 
-    public Proyecto getSelected() {
-        return selected;
+    public Proyecto getProyecto() {
+        return proyecto;
     }
 
-    public void setSelected(Proyecto selected) {
-        this.selected = selected;
+    public void setProyecto(Proyecto proyecto) {
+        this.proyecto = proyecto;
     }
 
     protected void setEmbeddableKeys() {
@@ -49,46 +49,99 @@ public class ProyectoController implements Serializable {
         return ejbFacade;
     }
 
-    public Proyecto prepareCreate() {
-        selected = new Proyecto();
+//    public Proyecto prepareCreate() {
+//        proyecto = new Proyecto();
+//        initializeEmbeddableKey();
+//        return proyecto;
+//    }
+    //jose
+    public void gestionProyecto(CargarFormularioController formularioController) {
+        formularioController.cargarGestionProyecto();
+    }     
+    //jose
+    public void prepareCreate(CargarFormularioController formularioController) {
+        System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC 1111 prepareCreate()");
+        proyecto = new Proyecto();
         initializeEmbeddableKey();
-        return selected;
+        formularioController.cargarCrearProyecto();
+    }    
+    //jose
+    public void registrarProyecto(){
+        System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC 2222 ProyectoController.registrarProyecto()");
+        
+//        System.err.println("proyecto docente = "+proyecto.getDocente().getNombres()+" "+proyecto.getDocente().getId());
+//        System.err.println("proyecto tipo proyecto = "+proyecto.getTipoproyecto().getTipoEstudio());
+//        System.err.println("proyecto resolucion = "+proyecto.getResolucion());
+//        System.err.println("proyecto res fecha = "+proyecto.getFechaAprobacion());
+//        System.err.println("proyecto titulo = "+proyecto.getTituloDelTrabajo());
+//        System.err.println("proyecto Acta = "+proyecto.getActadeptartamento());
+//        System.err.println("proyecto acta fecha = "+proyecto.getFechaacta());
+//        System.err.println("proyecto estudiante = ");
+//        System.err.println("proyecto soporte = "+proyecto.getId().getPath());
+//        //creo el objeto para agregar llaves foraneas y las agrego
+//        ProyectoPK proyectopk = new ProyectoPK();
+//        proyectopk.setDocId(proyecto.getDocente().getId());
+//        proyectopk.setTipIdEstudio(proyecto.getTipoproyecto().getIdEstudio());
+//        //al proyecto le agrego el objeto con las llaves foraneas ya fijadas
+//        proyecto.setProyectoPK(proyectopk);
+//        // mediante al EJB creo la entrada en la BD del proyecto
+//        ejbFacade.create(proyecto);
+        
     }
-
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleProyectosDirigidos").getString("ProyectoCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-
-    public void update() {
+    //jose
+    public void cancel(CargarFormularioController formularioController) {
+        limpiarProyecto();
+        formularioController.cargarGestionProyecto();
+    } 
+    //jose
+    public void prepareUpdate(Proyecto pro, CargarFormularioController formularioController) {
+        proyecto = pro;
+        formularioController.cargarModificarProyecto();
+    }    
+    //jose
+    public void update(CargarFormularioController formularioController) {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleProyectosDirigidos").getString("ProyectoUpdated"));
+        formularioController.cargarGestionProyecto();
     }
 
     public void destroy() {
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleProyectosDirigidos").getString("ProyectoDeleted"));
         if (!JsfUtil.isValidationFailed()) {
-            selected = null; // Remove selection
+            proyecto = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-
+    //jose
+    public void prepareView(Proyecto pro, CargarFormularioController formularioController) {
+        proyecto = pro;
+        formularioController.cargarVerProyecto();
+    }    
+    //jose
+    public void limpiarProyecto() {
+        proyecto = null;
+    }    
+    //jose
     public List<Proyecto> getItems() {
-        if (items == null) {
+        //if (items == null) {
             items = getFacade().findAll();
-        }
+        //}
         return items;
     }
 
     private void persist(PersistAction persistAction, String successMessage) {
-        if (selected != null) {
+        if (proyecto != null) {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
-                    getFacade().edit(selected);
+                    getFacade().edit(proyecto);
                 } else {
-                    getFacade().remove(selected);
+                    getFacade().remove(proyecto);
                 }
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (EJBException ex) {

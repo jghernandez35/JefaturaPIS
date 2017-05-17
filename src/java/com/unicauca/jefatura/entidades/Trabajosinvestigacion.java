@@ -35,6 +35,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Trabajosinvestigacion.findById", query = "SELECT t FROM Trabajosinvestigacion t WHERE t.id = :id")})
 public class Trabajosinvestigacion implements Serializable {
 
+    @JoinColumn(name = "EST_ID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Estudio estId;
+    @JoinColumn(name = "DOC_ID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Docente docId;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -114,5 +121,21 @@ public class Trabajosinvestigacion implements Serializable {
     public String toString() {
         return "com.unicauca.jefatura.entidades.Trabajosinvestigacion[ id=" + id + " ]";
     }
+
+    public Estudio getEstId() {
+        return estId;
+    }
+
+    public void setEstId(Estudio estId) {
+        this.estId = estId;
+    }
+
+    public Docente getDocId() {
+        return docId;
+    }
+
+    public void setDocId(Docente docId) {
+        this.docId = docId;
+    }	
     
 }

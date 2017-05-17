@@ -80,7 +80,11 @@
                             </p:confirmDialog>
 
                         </p:column>
-                        
+                        <p:column headerText="FormatoA">
+                            <p:commandLink title="Formatos A"  action="#{formatoaController.preparaGestionFormatoaDocentes(item,cargarFormulariosController )}" ajax="false" >                                    
+                                <p:graphicImage  library="img" name="contrato.png"/>
+                            </p:commandLink>
+                        </p:column>                        
                                                
                     </p:dataTable>
                 </p:panel>

@@ -42,6 +42,13 @@ import javax.xml.bind.annotation.XmlTransient;
 })
 public class Docente implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "docId")
+    private Collection<Trabajosinvestigacion> trabajosinvestigacionCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "docId")
+    private Collection<Proyectosinvestigacion> proyectosinvestigacionCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "docId")
+    private Collection<Formatoa> formatoaCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -189,5 +196,31 @@ public class Docente implements Serializable {
     public String toString() {
         return "com.unicauca.jefatura.entidades.Docente[ id=" + id + " ]";
     }
-    
+
+    @XmlTransient
+    public Collection<Trabajosinvestigacion> getTrabajosinvestigacionCollection() {
+        return trabajosinvestigacionCollection;
+    }
+
+    public void setTrabajosinvestigacionCollection(Collection<Trabajosinvestigacion> trabajosinvestigacionCollection) {
+        this.trabajosinvestigacionCollection = trabajosinvestigacionCollection;
+    }
+
+    @XmlTransient
+    public Collection<Proyectosinvestigacion> getProyectosinvestigacionCollection() {
+        return proyectosinvestigacionCollection;
+    }
+
+    public void setProyectosinvestigacionCollection(Collection<Proyectosinvestigacion> proyectosinvestigacionCollection) {
+        this.proyectosinvestigacionCollection = proyectosinvestigacionCollection;
+    }
+
+    @XmlTransient
+    public Collection<Formatoa> getFormatoaCollection() {
+        return formatoaCollection;
+    }
+
+    public void setFormatoaCollection(Collection<Formatoa> formatoaCollection) {
+        this.formatoaCollection = formatoaCollection;
+    }    
 }
