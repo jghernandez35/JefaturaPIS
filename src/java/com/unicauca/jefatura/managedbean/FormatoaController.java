@@ -135,6 +135,7 @@ public class FormatoaController implements Serializable {
         System.out.println("llamando a siguiente vista 1");
         formularioController.cargarGestionFormatoaDocente();
         System.out.println("llamando a siguiente vista 2");
+        estudiantepregrado = new Estudiantepregrado();
     }
     
     //jose
@@ -142,6 +143,12 @@ public class FormatoaController implements Serializable {
         limpiarFormatoa();
         formularioController.cargarGestionFormatoa();
     } 
+    
+     public void cancelDocente(CargarFormularioController formularioController) {
+        limpiarFormatoa();
+        formularioController.cargarGestionFormatoaDocente();
+    }    
+    
     //jose
     public void prepareUpdateFormatoa(Formatoa fa, CargarFormularioController formularioController) {
         formatoa = fa;
@@ -152,6 +159,11 @@ public class FormatoaController implements Serializable {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleProyectosDirigidos").getString("FormatoaUpdated"));
         formularioController.cargarGestionFormatoa();
     }
+    
+    public void updateDocente(CargarFormularioController formularioController) {
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleProyectosDirigidos").getString("FormatoaUpdated"));
+        formularioController.cargarGestionFormatoaDocente();
+    }    
 
     public void destroy(CargarFormularioController formularioController) {
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleProyectosDirigidos").getString("FormatoaDeleted"));
@@ -246,10 +258,12 @@ public class FormatoaController implements Serializable {
         cargarformulario.cargarVerFormatoaDocente();
     }
     //jose
-    public void prepareUpdateFormatoaDocentes(Docente doc,Formatoa fa, CargarFormularioController formularioController) {
+    public void prepareUpdateFormatoaDocentes(Docente doc,Formatoa fa,/*Proyecto pro,*/ CargarFormularioController cargarformulario) {
         docente=doc;
         formatoa = fa;
-        formularioController.cargarModificarFormatoaDocente();
+        proyecto = formatoa.getProyecto();
+//        proyecto = pro;
+        cargarformulario.cargarModificarFormatoaDocente();
     }
     //fabian renderiza la vista de los formatoa de cada docente////////////////////////////////////////////////////////////////////   
     private void persist(PersistAction persistAction, String successMessage) {
@@ -334,6 +348,11 @@ public class FormatoaController implements Serializable {
         }
 
     }
+    public void atras(CargarFormularioController formularioController) {
+        docente = null;
+        items_docente= null;
+        formularioController.cargarGestionDocente();
+    }    
 
 
 }

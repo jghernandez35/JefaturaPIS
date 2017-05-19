@@ -9,7 +9,7 @@
     <h:body>
 
             <h:form id="FormatoaViewForm">
-                <p:panel header="#{bundleProyectosDirigidos.ViewFormatoaTitle} - asociado a #{formatoaController.docente.nombres} #{formatoaController.docente.apellidos}">
+                <p:panel header="#{bundleProyectosDirigidos.ViewFormatoaTitleDocente} - asociado a #{formatoaController.docente.nombres} #{formatoaController.docente.apellidos}">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{formatoaController.formatoa != null}">
                         <h:outputText value="#{bundleProyectosDirigidos.ViewFormatoaLabel_actaDepartamento}"/>
@@ -17,14 +17,14 @@
 
                         <h:outputText value="#{bundleProyectosDirigidos.ViewFormatoaLabel_fechaActa}"/>
                         <h:outputText value="#{formatoaController.formatoa.fechaActa}" title="#{bundleProyectosDirigidos.ViewFormatoaTitle_fechaActa}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                          <h:outputText value="Resolucion:"/>
                          <h:outputText value="#{formatoaController.formatoa.proyecto.resolucion}" title="#{bundleProyectosDirigidos.ViewFormatoaTitle_actaDepartamento}"/>
 
                         <h:outputText value="Fecha Resolucion:"/>
                         <h:outputText value="#{formatoaController.formatoa.proyecto.fechaResolucion}" title="#{bundleProyectosDirigidos.ViewFormatoaTitle_fechaActa}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                         
                         <h:outputText value="Tipo Proyecto:"/>

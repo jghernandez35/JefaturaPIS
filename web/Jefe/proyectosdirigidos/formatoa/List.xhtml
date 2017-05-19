@@ -16,27 +16,17 @@
 
             <h:form id="FormatoaListForm">
                 <h:panelGrid  columns="1">
-                    <p:commandButton icon="ui-icon-plus"   value="#{bundleProyectosDirigidos.Create}" action="#{formatoaController.prepareCreateFormatoaDocentes(formatoaController.docente, cargarFormulariosController)}" oncomplete="#{formatoaController.limpiarFormatoa()}" ajax="false"/>
+                    <p:commandButton icon="ui-icon-plus"   value="#{bundleProyectosDirigidos.Create}" action="#{formatoaController.prepareCreateFormatoa(cargarFormulariosController)}" oncomplete="#{formatoaController.limpiarFormatoa()}" ajax="false"/>
                 </h:panelGrid>                 
-                <p:panel header="#{bundleProyectosDirigidos.ListFormatoaTitleDocente} por #{formatoaController.docente.nombres} #{formatoaController.docente.apellidos}">
-                    <p:dataTable id="datalist" value="#{formatoaController.items_docente}" var="item"
+                <p:panel header="#{bundleProyectosDirigidos.ListFormatoaTitle}">
+                    <p:dataTable id="datalist" value="#{formatoaController.items}" var="item"
                                  selectionMode="single" selection="#{formatoaController.formatoa}"
                                  paginator="true"
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
-                                 emptyMessage="No hay resultados con este criterio"
-                                 widgetVar="ProyectoDocenteListDialog"                                 
                                  >
-                        
-                       <f:facet name="header">
-                            <p:outputPanel>
-                                <h:outputText value="Buscar en todos los campos:" />
-                                <p:inputText id="globalFilter" onkeyup="PF('ProyectoDocenteListDialog').filter()" style="width:150px" placeholder="Digite palabra clave"/>
-                            </p:outputPanel>
-                        </f:facet>                        
-                        
-                        <p:column filterBy="#{item.actaDepartamento}" headerText="#{bundleProyectosDirigidos.ListFormatoaTitle_actaDepartamento}" filterMatchMode="contains">
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundleProyectosDirigidos.ListFormatoaTitle_actaDepartamento}"/>
                             </f:facet>
@@ -47,11 +37,11 @@
                                 <h:outputText value="#{bundleProyectosDirigidos.ListFormatoaTitle_fechaActa}"/>
                             </f:facet>
                             <h:outputText value="#{item.fechaActa}">
-                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
                             </h:outputText>
                         </p:column>
 
-                        <p:column filterBy="#{item.proyecto.resolucion}" headerText="#{bundleProyectosDirigidos.ListProyectoTitle_resolucion}" filterMatchMode="contains">
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundleProyectosDirigidos.ListProyectoTitle_resolucion}"/>
                             </f:facet>
@@ -62,34 +52,41 @@
                                 <h:outputText value="#{bundleProyectosDirigidos.ListProyectoTitle_fechaResolucion}"/>
                             </f:facet>
                             <h:outputText value="#{item.proyecto.fechaResolucion}">
-                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
                             </h:outputText>                                
                         </p:column>
                         
-                        <p:column filterBy="#{item.tituloTrabajo}" headerText="#{bundleProyectosDirigidos.ListFormatoaTitle_tituloTrabajo}" filterMatchMode="contains">
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundleProyectosDirigidos.ListFormatoaTitle_tituloTrabajo}"/>
                             </f:facet>
                             <h:outputText value="#{item.tituloTrabajo}"/>
                         </p:column>
                         
-                        <p:column filterBy="#{item.nombreEstudiantes}" headerText="#{bundleProyectosDirigidos.ListEstudianteinvestigacionTitle_nombreEstudiante}" filterMatchMode="contains">
+                        <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundleProyectosDirigidos.ListEstudianteinvestigacionTitle_nombreEstudiante}"/>
+                                <h:outputText value="#{bundleProyectosDirigidos.ListFormatoaTitle_docId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.docId.nombres} #{item.docId.apellidos}"/>
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Estudiante Nombres"/>
                             </f:facet>
                             <h:outputText value="#{item.nombreEstudiantes}"/>
-                        </p:column>                        
-                        
+                        </p:column>                          
+
                         <p:column headerText="Acciones">
-                            <p:commandLink title="Ver"  action="#{formatoaController.preparaVerFormatoaDocentes(formatoaController.docente,item,cargarFormulariosController )}" ajax="false" >                                    
+                            <p:commandLink title="Ver"  action="#{formatoaController.prepareViewFormatoa(item,cargarFormulariosController )}" ajax="false" >                                    
                                 <p:graphicImage  library="img" name="b_view.png"/>
                             </p:commandLink>
                             
-                            <p:commandLink title="Editar" style="margin-left: 5px;" action="#{formatoaController.prepareUpdateFormatoaDocentes(formatoaController.docente,item, cargarFormulariosController)}" ajax="false">                                    
+                            <p:commandLink title="Editar" style="margin-left: 5px;" action="#{formatoaController.prepareUpdateFormatoa(item, cargarFormulariosController)}" ajax="false">                                    
                                 <p:graphicImage  library="img" name="b_edit.png"/>
                             </p:commandLink>     
 
-                            <p:commandLink id="Eliminar" style="margin-left: 5px;" title="Eliminar" ajax="false">
+                            <p:commandLink id="Eliminar" style="margin-left: 5px;" action="#{formatoaController.destroy(cargarFormulariosController)}" title="Eliminar" ajax="false">
                                 <p:confirm header="Confirmación" message="¿Está seguro que desea eliminar?" icon="ui-icon-alert" />
                                 <p:graphicImage library="img" name="b_drop.png"/>
                             </p:commandLink>
@@ -99,15 +96,13 @@
                                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                             </p:confirmDialog>
 
-                        </p:column>
+                        </p:column>                         
                         <f:facet name="footer">
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
             </h:form>
-        <h:form>
-            <p:commandButton action="#{formatoaController.atras(cargarFormulariosController)}" value="#{bundleProduccion.Atras}" ajax="false"/>
-        </h:form>
+
     </h:body>
 
 </html>

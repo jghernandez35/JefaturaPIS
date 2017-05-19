@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+
+            <h:form id="FormatoaCreateForm">
+                <p:panel header="#{bundleProyectosDirigidos.CreateFormatoaTitle}">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{formatoaController.formatoa != null}">
+                        <p:outputLabel value="#{bundleProyectosDirigidos.CreateFormatoaLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{formatoaController.formatoa.id}" title="#{bundleProyectosDirigidos.CreateFormatoaTitle_id}" required="true" requiredMessage="#{bundleProyectosDirigidos.CreateFormatoaRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundleProyectosDirigidos.CreateFormatoaLabel_actaDepartamento}" for="actaDepartamento" />
+                        <p:inputTextarea rows="4" cols="30" id="actaDepartamento" value="#{formatoaController.formatoa.actaDepartamento}" title="#{bundleProyectosDirigidos.CreateFormatoaTitle_actaDepartamento}" required="true" requiredMessage="#{bundleProyectosDirigidos.CreateFormatoaRequiredMessage_actaDepartamento}"/>
+                        <p:outputLabel value="#{bundleProyectosDirigidos.CreateFormatoaLabel_tituloTrabajo}" for="tituloTrabajo" />
+                        <p:inputText id="tituloTrabajo" value="#{formatoaController.formatoa.tituloTrabajo}" title="#{bundleProyectosDirigidos.CreateFormatoaTitle_tituloTrabajo}" required="true" requiredMessage="#{bundleProyectosDirigidos.CreateFormatoaRequiredMessage_tituloTrabajo}"/>
+                        <p:outputLabel value="#{bundleProyectosDirigidos.CreateFormatoaLabel_fechaActa}" for="fechaActa" />
+                        <p:calendar id="fechaActa" pattern="MM/dd/yyyy" value="#{formatoaController.formatoa.fechaActa}" title="#{bundleProyectosDirigidos.EditFormatoaTitle_fechaActa}" required="true" requiredMessage="#{bundleProyectosDirigidos.EditFormatoaRequiredMessage_fechaActa}" showOn="button"/>
+                        <p:outputLabel value="#{bundleProyectosDirigidos.CreateFormatoaLabel_proyecto}" for="proyecto" />
+                        <p:selectOneMenu id="proyecto" value="#{formatoaController.formatoa.proyecto}" >
+                            <f:selectItems value="#{proyectoController.itemsAvailableSelectOne}"
+                                           var="proyectoItem"
+                                           itemLabel="#{proyectoItem.resolucion}"
+                                           itemValue="#{proyectoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundleProyectosDirigidos.CreateFormatoaLabel_docId}" for="docId" />
+                        <p:selectOneMenu id="docId" value="#{formatoaController.formatoa.docId}" required="true" requiredMessage="#{bundleProyectosDirigidos.EditFormatoaRequiredMessage_docId}">
+                            <f:selectItems value="#{docenteController.itemsAvailableSelectOne}"
+                                           var="docIdItem"
+                                           itemLabel="#{docIdItem.nombres} #{docIdItem.apellidos}"
+                                           itemValue="#{docIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton action="#{formatoaController.create(cargarFormulariosController)}" value="#{bundleProyectosDirigidos.Save}" ajax="false"/>
+                    <h:outputLabel>(*) Campos Obligatorios</h:outputLabel>
+                </h:panelGroup>
+                </p:panel>
+            </h:form>
+            <h:form>
+                    <p:commandButton action="#{formatoaController.cancel(cargarFormulariosController)}" value="#{bundleProyectosDirigidos.Cancel}" ajax="false"/>
+                    
+            </h:form>
+        
+
+    </h:body>
+</html>

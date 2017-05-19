@@ -193,7 +193,7 @@ public class CargarFormularioController implements Serializable {
         this.ruta = "/Jefe/estudiante/List.xhtml";
     }      
     //FORMATOS A DE CADA DOCENTE
-	public void cargarGestionFormatoaDocente(){
+    public void cargarGestionFormatoaDocente(){
        System.out.println("llamando a siguiente vista 3");
          this.ruta = "/Jefe/proyectosdirigidos/formatoa/List_Docentes.xhtml";
          System.out.println("llamando a siguiente vista 4");
@@ -210,5 +210,9 @@ public class CargarFormularioController implements Serializable {
     public void cargarCrearFormatoaDocente() {
         this.ruta = "/Jefe/proyectosdirigidos/formatoa/Create_Docentes.xhtml";
     }
+    
+    void cargarCrearEstudianteDocente() {
+        this.ruta = "/Jefe/proyectosdirigidos/estudiantepregrado/Create.xhtml";
+    }    
 	//GESTION DE PROYECTOS JOSE HERNANDEZ  
 }

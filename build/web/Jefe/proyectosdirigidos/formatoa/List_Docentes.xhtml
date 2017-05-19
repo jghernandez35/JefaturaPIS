@@ -18,15 +18,25 @@
                 <h:panelGrid  columns="1">
                     <p:commandButton icon="ui-icon-plus"   value="#{bundleProyectosDirigidos.Create}" action="#{formatoaController.prepareCreateFormatoaDocentes(formatoaController.docente, cargarFormulariosController)}" oncomplete="#{formatoaController.limpiarFormatoa()}" ajax="false"/>
                 </h:panelGrid>                 
-                <p:panel header="#{bundleProyectosDirigidos.ListFormatoaTitle} POR #{formatoaController.docente.nombres} #{formatoaController.docente.apellidos}">
+                <p:panel header="#{bundleProyectosDirigidos.ListFormatoaTitleDocente} por #{formatoaController.docente.nombres} #{formatoaController.docente.apellidos}">
                     <p:dataTable id="datalist" value="#{formatoaController.items_docente}" var="item"
                                  selectionMode="single" selection="#{formatoaController.formatoa}"
                                  paginator="true"
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
+                                 emptyMessage="No hay resultados con este criterio"
+                                 widgetVar="ProyectoDocenteListDialog"                                 
                                  >
-                        <p:column>
+                        
+                       <f:facet name="header">
+                            <p:outputPanel>
+                                <h:outputText value="Buscar en todos los campos:" />
+                                <p:inputText id="globalFilter" onkeyup="PF('ProyectoDocenteListDialog').filter()" style="width:150px" placeholder="Digite palabra clave"/>
+                            </p:outputPanel>
+                        </f:facet>                        
+                        
+                        <p:column filterBy="#{item.actaDepartamento}" headerText="#{bundleProyectosDirigidos.ListFormatoaTitle_actaDepartamento}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundleProyectosDirigidos.ListFormatoaTitle_actaDepartamento}"/>
                             </f:facet>
@@ -37,11 +47,11 @@
                                 <h:outputText value="#{bundleProyectosDirigidos.ListFormatoaTitle_fechaActa}"/>
                             </f:facet>
                             <h:outputText value="#{item.fechaActa}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:outputText>
                         </p:column>
 
-                        <p:column>
+                        <p:column filterBy="#{item.proyecto.resolucion}" headerText="#{bundleProyectosDirigidos.ListProyectoTitle_resolucion}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundleProyectosDirigidos.ListProyectoTitle_resolucion}"/>
                             </f:facet>
@@ -52,20 +62,20 @@
                                 <h:outputText value="#{bundleProyectosDirigidos.ListProyectoTitle_fechaResolucion}"/>
                             </f:facet>
                             <h:outputText value="#{item.proyecto.fechaResolucion}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:outputText>                                
                         </p:column>
                         
-                        <p:column>
+                        <p:column filterBy="#{item.tituloTrabajo}" headerText="#{bundleProyectosDirigidos.ListFormatoaTitle_tituloTrabajo}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundleProyectosDirigidos.ListFormatoaTitle_tituloTrabajo}"/>
                             </f:facet>
                             <h:outputText value="#{item.tituloTrabajo}"/>
                         </p:column>
                         
-                        <p:column>
+                        <p:column filterBy="#{item.nombreEstudiantes}" headerText="#{bundleProyectosDirigidos.ListEstudianteinvestigacionTitle_nombreEstudiante}" filterMatchMode="contains">
                             <f:facet name="header">
-                                <h:outputText value="Nombre Estudiantes"/>
+                                <h:outputText value="#{bundleProyectosDirigidos.ListEstudianteinvestigacionTitle_nombreEstudiante}"/>
                             </f:facet>
                             <h:outputText value="#{item.nombreEstudiantes}"/>
                         </p:column>                        
@@ -95,7 +105,9 @@
                     </p:dataTable>
                 </p:panel>
             </h:form>
-
+        <h:form>
+            <p:commandButton action="#{formatoaController.atras(cargarFormulariosController)}" value="#{bundleProduccion.Atras}" ajax="false"/>
+        </h:form>
     </h:body>
 
 </html>

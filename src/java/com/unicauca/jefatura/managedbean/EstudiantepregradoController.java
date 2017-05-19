@@ -54,7 +54,13 @@ public class EstudiantepregradoController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
-
+    
+    public void prepareCreateDocente(CargarFormularioController formularioController) {
+        selected = new Estudiantepregrado();
+        initializeEmbeddableKey();
+        formularioController.cargarCrearEstudianteDocente();
+    }
+    
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleProyectosDirigidos").getString("EstudiantepregradoCreated"));
         if (!JsfUtil.isValidationFailed()) {
