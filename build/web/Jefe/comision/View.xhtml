@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ComisionViewDlg" widgetVar="ComisionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.comisiones.ViewComisionTitle}">
+            <h:form id="ComisionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{comisionController.selected != null}">
+                        <h:outputText value="#{bundle.comisiones.ViewComisionLabel_idComision}"/>
+                        <h:outputText value="#{comisionController.selected.idComision}" title="#{bundle.comisiones.ViewComisionTitle_idComision}"/>
+                        <h:outputText value="#{bundle.comisiones.ViewComisionLabel_numeroResolucionComision}"/>
+                        <h:outputText value="#{comisionController.selected.numeroResolucionComision}" title="#{bundle.comisiones.ViewComisionTitle_numeroResolucionComision}"/>
+                        <h:outputText value="#{bundle.comisiones.ViewComisionLabel_numeroActaComision}"/>
+                        <h:outputText value="#{comisionController.selected.numeroActaComision}" title="#{bundle.comisiones.ViewComisionTitle_numeroActaComision}"/>
+                        <h:outputText value="#{bundle.comisiones.ViewComisionLabel_fechaSolicitudComision}"/>
+                        <h:outputText value="#{comisionController.selected.fechaSolicitudComision}" title="#{bundle.comisiones.ViewComisionTitle_fechaSolicitudComision}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.comisiones.ViewComisionLabel_fechaInicioComision}"/>
+                        <h:outputText value="#{comisionController.selected.fechaInicioComision}" title="#{bundle.comisiones.ViewComisionTitle_fechaInicioComision}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.comisiones.ViewComisionLabel_fechaFinComision}"/>
+                        <h:outputText value="#{comisionController.selected.fechaFinComision}" title="#{bundle.comisiones.ViewComisionTitle_fechaFinComision}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.comisiones.ViewComisionLabel_organizadoPorComision}"/>
+                        <h:outputText value="#{comisionController.selected.organizadoPorComision}" title="#{bundle.comisiones.ViewComisionTitle_organizadoPorComision}"/>
+                        <h:outputText value="#{bundle.comisiones.ViewComisionLabel_descripcionComision}"/>
+                        <h:outputText value="#{comisionController.selected.descripcionComision}" title="#{bundle.comisiones.ViewComisionTitle_descripcionComision}"/>
+                        <h:outputText value="#{bundle.comisiones.ViewComisionLabel_idCiudadComision}"/>
+                        <h:outputText value="#{comisionController.selected.idCiudadComision}" title="#{bundle.comisiones.ViewComisionTitle_idCiudadComision}"/>
+                        <h:outputText value="#{bundle.comisiones.ViewComisionLabel_idTipoParticipacionComision}"/>
+                        <h:outputText value="#{comisionController.selected.idTipoParticipacionComision}" title="#{bundle.comisiones.ViewComisionTitle_idTipoParticipacionComision}"/>
+                        <h:outputText value="#{bundle.comisiones.ViewComisionLabel_idTipoComisionComision}"/>
+                        <h:outputText value="#{comisionController.selected.idTipoComisionComision}" title="#{bundle.comisiones.ViewComisionTitle_idTipoComisionComision}"/>
+                        <h:outputText value="#{bundle.comisiones.ViewComisionLabel_idEstadoComision}"/>
+                        <h:outputText value="#{comisionController.selected.idEstadoComision}" title="#{bundle.comisiones.ViewComisionTitle_idEstadoComision}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.comisiones.Close}" onclick="ComisionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SoportecomisionViewDlg" widgetVar="SoportecomisionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.comisiones.ViewSoportecomisionTitle}">
+            <h:form id="SoportecomisionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{soportecomisionController.selected != null}">
+                        <h:outputText value="#{bundle.comisiones.ViewSoportecomisionLabel_idSoporteComision}"/>
+                        <h:outputText value="#{soportecomisionController.selected.idSoporteComision}" title="#{bundle.comisiones.ViewSoportecomisionTitle_idSoporteComision}"/>
+                        <h:outputText value="#{bundle.comisiones.ViewSoportecomisionLabel_rutaSoporteComision}"/>
+                        <h:outputText value="#{soportecomisionController.selected.rutaSoporteComision}" title="#{bundle.comisiones.ViewSoportecomisionTitle_rutaSoporteComision}"/>
+                        <h:outputText value="#{bundle.comisiones.ViewSoportecomisionLabel_nombreSoporteComision}"/>
+                        <h:outputText value="#{soportecomisionController.selected.nombreSoporteComision}" title="#{bundle.comisiones.ViewSoportecomisionTitle_nombreSoporteComision}"/>
+                        <h:outputText value="#{bundle.comisiones.ViewSoportecomisionLabel_idComisionSoporteComision}"/>
+                        <h:outputText value="#{soportecomisionController.selected.idComisionSoporteComision}" title="#{bundle.comisiones.ViewSoportecomisionTitle_idComisionSoporteComision}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.comisiones.Close}" onclick="SoportecomisionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
