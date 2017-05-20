@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -120,5 +121,99 @@
             <ui:include src="View.xhtml"/>
         </ui:define>
     </ui:composition>
+
+</html>
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    
+    
+    
+     <p:growl id="growl" life="5000" />
+
+        <h:body>
+      
+            <h:form id="ComisionListForm">
+		
+               
+             
+                <p:panel header="COMISIONES">
+                
+                    <!-- docenteController.items regresa una lista con todos los docentes almacenados en la base de datos
+                         y se recorre esta lista guardando un docente al tiempo en la variable item-->
+                    <p:dataTable id="datalist" value="#{docenteController.items}" var="item"
+                                 
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 emptyMessage="No hay docentes con este criterio"
+                                 widgetVar="DocenteListDialog"
+                                 >
+                        
+                       <f:facet name="header">
+                            <p:outputPanel>
+                                <h:outputText value="Buscar en todos los campos:" />
+                                <p:inputText id="globalFilter" onkeyup="PF('DocenteListDialog').filter()" style="width:150px" placeholder="Digite palabra clave"/>
+                            </p:outputPanel>
+                        </f:facet>
+                        
+                        <p:column filterBy="#{item.apellidos}" headerText="#{bundle.ListDocenteTitle_apellidos}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="APELLIDO"/>
+                            </f:facet>
+                            <!-- para obtener algun valor del docente actual se accede mediante la variable item y el nombre del campo -->
+                            <h:outputText value="#{item.apellidos}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.nombres}" headerText="#{bundle.ListDocenteTitle_nombres}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="NOMBRE"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombres}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.documento}" headerText="#{bundle.ListDocenteTitle_documento}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="NUMERO DE DOCUMENTO"/>
+                            </f:facet>
+                            <h:outputText value="#{item.documento}"/>
+                        </p:column>
+                        
+
+                        <p:column headerText="COMISIONES" style=" text-align: center;">
+
+                            <p:commandLink title="Comision Academica"  action="#{comisionController.prepareViewItemDocente(item, cargarFormulariosController)}" ajax="false" >                                    
+                                <p:graphicImage  library="img" name="revista.png"/>
+                            </p:commandLink>
+                            <p:spacer width="1" height="22" style="position: relative; bottom: -5px;background-color: #A8A8A8; margin-left: 10px;margin-right: 10px" />
+                            
+                            <!--
+                            <p:commandLink title="Revistas"  action="#{realizaController.prepareViewItemDocente(item, cargarFormulariosController)}" ajax="false" >                                    
+                                <p:graphicImage  library="img" name="revista2.png"/>
+                            </p:commandLink>
+                            <p:spacer width="1" height="22" style="position: relative; bottom: -5px;background-color: #A8A8A8; margin-left: 10px;margin-right: 10px" />
+                             <p:commandLink title="Conferencia"  action="#{realizaController.prepareViewConferenciaItemDocente(item, cargarFormulariosController)}" ajax="false" >                                    
+                                <p:graphicImage  library="img" name="conferencia3.png"/>
+                            </p:commandLink>
+                            <p:spacer width="1" height="22" style="position: relative; bottom: -5px;background-color: #A8A8A8; margin-left: 10px;margin-right: 10px" />
+                            <p:commandLink title="Capitulo de Libro"  action="#{realizaController.prepareViewCapLibroItemDocente(item, cargarFormulariosController)}" ajax="false" >                                    
+                                <p:graphicImage  library="img" name="capitulo_libro2.png"/>
+                            </p:commandLink>
+                            <p:spacer width="1" height="22" style="position: relative; bottom: -5px;background-color: #A8A8A8; margin-left: 10px;margin-right: 10px" />
+                            <p:commandLink title="Libro"  action="#{realizaController.prepareViewLibroItemDocente(item, cargarFormulariosController)}" ajax="false" >                                    
+                                <p:graphicImage  library="img" name="libro2.png"/>
+                            </p:commandLink>
+                            
+                            -->
+                        </p:column>
+                        
+                    </p:dataTable>
+                </p:panel>
+            </h:form>    
+        </h:body>
 
 </html>

@@ -215,4 +215,12 @@ public class CargarFormularioController implements Serializable {
         this.ruta = "/Jefe/proyectosdirigidos/estudiantepregrado/Create.xhtml";
     }    
 	//GESTION DE PROYECTOS JOSE HERNANDEZ  
+    
+     public void cargarComision() {
+        this.ruta = "/Jefe/comision/List.xhtml";
+    }
+     
+     public void cargarGestionComision() {
+        this.ruta = "/Jefe/comision/List.xhtml";
+    }
 }
