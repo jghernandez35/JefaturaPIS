@@ -1,6 +1,7 @@
 package com.unicauca.jefatura.managedbean;
 
 import com.unicauca.jefatura.entidades.Comision;
+import com.unicauca.jefatura.entidades.Docente;
 import com.unicauca.jefatura.managedbean.util.JsfUtil;
 import com.unicauca.jefatura.managedbean.util.JsfUtil.PersistAction;
 import com.unicauca.jefatura.sessionbean.ComisionFacade;
@@ -27,7 +28,8 @@ public class ComisionController implements Serializable {
     private com.unicauca.jefatura.sessionbean.ComisionFacade ejbFacade;
     private List<Comision> items = null;
     private Comision selected;
-
+    private Docente selectDocente;
+    
     public ComisionController() {
     }
 
@@ -160,6 +162,13 @@ public class ComisionController implements Serializable {
             }
         }
 
+         
+
+    }
+    public void prepareViewItemDocente(Docente selectDocent, CargarFormularioController formularioController) {
+        System.out.println("el nombre del docente es:" + selectDocent.getNombres());
+        this.selectDocente = selectDocent;
+        formularioController.cargarVerComisionAcademica();
     }
 
 }
