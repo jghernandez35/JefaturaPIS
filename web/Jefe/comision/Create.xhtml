@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+
+<!--<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -60,4 +61,88 @@
         </p:dialog>
 
     </ui:composition>
+</html>
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <h:form>
+            <p:panel header="#{bundle.CreateDocenteTitle}">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="3" rendered="#{docenteController.docente != null}">
+                        <!--el for es para señalar errores-->
+                        <p:outputLabel value="#{bundle.CreateDocenteLabel_apellidos}" for="apellidos" />
+                        <p:inputText id="apellidos" value="#{docenteController.docente.apellidos}" title="#{bundle.CreateDocenteTitle_apellidos}" required="true" requiredMessage="#{bundle.CreateDocenteRequiredMessage_apellidos}">
+                            <f:validator validatorId="ValidarCampoObligatorio"/>
+                            <f:validator validatorId="ValidarCampoSoloLetrasYespacio"/>
+                            <f:validator validatorId="ValidarCampoMaximo30Caracteres"/>
+                            <f:validator validatorId="ValidarCampoMinimo3Caracteres"/>
+                            <p:ajax event = "keyup" update="ape" />
+                        </p:inputText>
+                        <p:message for="apellidos" id="ape" class="message" />
+
+                        <p:outputLabel value="#{bundle.CreateDocenteLabel_nombres}" for="nombres" />
+                        <p:inputText id="nombres" value="#{docenteController.docente.nombres}" title="#{bundle.CreateDocenteTitle_nombres}" required="true" requiredMessage="#{bundle.CreateDocenteRequiredMessage_nombres}">
+                            <f:validator validatorId="ValidarCampoObligatorio"/>
+                            <f:validator validatorId="ValidarCampoSoloLetrasYespacio"/>
+                            <f:validator validatorId="ValidarCampoMaximo30Caracteres"/>
+                            <f:validator validatorId="ValidarCampoMinimo3Caracteres"/>
+                            <p:ajax event = "keyup" update="nom" />
+                        </p:inputText>
+                        <p:message for="nombres" id="nom" class="message" />
+
+                        <p:outputLabel value="#{bundle.CreateDocenteLabel_tipId}" for="tipId" />
+                        <p:selectOneMenu id="tipId" value="#{docenteController.docente.tipId}" required="true" requiredMessage="#{bundle.EditDocenteRequiredMessage_tipId}">
+                            <f:selectItems value="#{tipodocumentoController.itemsAvailableSelectOne}"
+                                           var="tipIdItem"
+                                           itemLabel="#{tipIdItem.tipo}"
+                                           itemValue="#{tipIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:message for="tipId" class="message" />
+
+                        <p:outputLabel value="#{bundle.CreateDocenteLabel_documento}" for="documento" />
+                        <p:inputText id="documento" value="#{docenteController.docente.documento}" title="#{bundle.CreateDocenteTitle_documento}" required="true" requiredMessage="#{bundle.CreateDocenteRequiredMessage_documento}" >
+
+
+                                     
+                                <f:validator validatorId="ValidarCampoObligatorio"/>
+                                <f:validator validatorId="ValidarCampoNumerico"/>
+                                <f:validator validatorId="ValidarCampoMaximo13Numeros"/>
+                                <f:validator validatorId="ValidarCampoMinimo6Numeros"/>
+                                <f:validator validatorId="ValidarCampoNumericoPositivo"/>
+                                <p:ajax event="keyup" update="num_doc"/>
+                                <f:validator validatorId="ValidarCampoNumeroIdentificacionDocente"/>
+                            
+                            
+<!--                            <p:ajax event="blur" update="num_doc"> -->
+                                <!--<f:validator validatorId="ValidarCampoNumeroIdentificacionDocente"/>-->
+<!--                            </p:ajax>-->
+                            <!--<p:ajax event = "blur" update="num_doc" />--> 
+                            
+                        </p:inputText>
+                        <p:message for="documento" id="num_doc" class="message" />
+
+                        <p:outputLabel value="#{bundle.CreateDocenteLabel_estId}" for="estId" />
+                        <p:selectOneMenu id="estId" value="#{docenteController.docente.estId}" required="true" requiredMessage="#{bundle.EditDocenteRequiredMessage_estId}">
+                            <f:selectItems value="#{estudioController.itemsAvailableSelectOne}"
+                                           var="estIdItem"
+                                           itemLabel="#{estIdItem.nombreEstudio}"
+                                           itemValue="#{estIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:message for="estId" class="message" />
+                    </p:panelGrid>
+                    <p:commandButton action="#{docenteController.create(cargarFormulariosController)}" value="#{bundle.Save}" ajax="false" />
+
+                </h:panelGroup>
+            </p:panel>
+        </h:form>
+        <h:form>
+            <p:commandButton action="#{docenteController.cancel(cargarFormulariosController)}" value="#{bundle.Cancel}" ajax="false"/>
+        </h:form>
+    </h:body>
 </html>

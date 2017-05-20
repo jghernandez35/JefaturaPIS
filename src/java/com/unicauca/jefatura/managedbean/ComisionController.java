@@ -1,7 +1,13 @@
 package com.unicauca.jefatura.managedbean;
 
+import com.unicauca.jefatura.entidades.CapituloLibro;
 import com.unicauca.jefatura.entidades.Comision;
+import com.unicauca.jefatura.entidades.Conferencia;
 import com.unicauca.jefatura.entidades.Docente;
+import com.unicauca.jefatura.entidades.Libro;
+import com.unicauca.jefatura.entidades.Produccionintelectual;
+import com.unicauca.jefatura.entidades.Realiza;
+import com.unicauca.jefatura.entidades.Revista;
 import com.unicauca.jefatura.managedbean.util.JsfUtil;
 import com.unicauca.jefatura.managedbean.util.JsfUtil.PersistAction;
 import com.unicauca.jefatura.sessionbean.ComisionFacade;
@@ -19,6 +25,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.persistence.PrePersist;
 
 @Named("comisionController")
 @SessionScoped
@@ -171,4 +178,39 @@ public class ComisionController implements Serializable {
         formularioController.cargarVerComisionAcademica();
     }
 
+     @PrePersist
+    public Comision prepareCreate(CargarFormularioController formularioController, Integer tipo) {
+        selected = new Comision();
+        initializeEmbeddableKey();
+        
+
+        switch (tipo) {
+        /*    case 1://crear libro
+                libroSelect = new Libro();
+                libroSelect.setLibroEdicion(1);
+                formularioController.cargarCrearLibro();
+
+                break;
+            case 2://crear capitulo libro
+                capLibroselect = new CapituloLibro();
+                capLibroselect.setLibroEdicion(1);
+                capLibroselect.setCapLibroNumero(1);
+                formularioController.cargarCrearCapituloLibro();
+                break;*/
+            case 3://crear  revista
+                //revistaSelect = new Revista();
+               // revistaSelect.setNumeroEdicion(1);
+                System.out.println("Se creo la revista");
+                formularioController.cargarCrearComision();
+                break;
+           /* case 4://crear conferencia
+                conferenciaSelect = new Conferencia();
+                System.out.println("Se creo la conferencias");
+                formularioController.cargarCrearConferencia();
+                break;
+*/
+        }
+
+        return selected;
+    }
 }
