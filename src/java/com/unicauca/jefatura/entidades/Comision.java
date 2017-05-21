@@ -6,10 +6,8 @@
 package com.unicauca.jefatura.entidades;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,14 +18,12 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -89,8 +85,6 @@ public class Comision implements Serializable {
     @Size(min = 1, max = 65535)
     @Column(name = "Descripcion_Comision")
     private String descripcionComision;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "informeComisionidcomision")
-    private Collection<Informecomision> informecomisionCollection;
     @JoinColumn(name = "IdCiudad_Comision", referencedColumnName = "Id_Ciudad")
     @ManyToOne(optional = false)
     private Ciudad idCiudadComision;
@@ -103,8 +97,9 @@ public class Comision implements Serializable {
     @JoinColumn(name = "IdEstado_Comision", referencedColumnName = "Id_Estado")
     @ManyToOne(optional = false)
     private Estadocomision idEstadoComision;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idComisionSoporteComision")
-    private Collection<Soportecomision> soportecomisionCollection;
+    @JoinColumn(name = "idDocente_Comision", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Docente idDocenteComision;
 
     public Comision() {
     }
@@ -188,15 +183,6 @@ public class Comision implements Serializable {
         this.descripcionComision = descripcionComision;
     }
 
-    @XmlTransient
-    public Collection<Informecomision> getInformecomisionCollection() {
-        return informecomisionCollection;
-    }
-
-    public void setInformecomisionCollection(Collection<Informecomision> informecomisionCollection) {
-        this.informecomisionCollection = informecomisionCollection;
-    }
-
     public Ciudad getIdCiudadComision() {
         return idCiudadComision;
     }
@@ -229,13 +215,12 @@ public class Comision implements Serializable {
         this.idEstadoComision = idEstadoComision;
     }
 
-    @XmlTransient
-    public Collection<Soportecomision> getSoportecomisionCollection() {
-        return soportecomisionCollection;
+    public Docente getIdDocenteComision() {
+        return idDocenteComision;
     }
 
-    public void setSoportecomisionCollection(Collection<Soportecomision> soportecomisionCollection) {
-        this.soportecomisionCollection = soportecomisionCollection;
+    public void setIdDocenteComision(Docente idDocenteComision) {
+        this.idDocenteComision = idDocenteComision;
     }
 
     @Override

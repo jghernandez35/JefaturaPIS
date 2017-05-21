@@ -32,7 +32,9 @@ import javax.persistence.PrePersist;
 public class ComisionController implements Serializable {
 
     @EJB
-    private com.unicauca.jefatura.sessionbean.ComisionFacade ejbFacade;
+    private com.unicauca.jefatura.sessionbean.ComisionFacade ejbComisionFacade;
+    
+    
     private List<Comision> items = null;
     private Comision selected;
     private Docente selectDocente;
@@ -63,7 +65,7 @@ public class ComisionController implements Serializable {
     }
 
     private ComisionFacade getFacade() {
-        return ejbFacade;
+        return ejbComisionFacade;
     }
 
     public Comision prepareCreate() {
@@ -220,5 +222,77 @@ public class ComisionController implements Serializable {
         }
 
         return selected;
+    }
+    
+    public void create(CargarFormularioController formularioController, Integer tipo) {
+
+        //ejbProduccionIntelectualFacade.create(produccionIntelectualSelect);
+
+        //idProduccionNueva = produccionIntelectualSelect.getId();
+        System.out.println("Hola comision1");
+        switch (tipo) {
+            /*case 1://crear libro
+                libroSelect.setLibroId(idProduccionNueva);
+                libroSelect.setProduccionintelectual(produccionIntelectualSelect);
+                ejbLibroFacade.create(libroSelect);
+                produccionIntelectualSelect.setLibro(libroSelect);
+                break;
+            case 2://crear capitulo libro
+                capLibroselect.setCapLibroId(idProduccionNueva);
+                capLibroselect.setProduccionintelectual(produccionIntelectualSelect);
+                ejbCapituloLibroFacade.create(capLibroselect);
+                produccionIntelectualSelect.setCapituloLibro(capLibroselect);
+                break;*/
+            
+            case 3://crear  revista
+                //revistaSelect.setId(idProduccionNueva);
+                //revistaSelect.setProduccionintelectual(produccionIntelectualSelect);
+                //ejbRevistaFacade.create(revistaSelect);
+                //produccionIntelectualSelect.setRevista(revistaSelect);
+                selected.setIdDocenteComision(selectDocente);
+                ejbComisionFacade.create(selected);
+                System.out.println("Hola comision2");
+                break;
+                
+                
+           /* case 4://crear conferencia
+                conferenciaSelect.setConferenciaId(idProduccionNueva);
+                conferenciaSelect.setProduccionintelectual(produccionIntelectualSelect);
+
+                ejbConferenciaFacade.create(conferenciaSelect);
+                produccionIntelectualSelect.setConferencia(conferenciaSelect);
+                break;
+*/
+        }
+
+       // selected.setProId(produccionIntelectualSelect);
+        selected.setIdDocenteComision(selectDocente);
+        
+     System.out.println("Hola comision3");
+
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("RealizaCreated"));
+
+        if (!JsfUtil.isValidationFailed()) {
+            items = null;    // Invalidate list of items to trigger re-query.
+            items = null;
+
+        }
+        switch (tipo) {
+            case 1://crear libro
+                formularioController.cargarVerLibrosDocente();
+
+                break;
+            case 2://crear capitulo libro
+                formularioController.cargarVerCapLibrosDocente();
+                break;
+            case 3://crear  revista
+                formularioController.cargarVerRevistasDocente();
+                break;
+            case 4://crear conferencia
+                formularioController.cargarVerConferenciasDocente();
+                break;
+
+        }
+
     }
 }

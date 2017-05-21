@@ -42,6 +42,9 @@ import javax.xml.bind.annotation.XmlTransient;
 })
 public class Docente implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDocenteComision")
+    private Collection<Comision> comisionCollection;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "docId")
     private Collection<Trabajosinvestigacion> trabajosinvestigacionCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "docId")
@@ -223,4 +226,13 @@ public class Docente implements Serializable {
     public void setFormatoaCollection(Collection<Formatoa> formatoaCollection) {
         this.formatoaCollection = formatoaCollection;
     }    
+
+    @XmlTransient
+    public Collection<Comision> getComisionCollection() {
+        return comisionCollection;
+    }
+
+    public void setComisionCollection(Collection<Comision> comisionCollection) {
+        this.comisionCollection = comisionCollection;
+    }
 }

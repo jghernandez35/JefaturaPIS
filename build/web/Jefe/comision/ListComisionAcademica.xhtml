@@ -45,46 +45,46 @@ and open the template in the editor.
                             </p:outputPanel>
                         </f:facet>
                         
-                        <p:column filterBy="#{item.apellidos}" headerText="#{bundle.ListDocenteTitle_apellidos}" filterMatchMode="contains">
+                        <p:column filterBy="#{item.numeroResolucionComision}" headerText="#{bundle.ListDocenteTitle_apellidos}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="Numero Resolucion"/>
                             </f:facet>
                             <!-- para obtener algun valor del docente actual se accede mediante la variable item y el nombre del campo -->
-                            <h:outputText value="#{item.apellidos}"/>
+                            <h:outputText value="#{item.numeroResolucionComision}"/>
                         </p:column>
                         
-                        <p:column filterBy="#{item.nombres}" headerText="#{bundle.ListDocenteTitle_nombres}" filterMatchMode="contains">
+                        <p:column filterBy="#{item.numeroActaComision}" headerText="#{bundle.ListDocenteTitle_nombres}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="Numero Acta"/>
                             </f:facet>
-                            <h:outputText value="#{item.nombres}"/>
+                            <h:outputText value="#{item.numeroActaComision}"/>
                         </p:column>
                         
                         
-                        <p:column filterBy="#{item.documento}" headerText="#{bundle.ListDocenteTitle_documento}" filterMatchMode="contains">
+                        <p:column filterBy="#{item.fechaInicioComision}" headerText="#{bundle.ListDocenteTitle_documento}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="Fecha de Inicio"/>
                             </f:facet>
-                            <h:outputText value="#{item.documento}"/>
+                            <h:outputText value="#{item.fechaInicioComision}"/>
                         </p:column>
                         
-                        <p:column filterBy="#{item.documento}" headerText="#{bundle.ListDocenteTitle_documento}" filterMatchMode="contains">
+                        <p:column filterBy="#{item.fechaFinComision}" headerText="#{bundle.ListDocenteTitle_documento}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="Fecha Fin"/>
                             </f:facet>
-                            <h:outputText value="#{item.documento}"/>
+                            <h:outputText value="#{item.fechaFinComision}"/>
                         </p:column>
                         
-                        <p:column filterBy="#{item.documento}" headerText="#{bundle.ListDocenteTitle_documento}" filterMatchMode="contains">
+                        <p:column filterBy="#{item.organizadoPorComision}" headerText="#{bundle.ListDocenteTitle_documento}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="Organizado por"/>
                             </f:facet>
-                            <h:outputText value="#{item.documento}"/>
+                            <h:outputText value="#{item.organizadoPorComision}"/>
                         </p:column>
 
                         <p:column headerText="COMISIONES" style=" text-align: center;">
 
-                            <p:commandLink title="Comision Academica"  action="#{realizaController.prepareViewItemDocente(item, cargarFormulariosController)}" ajax="false" >                                    
+                            <p:commandLink title="Comision Academica"  action="#{comisionController.prepareViewItemDocente(item, cargarFormulariosController)}" ajax="false" >                                    
                                 <p:graphicImage  library="img" name="revista.png"/>
                             </p:commandLink>
                             <p:spacer width="1" height="22" style="position: relative; bottom: -5px;background-color: #A8A8A8; margin-left: 10px;margin-right: 10px" />
