@@ -40,6 +40,14 @@ public class ComisionController implements Serializable {
     public ComisionController() {
     }
 
+    public Docente getSelectDocente() {
+        return selectDocente;
+    }
+
+    public void setSelectDocente(Docente selectDocente) {
+        this.selectDocente = selectDocente;
+    }
+
     public Comision getSelected() {
         return selected;
     }

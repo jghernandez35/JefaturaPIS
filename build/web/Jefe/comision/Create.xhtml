@@ -6,7 +6,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-
+ 
     <ui:composition>
 
         <p:dialog id="ComisionCreateDlg" widgetVar="ComisionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.comisiones.CreateComisionTitle}">
@@ -72,77 +72,100 @@
 
     <h:body>
         <h:form>
-            <p:panel header="#{bundle.CreateDocenteTitle}">
+            <p:panel header="Crear Comision Academica">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="3" rendered="#{docenteController.docente != null}">
-                        <!--el for es para señalar errores-->
-                        <p:outputLabel value="#{bundle.CreateDocenteLabel_apellidos}" for="apellidos" />
-                        <p:inputText id="apellidos" value="#{docenteController.docente.apellidos}" title="#{bundle.CreateDocenteTitle_apellidos}" required="true" requiredMessage="#{bundle.CreateDocenteRequiredMessage_apellidos}">
-                            <f:validator validatorId="ValidarCampoObligatorio"/>
-                            <f:validator validatorId="ValidarCampoSoloLetrasYespacio"/>
-                            <f:validator validatorId="ValidarCampoMaximo30Caracteres"/>
-                            <f:validator validatorId="ValidarCampoMinimo3Caracteres"/>
-                            <p:ajax event = "keyup" update="ape" />
-                        </p:inputText>
-                        <p:message for="apellidos" id="ape" class="message" />
+                    <p:panelGrid columns="3"  rendered="#{realizaController.selected != null}">
 
-                        <p:outputLabel value="#{bundle.CreateDocenteLabel_nombres}" for="nombres" />
-                        <p:inputText id="nombres" value="#{docenteController.docente.nombres}" title="#{bundle.CreateDocenteTitle_nombres}" required="true" requiredMessage="#{bundle.CreateDocenteRequiredMessage_nombres}">
+                        <h:outputText value="#{bundleProduccion.ViewProduccionDocenteLabel_Documento}"/>
+                        <h:outputText value="#{comisionController.selectDocente.documento}" title="#{bundleProduccion.ViewProduccionDocenteTitle_Documento}"/>
+                        <h:outputText value=""/>
+                        <h:outputText value="#{bundleProduccion.ViewProduccionDocenteLabel_Nombre}"/>
+                        <h:outputText value="#{comisionController.selectDocente.nombres}" title="#{bundleProduccion.ViewProduccionDocenteTitle_Nombre}"/>
+                        <h:outputText value=""/>
+                        <h:outputText value="#{bundleProduccion.ViewProduccionDocenteLabel_Apellido}"/>
+                        <h:outputText value="#{comisionController.selectDocente.apellidos}" title="#{bundleProduccion.ViewProduccionDocenteTitle_Apellido}"/>
+                        <h:outputText value=""/>
+
+                        <p:outputLabel value="Numero de Resolucion" for="Resolucion" />
+                        <p:inputText id="Resolucion" value="#{comisionController.selected.numeroResolucionComision}" title="Hola" required="true" requiredMessage="#{bundleProduccion.CreateRevistaRequiredMessage_nombreRevista}">
                             <f:validator validatorId="ValidarCampoObligatorio"/>
-                            <f:validator validatorId="ValidarCampoSoloLetrasYespacio"/>
-                            <f:validator validatorId="ValidarCampoMaximo30Caracteres"/>
-                            <f:validator validatorId="ValidarCampoMinimo3Caracteres"/>
                             <p:ajax event = "keyup" update="nom" />
                         </p:inputText>
-                        <p:message for="nombres" id="nom" class="message" />
-
-                        <p:outputLabel value="#{bundle.CreateDocenteLabel_tipId}" for="tipId" />
-                        <p:selectOneMenu id="tipId" value="#{docenteController.docente.tipId}" required="true" requiredMessage="#{bundle.EditDocenteRequiredMessage_tipId}">
-                            <f:selectItems value="#{tipodocumentoController.itemsAvailableSelectOne}"
-                                           var="tipIdItem"
-                                           itemLabel="#{tipIdItem.tipo}"
-                                           itemValue="#{tipIdItem}"/>
-                        </p:selectOneMenu>
-                        <p:message for="tipId" class="message" />
-
-                        <p:outputLabel value="#{bundle.CreateDocenteLabel_documento}" for="documento" />
-                        <p:inputText id="documento" value="#{docenteController.docente.documento}" title="#{bundle.CreateDocenteTitle_documento}" required="true" requiredMessage="#{bundle.CreateDocenteRequiredMessage_documento}" >
-
-
-                                     
-                                <f:validator validatorId="ValidarCampoObligatorio"/>
-                                <f:validator validatorId="ValidarCampoNumerico"/>
-                                <f:validator validatorId="ValidarCampoMaximo13Numeros"/>
-                                <f:validator validatorId="ValidarCampoMinimo6Numeros"/>
-                                <f:validator validatorId="ValidarCampoNumericoPositivo"/>
-                                <p:ajax event="keyup" update="num_doc"/>
-                                <f:validator validatorId="ValidarCampoNumeroIdentificacionDocente"/>
-                            
-                            
-<!--                            <p:ajax event="blur" update="num_doc"> -->
-                                <!--<f:validator validatorId="ValidarCampoNumeroIdentificacionDocente"/>-->
-<!--                            </p:ajax>-->
-                            <!--<p:ajax event = "blur" update="num_doc" />--> 
-                            
+                        <p:message for="Resolucion" id="nom" class="message" />
+                        
+                        <p:outputLabel value="Numero acta" for="acta" />
+                        <p:inputText  id="acta" value="#{comisionController.selected.numeroActaComision}" title="#{bundleProduccion.CreateRevistaTitle_numeroEdicion}" required="true" requiredMessage="#{bundleProduccion.CreateRevistaRequiredMessage_numeroEdicion}">
+                            <f:validator validatorId="ValidarCampoObligatorio"/>
+                            <p:ajax event = "keyup" update="ned" />
+                            <p:keyFilter regEx="/[\d]/" />
                         </p:inputText>
-                        <p:message for="documento" id="num_doc" class="message" />
-
-                        <p:outputLabel value="#{bundle.CreateDocenteLabel_estId}" for="estId" />
-                        <p:selectOneMenu id="estId" value="#{docenteController.docente.estId}" required="true" requiredMessage="#{bundle.EditDocenteRequiredMessage_estId}">
-                            <f:selectItems value="#{estudioController.itemsAvailableSelectOne}"
-                                           var="estIdItem"
-                                           itemLabel="#{estIdItem.nombreEstudio}"
-                                           itemValue="#{estIdItem}"/>
-                        </p:selectOneMenu>
-                        <p:message for="estId" class="message" />
+                        <p:message for="acta" id="ned" class="message" />
+                        
+                         <p:outputLabel value="Fecha solicitud" for="fechaS" />
+                         <p:calendar  id="fechaS" placeholder="dd-mm-aaaa" pattern="dd-MM-yyyy" value="#{comisionController.selected.fechaSolicitudComision}" title="#{bundleProduccion.EditProduccionintelectualTitle_fecha}" required="true" requiredMessage="#{bundleProduccion.EditProduccionintelectualRequiredMessage_fecha}" showOn="button"/>
+                         <p:message for="fechaS" id="ned1" class="message" />
+                         
+                         <p:outputLabel value="Fecha inicio" for="fechaI" />
+                         <p:calendar  id="fechaI" placeholder="dd-mm-aaaa" pattern="dd-MM-yyyy" value="#{comisionController.selected.fechaInicioComision}" title="#{bundleProduccion.EditProduccionintelectualTitle_fecha}" required="true" requiredMessage="#{bundleProduccion.EditProduccionintelectualRequiredMessage_fecha}" showOn="button"/>
+                         <p:message for="fechaI" id="ned2" class="message" />
+                         
+                         <p:outputLabel value="Fecha fin" for="fechaF" />
+                         <p:calendar  id="fechaF" placeholder="dd-mm-aaaa" pattern="dd-MM-yyyy" value="#{comisionController.selected.fechaFinComision}" title="#{bundleProduccion.EditProduccionintelectualTitle_fecha}" required="true" requiredMessage="#{bundleProduccion.EditProduccionintelectualRequiredMessage_fecha}" showOn="button"/>
+                        <p:message for="fechaF" id="ned3" class="message" />
+                        
+                       <p:outputLabel value="Organizado por" for="organizado" />
+                       <p:inputText id="organizado" value="#{comisionController.selected.organizadoPorComision}" title="#{bundleProduccion.CreateRevistaTitle_nombreRevista}" required="true" requiredMessage="#{bundleProduccion.CreateRevistaRequiredMessage_nombreRevista}">
+                            <f:validator validatorId="ValidarCampoObligatorio"/>
+                            <p:ajax event = "keyup" update="nom1" />
+                        </p:inputText>
+                        <p:message for="organizado" id="nom1" class="message" />
+                        
+                        <p:outputLabel value="Descripcion" for="Descripcion" />
+                        <p:inputText id="Descripcion" value="#{comisionController.selected.descripcionComision}" title="#{bundleProduccion.CreateRevistaTitle_nombreRevista}" required="true" requiredMessage="#{bundleProduccion.CreateRevistaRequiredMessage_nombreRevista}">
+                            <f:validator validatorId="ValidarCampoObligatorio"/>
+                            <p:ajax event = "keyup" update="nom2" />
+                        </p:inputText>
+                        <p:message for="Descripcion" id="nom2" class="message" />
+                        
+                        <p:outputLabel value="Estado de la comision" for="Estado" />
+                        <p:inputText id="Estado" value="#{comisionController.selected.idEstadoComision}" title="#{bundleProduccion.CreateRevistaTitle_nombreRevista}" required="true" requiredMessage="#{bundleProduccion.CreateRevistaRequiredMessage_nombreRevista}">
+                            <f:validator validatorId="ValidarCampoObligatorio"/>
+                            <p:ajax event = "keyup" update="nom3" />
+                        </p:inputText>
+                        <p:message for="Estado" id="nom3" class="message" />
+                        
+                        <p:outputLabel value="Ciudad de realización" for="Ciudad" />
+                        <p:inputText id="Ciudad" value="#{comisionController.selected.idCiudadComision}" title="#{bundleProduccion.CreateRevistaTitle_nombreRevista}" required="true" requiredMessage="#{bundleProduccion.CreateRevistaRequiredMessage_nombreRevista}">
+                            <f:validator validatorId="ValidarCampoObligatorio"/>
+                            <p:ajax event = "keyup" update="nom4" />
+                        </p:inputText>
+                        <p:message for="Ciudad" id="nom4" class="message" />
+                        
+                        <p:outputLabel value="Tipo comision" for="Tipo" />
+                        <p:inputText id="Tipo" value="#{comisionController.selected.idTipoComisionComision}" title="#{bundleProduccion.CreateRevistaTitle_nombreRevista}" required="true" requiredMessage="#{bundleProduccion.CreateRevistaRequiredMessage_nombreRevista}">
+                            <f:validator validatorId="ValidarCampoObligatorio"/>
+                            <p:ajax event = "keyup" update="nom5" />
+                        </p:inputText>
+                        <p:message for="Tipo" id="nom5" class="message" />
+                        
+                        <p:outputLabel value="Tipo participación" for="participación" />
+                        <p:inputText id="participación" value="#{comisionController.selected.idTipoParticipacionComision}" title="#{bundleProduccion.CreateRevistaTitle_nombreRevista}" required="true" requiredMessage="#{bundleProduccion.CreateRevistaRequiredMessage_nombreRevista}">
+                            <f:validator validatorId="ValidarCampoObligatorio"/>
+                            <p:ajax event = "keyup" update="nom6" />
+                        </p:inputText>
+                        <p:message for="participación" id="nom6" class="message" />
+                   
+                   
+                        <h:outputText value=""/>
                     </p:panelGrid>
-                    <p:commandButton action="#{docenteController.create(cargarFormulariosController)}" value="#{bundle.Save}" ajax="false" />
+                 
+                    <p:commandButton actionListener="#{realizaController.create(cargarFormulariosController,3)}"  action ="#{realizaController.recargarRevistas()}" value="#{bundleProduccion.Save}" update=":RevistasListDocenteForm:panel1:datalistRevistas" ajax="false"/>
 
                 </h:panelGroup>
-            </p:panel>
+            </p:panel> 
         </h:form>
         <h:form>
-            <p:commandButton action="#{docenteController.cancel(cargarFormulariosController)}" value="#{bundle.Cancel}" ajax="false"/>
+            <p:commandButton action="#{realizaController.cancel(cargarFormulariosController,3)}" value="#{bundleProduccion.Cancel}" ajax="false"/>
         </h:form>
     </h:body>
 </html>
