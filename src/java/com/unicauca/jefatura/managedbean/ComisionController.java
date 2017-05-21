@@ -13,6 +13,7 @@ import com.unicauca.jefatura.managedbean.util.JsfUtil.PersistAction;
 import com.unicauca.jefatura.sessionbean.ComisionFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -34,6 +35,10 @@ public class ComisionController implements Serializable {
     @EJB
     private com.unicauca.jefatura.sessionbean.ComisionFacade ejbComisionFacade;
     
+    private List<Comision> listaComisionesAcademicas=new ArrayList<>();
+    private List<Comision> listaComisionesDeEstudio=new ArrayList<>();
+    private List<Comision> listaComisionesAnioSabatico=new ArrayList<>();
+    
     
     private List<Comision> items = null;
     private Comision selected;
@@ -44,6 +49,32 @@ public class ComisionController implements Serializable {
 
     public Docente getSelectDocente() {
         return selectDocente;
+    }
+    
+    public void setListaComisionesAcademicas(List<Comision> academicas)
+    {
+        this.listaComisionesAcademicas=academicas;
+    }
+    public void setListaComisionesEstudios(List<Comision> estudios)
+    {
+        this.listaComisionesDeEstudio=estudios;
+    }
+    public void setListaComisionesAnioSabatico(List<Comision> sabatico)
+    {
+        this.listaComisionesAnioSabatico=sabatico;
+    }
+    
+    public List<Comision> getListaComisionesAcademicas()
+    {
+        return listaComisionesAcademicas;
+    }
+    public List<Comision> getListaComisionesEstudios()
+    {
+        return listaComisionesDeEstudio;
+    }
+    public List<Comision> getListaComisionesAnioSabatico()
+    {
+        return listaComisionesAnioSabatico;
     }
 
     public void setSelectDocente(Docente selectDocente) {
@@ -307,5 +338,19 @@ public class ComisionController implements Serializable {
 
         }
 
+    }
+    
+    public List<Comision> comisionesAcademicas()
+    {
+        List<Comision> aux=new ArrayList<>();
+        aux=ejbComisionFacade.findAll();
+        for(int i=0;i<aux.size();i++)
+        {
+            if(aux.get(i).getIdTipoComisionComision().getIdTipoComision()==1)
+                listaComisionesAcademicas.add(aux.get(i));
+        }
+        
+    
+        return listaComisionesAcademicas;
     }
 }
