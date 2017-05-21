@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    
+    
+    
+     <p:growl id="growl" life="5000" />
+
+        <h:body>
+            
+            <h:form id="ComisionListForm">
+		 <h:panelGrid  columns="1">
+<!--                //oncomplete="#{docenteController.limpiarDocente()}"-->
+                <p:commandButton icon="ui-icon-plus"   value="#{bundleProduccion.Create}" actionListener="#{comisionController.prepareCreate(cargarFormulariosController,3)}"  ajax="false"/>
+                
+            </h:panelGrid>
+               
+             
+                <p:panel header="COMISIONES">
+                
+                    <p:dataTable id="datalist" value="#{comisionController.items}" var="item"
+                                 
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 emptyMessage="No hay comisiones con este criterio"
+                                 widgetVar="DocenteListDialog"
+                                 >
+                        
+                       <f:facet name="header">
+                            <p:outputPanel>
+                                <h:outputText value="Buscar en todos los campos:" />
+                                <p:inputText id="globalFilter" onkeyup="PF('DocenteListDialog').filter()" style="width:150px" placeholder="Digite palabra clave"/>
+                            </p:outputPanel>
+                        </f:facet>
+                        
+                        <p:column filterBy="#{item.numeroResolucionComision}" headerText="#{bundle.ListDocenteTitle_apellidos}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="Numero Resolucion"/>
+                            </f:facet>
+                            <!-- para obtener algun valor del docente actual se accede mediante la variable item y el nombre del campo -->
+                            <h:outputText value="#{item.numeroResolucionComision}"/>
+                        </p:column>
+                        
+                        <p:column filterBy="#{item.numeroActaComision}" headerText="#{bundle.ListDocenteTitle_nombres}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="Numero Acta"/>
+                            </f:facet>
+                            <h:outputText value="#{item.numeroActaComision}"/>
+                        </p:column>
+                        
+                        
+                        <p:column filterBy="#{item.fechaInicioComision}" headerText="#{bundle.ListDocenteTitle_documento}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="Fecha de Inicio"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaInicioComision}"/>
+                        </p:column>
+                        
+                        <p:column filterBy="#{item.fechaFinComision}" headerText="#{bundle.ListDocenteTitle_documento}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="Fecha Fin"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaFinComision}"/>
+                        </p:column>
+                        
+                        <p:column filterBy="#{item.organizadoPorComision}" headerText="#{bundle.ListDocenteTitle_documento}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="Organizado por"/>
+                            </f:facet>
+                            <h:outputText value="#{item.organizadoPorComision}"/>
+                        </p:column>
+
+                        <p:column headerText="COMISIONES" style=" text-align: center;">
+
+                            <p:commandLink title="Comision Academica"  action="#{comisionController.prepareViewItemDocente(item, cargarFormulariosController)}" ajax="false" >                                    
+                                <p:graphicImage  library="img" name="revista.png"/>
+                            </p:commandLink>
+                            <p:spacer width="1" height="22" style="position: relative; bottom: -5px;background-color: #A8A8A8; margin-left: 10px;margin-right: 10px" />
+                            
+                           
+                        </p:column>
+                        
+                    </p:dataTable>
+                </p:panel>
+            </h:form>    
+        </h:body>
+
+</html>

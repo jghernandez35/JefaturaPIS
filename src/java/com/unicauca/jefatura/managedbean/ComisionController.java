@@ -187,6 +187,19 @@ public class ComisionController implements Serializable {
         this.selectDocente = selectDocent;
         formularioController.cargarVerComisionAcademica();
     }
+    
+    public void prepareViewItemDocenteComisionEstudios(Docente selectDocent, CargarFormularioController formularioController) {
+        System.out.println("el nombre del docente es:" + selectDocent.getNombres());
+        this.selectDocente = selectDocent;
+        formularioController.cargarVerComisionEstudio();
+    }
+    
+    public void prepareViewItemDocenteAnioSabatico(Docente selectDocent, CargarFormularioController formularioController) {
+        System.out.println("el nombre del docente es:" + selectDocent.getNombres());
+        this.selectDocente = selectDocent;
+        formularioController.cargarVerComisionAnioSabatico();
+    }
+    
 
      @PrePersist
     public Comision prepareCreate(CargarFormularioController formularioController, Integer tipo) {
