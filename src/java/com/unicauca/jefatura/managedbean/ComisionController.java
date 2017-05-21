@@ -278,19 +278,19 @@ public class ComisionController implements Serializable {
 
         }
         switch (tipo) {
-            case 1://crear libro
+            /*case 1://crear libro
                 formularioController.cargarVerLibrosDocente();
 
                 break;
             case 2://crear capitulo libro
                 formularioController.cargarVerCapLibrosDocente();
-                break;
+                break;*/
             case 3://crear  revista
-                formularioController.cargarVerRevistasDocente();
+                formularioController.cargarVerComisionAcademica();
                 break;
-            case 4://crear conferencia
-                formularioController.cargarVerConferenciasDocente();
-                break;
+         //   case 4://crear conferencia
+           //     formularioController.cargarVerConferenciasDocente();
+             //   break;
 
         }
 
