@@ -217,6 +217,7 @@ public class ComisionController implements Serializable {
         System.out.println("el nombre del docente es:" + selectDocent.getNombres());
         this.selectDocente = selectDocent;
         formularioController.cargarVerComisionAcademica();
+        
     }
     
     public void prepareViewItemDocenteComisionEstudios(Docente selectDocent, CargarFormularioController formularioController) {
@@ -340,17 +341,30 @@ public class ComisionController implements Serializable {
 
     }
     
-    public List<Comision> comisionesAcademicas()
+    public List<Comision> comisiones(int tipo)
     {
         List<Comision> aux=new ArrayList<>();
+        List<Comision> comisiones=new ArrayList<>();
         aux=ejbComisionFacade.findAll();
         for(int i=0;i<aux.size();i++)
         {
-            if(aux.get(i).getIdTipoComisionComision().getIdTipoComision()==1)
+            int auxiliar=aux.get(i).getIdTipoComisionComision().getIdTipoComision();
+            System.out.println(auxiliar);
+            if(auxiliar==1)
                 listaComisionesAcademicas.add(aux.get(i));
+            if(auxiliar==2)
+                listaComisionesDeEstudio.add(aux.get(i));
+            if(auxiliar==3)
+                listaComisionesAnioSabatico.add(aux.get(i));
         }
         
-    
-        return listaComisionesAcademicas;
+        if (tipo==1)
+            comisiones= listaComisionesAcademicas;
+        if(tipo==2)
+           comisiones= listaComisionesDeEstudio;
+        if(tipo==3)
+            comisiones= listaComisionesAnioSabatico;
+        
+        return comisiones;
     }
 }

@@ -28,7 +28,7 @@ and open the template in the editor.
              
                 <p:panel header="COMISIONES">
                 
-                    <p:dataTable id="datalist" value="#{comisionController.listaComisionesAcademicas}" var="item"
+                    <p:dataTable id="datalist" value="#{comisionController.comisiones(1)}" var="item"
                                  
                                  paginator="true"
                                  rowKey="#{item.id}"

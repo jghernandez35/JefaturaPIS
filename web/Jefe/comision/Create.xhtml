@@ -133,17 +133,19 @@
                         </p:inputTextarea>
                         <p:message for="Descripcion" id="nom2" class="message" />
                         
-                        <p:outputLabel value="Estado de la comision" for="Estado" />
+                        <p:outputLabel value="Estado de la comision" for="Estado"    />
                        <!-- <p:inputText id="Estado" value="#{comisionController.selected.idEstadoComision}" title="#{bundleProduccion.CreateRevistaTitle_nombreRevista}" required="true" requiredMessage="#{bundleProduccion.CreateRevistaRequiredMessage_nombreRevista}">
                             <f:validator validatorId="ValidarCampoObligatorio"/>
                             <p:ajax event = "keyup" update="nom3" />
                         </p:inputText>-->
-                        <p:selectOneMenu id="Estado" style="width:150px" value="#{comisionController.selected.idEstadoComision}">
+                        <p:selectOneMenu id="Estado" style="width:150px" value="#{comisionController.selected.idEstadoComision}" >
                             <f:selectItems value="#{estadocomisionController.itemsAvailableSelectOne}"
                                            var="estados"
-                                           itemValue="#{estados.idEstado}"
-                                           itemLabel="#{estados.nombreEstado}"/>
-            </p:selectOneMenu>
+                                           
+                                           itemLabel="#{estados.nombreEstado}"
+                                           itemValue="#{estados}"
+                                           />
+                        </p:selectOneMenu>
                         <p:message for="Estado" id="nom3" class="message" />
                         
                         <p:outputLabel value="Ciudad de realización" for="Ciudad" />
@@ -154,7 +156,7 @@
                         <p:selectOneMenu id="Ciudad" style="width:150px" value="#{comisionController.selected.idCiudadComision}">
                             <f:selectItems value="#{ciudadController.itemsAvailableSelectOne}"
                                            var="ciudades"
-                                           itemValue="#{ciudades.idCiudad}"
+                                           itemValue="#{ciudades}"
                                            itemLabel="#{ciudades.nombreCiudad}"/>
                         </p:selectOneMenu>
                         <p:message for="Ciudad" id="nom4" class="message" />
@@ -167,7 +169,7 @@
                         <p:selectOneMenu id="Tipo" style="width:150px" value="#{comisionController.selected.idTipoComisionComision}">
                             <f:selectItems value="#{tipocomisionController.itemsAvailableSelectOne}"
                                            var="tipos"
-                                           itemValue="#{tipos.idTipoComision}"
+                                           itemValue="#{tipos}"
                                            itemLabel="#{tipos.nombreTipoComision}"/>
                         </p:selectOneMenu>
                         <p:message for="Tipo" id="nom5" class="message" />
@@ -180,7 +182,7 @@
                         <p:selectOneMenu id="participación" style="width:150px" value="#{comisionController.selected.idTipoParticipacionComision}">
                             <f:selectItems value="#{tipoparticipacionController.itemsAvailableSelectOne}"
                                            var="tiposP"
-                                           itemValue="#{tiposP.idTipoParticipacion}"
+                                           itemValue="#{tiposP}"
                                            itemLabel="#{tiposP.nombreTipoParticipacion}"/>
                         </p:selectOneMenu>
                         <p:message for="participación" id="nom6" class="message" />
