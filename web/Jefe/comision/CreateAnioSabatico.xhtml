@@ -102,10 +102,7 @@ and open the template in the editor.
                         </p:selectOneMenu>
                         <p:message for="Ciudad" id="nom4" class="message" />
                         <p:outputLabel value="Tipo participación" for="participación" />
-                        <!--<p:inputText id="participación" value="#{comisionController.selected.idTipoParticipacionComision}" title="#{bundleProduccion.CreateRevistaTitle_nombreRevista}" required="true" requiredMessage="#{bundleProduccion.CreateRevistaRequiredMessage_nombreRevista}">
-                            <f:validator validatorId="ValidarCampoObligatorio"/>
-                            <p:ajax event = "keyup" update="nom6" />
-                        </p:inputText>-->
+                        
                         <p:selectOneMenu id="participación" style="width:150px" value="#{comisionController.selected.idTipoParticipacionComision}">
                             <f:selectItems value="#{tipoparticipacionController.itemsAvailableSelectOne}"
                                            var="tiposP"
