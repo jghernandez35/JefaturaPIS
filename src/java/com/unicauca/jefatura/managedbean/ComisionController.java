@@ -16,6 +16,7 @@ import com.unicauca.jefatura.sessionbean.ComisionFacade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -24,6 +25,7 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -258,13 +260,82 @@ public class ComisionController implements Serializable {
 
         return selected;
     }
-    
+    public java.sql.Date convertirFecha(Date fecha)
+    {
+       long convertir=0;
+       convertir = fecha.getTime();
+       java.sql.Date sqlDate = new java.sql.Date(convertir);
+       return sqlDate;
+    }
     public void create(CargarFormularioController formularioController, Integer tipo) {
+        
+      Date fechaSolicitud=selected.getFechaSolicitudComision();
+      Date fechaInicio=selected.getFechaInicioComision();
+      Date fechaFin=selected.getFechaFinComision();
+      
+      if((fechaSolicitud.compareTo(fechaInicio))==0 || fechaInicio.compareTo(fechaFin)<0){
+          System.out.print(fechaSolicitud.compareTo(fechaInicio));
+          if((fechaInicio.compareTo(fechaFin))==0 || (fechaInicio.compareTo(fechaFin))<0)
+          {
+            switch (tipo) {
+                case 1://crear comision de estudios
+                    List<Tipocomision> lista= new ArrayList<>();
+                    lista=ejbTipoComision.findAll();        
+                    selected.setIdTipoComisionComision(lista.get(1)); // obtiene la comision de estudios de la tabla tipoComision
+                    selected.setIdDocenteComision(selectDocente);
+                
+                    ejbComisionFacade.create(selected);
+                    System.out.println("Hola comision2");
+                
+                break;
+                case 2://crear año sabatico
+                    List<Tipocomision> lista1= new ArrayList<>();
+                    lista1=ejbTipoComision.findAll();        
+                    selected.setIdTipoComisionComision(lista1.get(2));// Obtiene la comision Año sabatico de la tabla tipoComision
+                    selected.setIdDocenteComision(selectDocente);
+                
+                    ejbComisionFacade.create(selected);
+                    System.out.println("Hola comision2");
+                break;
+            
+                case 3://crear  comision academica
+                    List<Tipocomision> lista2= new ArrayList<>();
+                    lista2=ejbTipoComision.findAll();        
+                    selected.setIdTipoComisionComision(lista2.get(0));// Obtiene la comision Academica de la tabla  tipoComision
+                    selected.setIdDocenteComision(selectDocente);
+                
+                    ejbComisionFacade.create(selected);
+                    System.out.println("Hola comision2");
+                break;
+       }
 
-        //ejbProduccionIntelectualFacade.create(produccionIntelectualSelect);
+       // selected.setProId(produccionIntelectualSelect);
+        selected.setIdDocenteComision(selectDocente);
+        
+     System.out.println("Hola comision3");
 
-        //idProduccionNueva = produccionIntelectualSelect.getId();
-        System.out.println("Hola comision1");
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("RealizaCreated"));
+          
+          }
+    
+          else{
+           if (!JsfUtil.isValidationFailed()) {
+            items = null;    // Invalidate list of items to trigger re-query.
+            items = null;
+
+        }
+          }
+    }
+              
+      else{
+           if (!JsfUtil.isValidationFailed()) {
+            items = null;    // Invalidate list of items to trigger re-query.
+            items = null;
+
+        }
+          }
+              /*
+            
         switch (tipo) {
             case 1://crear comision de estudios
                List<Tipocomision> lista= new ArrayList<>();
@@ -308,15 +379,15 @@ public class ComisionController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
             items = null;
 
-        }
+        }*/
         switch (tipo) {
-            /*case 1://crear libro
-                formularioController.cargarVerLibrosDocente();
+            case 1://crear libro
+                formularioController.cargarVerComisionEstudio();
 
                 break;
             case 2://crear capitulo libro
-                formularioController.cargarVerCapLibrosDocente();
-                break;*/
+                formularioController.cargarVerComisionAnioSabatico();
+                break;
             case 3://crear  revista
                 formularioController.cargarVerComisionAcademica();
                 break;

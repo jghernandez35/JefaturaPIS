@@ -64,14 +64,14 @@ and open the template in the editor.
                             <f:facet name="header">
                                 <h:outputText value="Fecha de Inicio"/>
                             </f:facet>
-                            <h:outputText value="#{item.fechaInicioComision}"/>
+                            <h:outputText value="#{comisionController.convertirFecha(item.fechaInicioComision)}"/>
                         </p:column>
                         
                         <p:column filterBy="#{item.fechaFinComision}" headerText="#{bundle.ListDocenteTitle_documento}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="Fecha Fin"/>
                             </f:facet>
-                            <h:outputText value="#{item.fechaFinComision}"/>
+                             <h:outputText value="#{comisionController.convertirFecha(item.fechaFinComision)}"/>
                         </p:column>
                         
                         <p:column filterBy="#{item.organizadoPorComision}" headerText="#{bundle.ListDocenteTitle_documento}" filterMatchMode="contains">
