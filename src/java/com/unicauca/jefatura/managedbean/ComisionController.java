@@ -279,10 +279,11 @@ public class ComisionController implements Serializable {
       Date fechaInicio=selected.getFechaInicioComision();
       Date fechaFin=selected.getFechaFinComision();
       
-      if((fechaSolicitud.compareTo(fechaInicio))==0 || fechaInicio.compareTo(fechaFin)<0){
-          System.out.print(fechaSolicitud.compareTo(fechaInicio));
+      if((fechaSolicitud.compareTo(fechaInicio))==0 || fechaSolicitud.compareTo(fechaInicio)<0){
+          System.out.print("Comparar fecha solicitud einicio"+fechaSolicitud.compareTo(fechaInicio));
           if((fechaInicio.compareTo(fechaFin))==0 || (fechaInicio.compareTo(fechaFin))<0)
           {
+              System.out.print("Comparar fecha inicio y fin"+fechaInicio.compareTo(fechaFin));
             switch (tipo) {
                 case 1://crear comision de estudios
                     List<Tipocomision> lista= new ArrayList<>();
