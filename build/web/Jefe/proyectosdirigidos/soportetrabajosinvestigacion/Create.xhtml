@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SoportetrabajosinvestigacionCreateDlg" widgetVar="SoportetrabajosinvestigacionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleProyectosDirigidos.CreateSoportetrabajosinvestigacionTitle}">
+            <h:form id="SoportetrabajosinvestigacionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{soportetrabajosinvestigacionController.selected != null}">
+                        <p:outputLabel value="#{bundleProyectosDirigidos.CreateSoportetrabajosinvestigacionLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{soportetrabajosinvestigacionController.selected.id}" title="#{bundleProyectosDirigidos.CreateSoportetrabajosinvestigacionTitle_id}" required="true" requiredMessage="#{bundleProyectosDirigidos.CreateSoportetrabajosinvestigacionRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundleProyectosDirigidos.CreateSoportetrabajosinvestigacionLabel_path}" for="path" />
+                        <p:inputText id="path" value="#{soportetrabajosinvestigacionController.selected.path}" title="#{bundleProyectosDirigidos.CreateSoportetrabajosinvestigacionTitle_path}" required="true" requiredMessage="#{bundleProyectosDirigidos.CreateSoportetrabajosinvestigacionRequiredMessage_path}"/>
+                        <p:outputLabel value="#{bundleProyectosDirigidos.CreateSoportetrabajosinvestigacionLabel_trabajosinvestigacion}" for="trabajosinvestigacion" />
+                        <p:selectOneMenu id="trabajosinvestigacion" value="#{soportetrabajosinvestigacionController.selected.trabajosinvestigacion}" required="true" requiredMessage="#{bundleProyectosDirigidos.EditSoportetrabajosinvestigacionRequiredMessage_trabajosinvestigacion}">
+                            <f:selectItems value="#{trabajosinvestigacionController.itemsAvailableSelectOne}"
+                                           var="trabajosinvestigacionItem"
+                                           itemValue="#{trabajosinvestigacionItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{soportetrabajosinvestigacionController.create}" value="#{bundleProyectosDirigidos.Save}" update="display,:SoportetrabajosinvestigacionListForm:datalist,:growl" oncomplete="handleSubmit(args,'SoportetrabajosinvestigacionCreateDialog');"/>
+                    <p:commandButton value="#{bundleProyectosDirigidos.Cancel}" onclick="SoportetrabajosinvestigacionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

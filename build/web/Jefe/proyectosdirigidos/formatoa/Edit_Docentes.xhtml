@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+
+            <h:form id="FormatoaEditForm">
+                <p:panel header="#{bundleProyectosDirigidos.EditFormatoaTitleDocente} - asociado a #{formatoaController.docente.nombres} #{formatoaController.docente.apellidos}">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="3" rendered="#{formatoaController.formatoa != null}">
+                        
+                        <h:outputText value="Documento #{bundleProyectosDirigidos.CreateFormatoaLabel_docId}"/>
+                        <h:outputText value="#{formatoaController.docente.documento}"/>
+                        <h:outputText value=""/>
+                        <h:outputText value="Nombre Docente:"/>
+                        <h:outputText value="#{formatoaController.docente.nombres}" title="#{bundleProduccion.ViewProduccionDocenteTitle_Nombre}"/>
+                        <h:outputText value=""/>
+                        <h:outputText value="Apellido Docente:"/>
+                        <h:outputText value="#{formatoaController.docente.apellidos}" title="#{bundleProduccion.ViewProduccionDocenteTitle_Apellido}"/>
+                        <h:outputText value=""/>
+                        
+                        <p:outputLabel value="#{bundleProyectosDirigidos.CreateFormatoaLabel_actaDepartamento}" for="actaDepartamento" />
+                        <p:inputTextarea rows="2" cols="30" id="actaDepartamento" value="#{formatoaController.formatoa.actaDepartamento}" title="#{bundleProyectosDirigidos.CreateFormatoaTitle_actaDepartamento}" required="true" requiredMessage="#{bundleProyectosDirigidos.CreateFormatoaRequiredMessage_actaDepartamento}">
+                            <f:validator validatorId="ValidarCampoObligatorio"/>
+                            <p:ajax event = "keyup" update="nom" />                              
+                        </p:inputTextarea>
+                        <p:message for="actaDepartamento" id="nom" class="message" />
+                        
+                        <p:outputLabel value="#{bundleProyectosDirigidos.CreateFormatoaLabel_fechaActa}" for="fechaActa" />
+                        <p:calendar maxdate="#{realizaController.getCurrentDate()}" id="fechaActa" placeholder="dd-mm-aaaa" pattern="dd-MM-yyyy" value="#{formatoaController.formatoa.fechaActa}" title="#{bundleProyectosDirigidos.EditFormatoaTitle_fechaActa}" required="true" requiredMessage="#{bundleProyectosDirigidos.EditFormatoaRequiredMessage_fechaActa}" showOn="button">
+                            <f:validator validatorId="ValidarCampoObligatorio"/>
+                            <p:ajax event = "keyup" update="nom1" />                              
+                        </p:calendar>
+                        <p:message for="fechaActa" id="nom1" class="message" />
+                        
+                        <p:outputLabel value="Resolucion: " for="resolucion"/>
+                        <p:inputTextarea rows="2" cols="30" id="resolucion" value="#{formatoaController.proyecto.resolucion}" title="#{bundleProyectosDirigidos.CreateProyectoTitle_resolucion}" required="true" requiredMessage="#{bundleProyectosDirigidos.CreateProyectoRequiredMessage_resolucion}"/>
+                        <h:outputText value=""/>
+                        
+                        <p:outputLabel value="Fecha Resolucion: " />
+                        <p:calendar maxdate="#{realizaController.getCurrentDate()}" id="fechaResolucion" placeholder="dd-mm-aaaa" pattern="dd-MM-yyyy" value="#{formatoaController.proyecto.fechaResolucion}" title="#{bundleProyectosDirigidos.CreateProyectoTitle_fechaResolucion}" required="true" requiredMessage="#{bundleProyectosDirigidos.CreateProyectoRequiredMessage_fechaResolucion}" showOn="button"/>                      
+                        <h:outputText value=""/>
+                        
+                        <p:outputLabel value="#{bundleProyectosDirigidos.CreateFormatoaLabel_tituloTrabajo}" for="tituloTrabajo" />
+                        <p:inputText id="tituloTrabajo" value="#{formatoaController.formatoa.tituloTrabajo}" title="#{bundleProyectosDirigidos.CreateFormatoaTitle_tituloTrabajo}" required="true" requiredMessage="#{bundleProyectosDirigidos.CreateFormatoaRequiredMessage_tituloTrabajo}">
+                            <f:validator validatorId="ValidarCampoObligatorio"/>
+                            <p:ajax event = "keyup" update="nom2" />                              
+                        </p:inputText>
+                        <p:message for="tituloTrabajo" id="nom2" class="message" />
+                        
+                        <p:outputLabel value="Estudiantes:" for="estudiantes" />
+                        <p:selectOneMenu id="estudiantes" value="#{formatoaController.estudiantepregrado}"  required="false">
+                            <f:selectItems value="#{estudiantepregradoController.itemsAvailableSelectOne}"
+                                           var="estudiantepregradoItem"
+                                           itemLabel="#{estudiantepregradoItem.nombreEstudiante} - #{estudiantepregradoItem.codigo}"
+                                           itemValue="#{estudiantepregradoItem}"/>
+                        </p:selectOneMenu>
+                        <h:outputText value=""/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{formatoaController.updateDocente(cargarFormulariosController)}" value="#{bundleProyectosDirigidos.Save}" ajax="false"/>
+                </h:panelGroup>
+                </p:panel>
+            </h:form>
+        <h:form id="FormatoaViewForm2">
+            
+            
+        </h:form>
+            <h:form>
+                <p:commandButton actionListener="#{formatoaController.cancelDocente(cargarFormulariosController)}" value="#{bundleProyectosDirigidos.Cancel}" ajax="false"/>
+            </h:form>
+    </h:body>
+</html>

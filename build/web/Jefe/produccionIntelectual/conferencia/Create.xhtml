@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <h:body>    
+        <h:form>
+            <p:panel header="#{bundleProduccion.CreateConferenciaTitle}">
+                <h:panelGroup id="display">
+                       <p:panelGrid columns="3" rendered="#{realizaController.selected != null}">
+
+                      <h:outputText value="#{bundleProduccion.ViewProduccionDocenteLabel_Documento}"/>
+                        <h:outputText value="#{realizaController.selectDocente.documento}" title="#{bundleProduccion.ViewProduccionDocenteTitle_Documento}"/>
+                        <h:outputText value=""/>
+                        <h:outputText value="#{bundleProduccion.ViewProduccionDocenteLabel_Nombre}"/>
+                        <h:outputText value="#{realizaController.selectDocente.nombres}" title="#{bundleProduccion.ViewProduccionDocenteTitle_Nombre}"/>
+                        <h:outputText value=""/>
+                        <h:outputText value="#{bundleProduccion.ViewProduccionDocenteLabel_Apellido}"/>
+                        <h:outputText value="#{realizaController.selectDocente.apellidos}" title="#{bundleProduccion.ViewProduccionDocenteTitle_Apellido}"/>
+                        <h:outputText value=""/>
+                        
+                        
+                        <p:outputLabel value="#{bundleProduccion.CreateConferenciaLabel_Nombre}" for="conferenciaNombre" />
+                        <p:inputText id="conferenciaNombre" value="#{realizaController.conferenciaSelect.conferenciaNombre}" title="#{bundleProduccion.CreateConferenciaTitle_Nombre}" required="true" requiredMessage="#{bundleProduccion.CreateConferenciaRequiredMessage_Nombre}">
+                            <f:validator validatorId="ValidarCampoObligatorio"/>
+                            <p:ajax event = "keyup" update="nombre" />
+                        </p:inputText>
+                        <p:message for="conferenciaNombre" id="nombre" class="message" />
+                        
+                      <p:outputLabel value="#{bundleProduccion.CreateConferenciaLabel_UbicacionTipo}" for="conferenciaUbicacionTipo" />
+                        <p:selectOneMenu id="conferenciaUbicacionTipo"  value="#{realizaController.conferenciaSelect.conferenciaUbicacionTipo}" required="true" title="#{bundleProduccion.CreateConferenciaTitle_UbicacionTipo}" requiredMessage="#{bundleProduccion.CreateConferenciaRequiredMessage_UbicacionTipo}" style="width:185px;">
+                              <f:selectItem                           
+                                           itemLabel="Nacional"
+                                           itemValue="#{0}"/>
+                             <f:selectItem                              
+                                           itemLabel="Internacional"
+                                             itemValue="#{1}"/>
+                        </p:selectOneMenu>
+                        <p:message for="conferenciaUbicacionTipo" id="tipoubicacion"  class="message" />
+                        
+             
+                        
+                        <p:outputLabel value="#{bundleProduccion.CreateConferenciaLabel_Ubicacion}" for="conferenciaUbicacion" />
+                        <p:inputText placeholder="ciudad/país" id="conferenciaUbicacion" value="#{realizaController.conferenciaSelect.conferenciaUbicacion}" title="#{bundleProduccion.CreateConferenciaTitle_Ubicacion}" required="true" requiredMessage="#{bundleProduccion.CreateConferenciaRequiredMessage_Ubicacion}">
+                            <f:validator validatorId="ValidarCampoObligatorio"/>
+                            <p:ajax event = "keyup" update="ubicacion" />
+                        </p:inputText>
+                        <p:message for="conferenciaUbicacion" id="ubicacion" class="message" />
+                        
+                         <p:outputLabel value="#{bundleProduccion.CreateConferenciaLabel_tituloArticulo}" for="tituloArticulo" />
+                        <p:inputText id="tituloArticulo" value="#{realizaController.conferenciaSelect.tituloArticulo}" title="#{bundleProduccion.CreateConferenciaTitle_tituloArticulo}" required="true" requiredMessage="#{bundleProduccion.CreateConferenciaRequiredMessage_tituloArticulo}">
+                            <f:validator validatorId="ValidarCampoObligatorio"/>
+                            <p:ajax event = "keyup" update="titulo" />
+                        </p:inputText>
+                        <p:message for="tituloArticulo" id="titulo" class="message" />
+                        
+                        
+                       
+                        <p:outputLabel value="#{bundleProduccion.CreateProduccionintelectualLabel_fecha}" for="fecha" />
+                        <p:calendar maxdate="#{realizaController.getCurrentDate()}" id="fecha" placeholder="dd-mm-aaaa" pattern="dd-MM-yyyy" value="#{realizaController.produccionIntelectualSelect.fecha}" title="#{bundleProduccion.EditProduccionintelectualTitle_fecha}" required="true" requiredMessage="#{bundleProduccion.EditProduccionintelectualRequiredMessage_fecha}" showOn="button"/>
+                         <h:outputText value=""/>
+                        <h:outputLabel for="multiple" value="Colaboradores" />
+                        <p:selectCheckboxMenu id="multiple" value="#{realizaController.colaboradores}"  label="Docentes"     converter="docenteConverter"   filter="true"  filterMathMode="contains"  multiple="true"  panelStyle="width:250px" style="width:210px;">
+                            <f:selectItems value="#{docenteController.itemsAvailableSelectMany}" var="docente" itemLabel="#{docente.nombres} #{docente.apellidos}" itemValue="#{docente}"/>
+                        </p:selectCheckboxMenu>
+                        <h:outputText value=""/>
+                    </p:panelGrid>
+                 
+                    <p:commandButton actionListener ="#{realizaController.create(cargarFormulariosController,4)}"  action ="#{realizaController.recargarConferencias()}"  value="#{bundleProduccion.Save}" update="display,:RealizaListDocenteForm:datalist,:growl" ajax="false"/>
+
+                </h:panelGroup>
+            </p:panel> 
+        </h:form>
+        <h:form>
+            <p:commandButton action="#{realizaController.cancel(cargarFormulariosController,4)}" value="#{bundleProduccion.Cancel}" ajax="false"/>
+        </h:form>
+    </h:body>
+
+
+</html>
+
+

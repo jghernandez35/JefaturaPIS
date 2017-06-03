@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProyectosinvestigacionViewDlg" widgetVar="ProyectosinvestigacionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleProyectosDirigidos.ViewProyectosinvestigacionTitle}">
+            <h:form id="ProyectosinvestigacionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{proyectosinvestigacionController.selected != null}">
+                        <h:outputText value="#{bundleProyectosDirigidos.ViewProyectosinvestigacionLabel_id}"/>
+                        <h:outputText value="#{proyectosinvestigacionController.selected.id}" title="#{bundleProyectosDirigidos.ViewProyectosinvestigacionTitle_id}"/>
+                        <h:outputText value="#{bundleProyectosDirigidos.ViewProyectosinvestigacionLabel_vri}"/>
+                        <h:outputText value="#{proyectosinvestigacionController.selected.vri}" title="#{bundleProyectosDirigidos.ViewProyectosinvestigacionTitle_vri}"/>
+                        <h:outputText value="#{bundleProyectosDirigidos.ViewProyectosinvestigacionLabel_nombre}"/>
+                        <h:outputText value="#{proyectosinvestigacionController.selected.nombre}" title="#{bundleProyectosDirigidos.ViewProyectosinvestigacionTitle_nombre}"/>
+                        <h:outputText value="#{bundleProyectosDirigidos.ViewProyectosinvestigacionLabel_fechaInicio}"/>
+                        <h:outputText value="#{proyectosinvestigacionController.selected.fechaInicio}" title="#{bundleProyectosDirigidos.ViewProyectosinvestigacionTitle_fechaInicio}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundleProyectosDirigidos.ViewProyectosinvestigacionLabel_fechaFin}"/>
+                        <h:outputText value="#{proyectosinvestigacionController.selected.fechaFin}" title="#{bundleProyectosDirigidos.ViewProyectosinvestigacionTitle_fechaFin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundleProyectosDirigidos.Close}" onclick="ProyectosinvestigacionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

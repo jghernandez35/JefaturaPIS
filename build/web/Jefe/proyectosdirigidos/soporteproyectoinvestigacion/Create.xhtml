@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SoporteproyectoinvestigacionCreateDlg" widgetVar="SoporteproyectoinvestigacionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleProyectosDirigidos.CreateSoporteproyectoinvestigacionTitle}">
+            <h:form id="SoporteproyectoinvestigacionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{soporteproyectoinvestigacionController.selected != null}">
+                        <p:outputLabel value="#{bundleProyectosDirigidos.CreateSoporteproyectoinvestigacionLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{soporteproyectoinvestigacionController.selected.id}" title="#{bundleProyectosDirigidos.CreateSoporteproyectoinvestigacionTitle_id}" required="true" requiredMessage="#{bundleProyectosDirigidos.CreateSoporteproyectoinvestigacionRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundleProyectosDirigidos.CreateSoporteproyectoinvestigacionLabel_path}" for="path" />
+                        <p:inputText id="path" value="#{soporteproyectoinvestigacionController.selected.path}" title="#{bundleProyectosDirigidos.CreateSoporteproyectoinvestigacionTitle_path}" required="true" requiredMessage="#{bundleProyectosDirigidos.CreateSoporteproyectoinvestigacionRequiredMessage_path}"/>
+                        <p:outputLabel value="#{bundleProyectosDirigidos.CreateSoporteproyectoinvestigacionLabel_proId}" for="proId" />
+                        <p:selectOneMenu id="proId" value="#{soporteproyectoinvestigacionController.selected.proId}" required="true" requiredMessage="#{bundleProyectosDirigidos.EditSoporteproyectoinvestigacionRequiredMessage_proId}">
+                            <f:selectItems value="#{proyectosinvestigacionController.itemsAvailableSelectOne}"
+                                           var="proIdItem"
+                                           itemValue="#{proIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{soporteproyectoinvestigacionController.create}" value="#{bundleProyectosDirigidos.Save}" update="display,:SoporteproyectoinvestigacionListForm:datalist,:growl" oncomplete="handleSubmit(args,'SoporteproyectoinvestigacionCreateDialog');"/>
+                    <p:commandButton value="#{bundleProyectosDirigidos.Cancel}" onclick="SoporteproyectoinvestigacionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

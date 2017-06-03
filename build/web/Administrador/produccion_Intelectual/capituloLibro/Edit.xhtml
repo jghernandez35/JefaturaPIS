@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CapituloLibroEditDlg" widgetVar="CapituloLibroEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle2.EditCapituloLibroTitle}">
+            <h:form id="CapituloLibroEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{capituloLibroController.selected != null}">
+                        <p:outputLabel value="#{bundle2.EditCapituloLibroLabel_capLibroId}" for="capLibroId" />
+                        <p:inputText id="capLibroId" value="#{capituloLibroController.selected.capLibroId}" title="#{bundle2.EditCapituloLibroTitle_capLibroId}" required="true" requiredMessage="#{bundle2.EditCapituloLibroRequiredMessage_capLibroId}"/>
+                        <p:outputLabel value="#{bundle2.EditCapituloLibroLabel_capLibroTitulo}" for="capLibroTitulo" />
+                        <p:inputText id="capLibroTitulo" value="#{capituloLibroController.selected.capLibroTitulo}" title="#{bundle2.EditCapituloLibroTitle_capLibroTitulo}" required="true" requiredMessage="#{bundle2.EditCapituloLibroRequiredMessage_capLibroTitulo}"/>
+                        <p:outputLabel value="#{bundle2.EditCapituloLibroLabel_capLibroNumero}" for="capLibroNumero" />
+                        <p:inputText id="capLibroNumero" value="#{capituloLibroController.selected.capLibroNumero}" title="#{bundle2.EditCapituloLibroTitle_capLibroNumero}" required="true" requiredMessage="#{bundle2.EditCapituloLibroRequiredMessage_capLibroNumero}"/>
+                        <p:outputLabel value="#{bundle2.EditCapituloLibroLabel_libroIsbn}" for="libroIsbn" />
+                        <p:inputText id="libroIsbn" value="#{capituloLibroController.selected.libroIsbn}" title="#{bundle2.EditCapituloLibroTitle_libroIsbn}" required="true" requiredMessage="#{bundle2.EditCapituloLibroRequiredMessage_libroIsbn}"/>
+                        <p:outputLabel value="#{bundle2.EditCapituloLibroLabel_libroNombre}" for="libroNombre" />
+                        <p:inputText id="libroNombre" value="#{capituloLibroController.selected.libroNombre}" title="#{bundle2.EditCapituloLibroTitle_libroNombre}" required="true" requiredMessage="#{bundle2.EditCapituloLibroRequiredMessage_libroNombre}"/>
+                        <p:outputLabel value="#{bundle2.EditCapituloLibroLabel_libroEdicion}" for="libroEdicion" />
+                        <p:inputText id="libroEdicion" value="#{capituloLibroController.selected.libroEdicion}" title="#{bundle2.EditCapituloLibroTitle_libroEdicion}" required="true" requiredMessage="#{bundle2.EditCapituloLibroRequiredMessage_libroEdicion}"/>
+                        <p:outputLabel value="#{bundle2.EditCapituloLibroLabel_libroEditorial}" for="libroEditorial" />
+                        <p:inputText id="libroEditorial" value="#{capituloLibroController.selected.libroEditorial}" title="#{bundle2.EditCapituloLibroTitle_libroEditorial}" required="true" requiredMessage="#{bundle2.EditCapituloLibroRequiredMessage_libroEditorial}"/>
+                        <p:outputLabel value="#{bundle2.EditCapituloLibroLabel_produccionintelectual}" for="produccionintelectual" />
+                        <p:selectOneMenu id="produccionintelectual" value="#{capituloLibroController.selected.produccionintelectual}" required="true" requiredMessage="#{bundle2.EditCapituloLibroRequiredMessage_produccionintelectual}">
+                            <f:selectItem itemLabel="#{bundle2.SelectOneMessage}"/>
+                            <f:selectItems value="#{produccionintelectualController.itemsAvailableSelectOne}"
+                                           var="produccionintelectualItem"
+                                           itemValue="#{produccionintelectualItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{capituloLibroController.update}" value="#{bundle2.Save}" update="display,:CapituloLibroListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CapituloLibroEditDialog');"/>
+                    <p:commandButton value="#{bundle2.Cancel}" onclick="CapituloLibroEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

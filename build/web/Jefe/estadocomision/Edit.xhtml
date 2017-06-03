@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EstadocomisionEditDlg" widgetVar="EstadocomisionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.comisiones.EditEstadocomisionTitle}">
+            <h:form id="EstadocomisionEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{estadocomisionController.selected != null}">
+                        <p:outputLabel value="#{bundle.comisiones.EditEstadocomisionLabel_idEstado}" for="idEstado" />
+                        <p:inputText id="idEstado" value="#{estadocomisionController.selected.idEstado}" title="#{bundle.comisiones.EditEstadocomisionTitle_idEstado}" required="true" requiredMessage="#{bundle.comisiones.EditEstadocomisionRequiredMessage_idEstado}"/>
+                        <p:outputLabel value="#{bundle.comisiones.EditEstadocomisionLabel_nombreEstado}" for="nombreEstado" />
+                        <p:inputText id="nombreEstado" value="#{estadocomisionController.selected.nombreEstado}" title="#{bundle.comisiones.EditEstadocomisionTitle_nombreEstado}" required="true" requiredMessage="#{bundle.comisiones.EditEstadocomisionRequiredMessage_nombreEstado}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{estadocomisionController.update}" value="#{bundle.comisiones.Save}" update="display,:EstadocomisionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EstadocomisionEditDialog');"/>
+                    <p:commandButton value="#{bundle.comisiones.Cancel}" onclick="EstadocomisionEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

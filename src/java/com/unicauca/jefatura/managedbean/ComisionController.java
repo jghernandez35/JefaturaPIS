@@ -51,6 +51,7 @@ public class ComisionController implements Serializable {
     private Docente selectDocente;
     
     public ComisionController() {
+        selected=new Comision();
     }
 
     public Docente getSelectDocente() {
@@ -218,6 +219,11 @@ public class ComisionController implements Serializable {
 
          
 
+    }
+    public void prepareView(Comision doc, CargarFormularioController formularioController) {
+        selected = doc;
+        formularioController.cargarVerComisionAcademicauna();
+    
     }
     public void prepareViewItemDocente(Docente selectDocent, CargarFormularioController formularioController) {
         System.out.println("el nombre del docente es:" + selectDocent.getNombres());
@@ -401,6 +407,7 @@ public class ComisionController implements Serializable {
     
     public List<Comision> comisiones(int tipo)
     {
+        
         List<Comision> aux=new ArrayList<>();
         List<Comision> comisiones=new ArrayList<>();
         comisiones=null;
@@ -410,11 +417,12 @@ public class ComisionController implements Serializable {
         {
             int auxiliar=aux.get(i).getIdTipoComisionComision().getIdTipoComision();
             System.out.println(auxiliar);
-            if(auxiliar==1)
+            //System.out.println("IDDDDDDDDDDDDD"+aux.get(i).getIdDocenteComision().getId());
+            if(auxiliar==1&& aux.get(i).getIdDocenteComision().getId().equals(selectDocente.getId()))
                 listaComisionesAcademicas.add(aux.get(i));
-            if(auxiliar==2)
+            if(auxiliar==2 && aux.get(i).getIdDocenteComision().getId().equals(selectDocente.getId()))
                 listaComisionesDeEstudio.add(aux.get(i));
-            if(auxiliar==3)
+            if(auxiliar==3 && aux.get(i).getIdDocenteComision().getId().equals(selectDocente.getId()))
                 listaComisionesAnioSabatico.add(aux.get(i));
         }
         

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <h:body>
+        <h:form id="RevistaViewForm">
+            <p:panel header="#{bundleProduccion.ViewRealizaTitle}">
+                <h:panelGroup id="display">
+
+
+
+                    <!--<p:graphicImage  library="img" name="img_revista.png"/>-->
+
+                    <p:panelGrid columns="2" rendered="#{realizaController.selected != null}">
+                        <f:facet name = "header">
+                            <h:outputText value = "Información Publicación en Conferencia"/>
+                        </f:facet>
+                        <h:outputText value="#{bundleProduccion.ViewProduccionDocenteLabel_Documento}"/>
+                        <h:outputText value="#{realizaController.selected.docId.documento}" title="#{bundleProduccion.ViewProduccionDocenteTitle_Documento}"/>
+                        <h:outputText value="#{bundleProduccion.ViewProduccionDocenteLabel_Nombre}"/>
+                        <h:outputText value="#{realizaController.selected.docId.nombres}" title="#{bundleProduccion.ViewProduccionDocenteTitle_Nombre}"/>
+                        <h:outputText value="#{bundleProduccion.ViewProduccionDocenteLabel_Apellido}"/>
+                        <h:outputText value="#{realizaController.selected.docId.apellidos}" title="#{bundleProduccion.ViewProduccionDocenteTitle_Apellido}"/>
+                        <h:outputText value="#{bundleProduccion.ViewConferenciaLabel_Nombre}"/>
+                        <h:outputText value="#{realizaController.selected.proId.conferencia.conferenciaNombre}" title="#{bundleProduccion.ViewConferenciaTitle_Nombre}"/>
+                        <h:outputText value="#{bundleProduccion.ViewConferenciaLabel_UbicacionTipo}"/>
+                        <h:outputText value="#{realizaController.selected.proId.conferencia.conferenciaUbicacionTipo()}" title="#{bundleProduccion.ViewConferenciaTitle_UbicacionTipo}"/>
+                        <h:outputText value="#{bundleProduccion.ViewConferenciaLabel_Ubicacion}"/>
+                        <h:outputText value="#{realizaController.selected.proId.conferencia.conferenciaUbicacion}" title="#{bundleProduccion.ViewConferenciaTitle_Ubicacion}"/>
+                        <h:outputText value="#{bundleProduccion.ViewConferenciaLabel_tituloArticulo}"/>
+                        <h:outputText value="#{realizaController.selected.proId.conferencia.tituloArticulo}" title="#{bundleProduccion.ViewConferenciaTitle_tituloArticulo}"/>
+                        <h:outputText value="#{bundleProduccion.ViewRealizaLabel_fecha}"/>
+                        <h:outputText value="#{realizaController.selected.proId.fecha}" title="#{bundleProduccion.ViewRealizaTitle_fecha}">
+                            <f:convertDateTime pattern="dd-MM-yyyy" />
+                        </h:outputText>
+                    </p:panelGrid>
+                    <p:commandButton action="#{cargarFormulariosController.cargarGestionProduccion()}" value="#{bundleProduccion.Atras}" ajax="false"/>
+                </h:panelGroup>
+            </p:panel>
+        </h:form>
+
+    </h:body>
+
+</html>
