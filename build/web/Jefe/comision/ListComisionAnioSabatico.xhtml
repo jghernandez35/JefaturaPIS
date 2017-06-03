@@ -20,12 +20,12 @@ and open the template in the editor.
             <h:form id="ComisionListForm">
 		 <h:panelGrid  columns="1">
 <!--                //oncomplete="#{docenteController.limpiarDocente()}"-->
-                <p:commandButton icon="ui-icon-plus"   value="#{bundleProduccion.Create}" actionListener="#{comisionController.prepareCreate(cargarFormulariosController,3)}"  ajax="false"/>
+                <p:commandButton icon="ui-icon-plus"   value="#{bundleProduccion.Create}" actionListener="#{comisionController.prepareCreate(cargarFormulariosController,2)}"  ajax="false"/>
                 
             </h:panelGrid>
                
              
-                <p:panel header="COMISIONES">
+                <p:panel header="AÑO SABATICO">
                 
                     <p:dataTable id="datalist" value="#{comisionController.comisiones(3)}" var="item"
                                  

@@ -1,70 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<!--<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
- 
-    <ui:composition>
-
-        <p:dialog id="ComisionCreateDlg" widgetVar="ComisionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.comisiones.CreateComisionTitle}">
-            <h:form id="ComisionCreateForm">
-                <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{comisionController.selected != null}">
-                        <p:outputLabel value="#{bundle.comisiones.CreateComisionLabel_idComision}" for="idComision" />
-                        <p:inputText id="idComision" value="#{comisionController.selected.idComision}" title="#{bundle.comisiones.CreateComisionTitle_idComision}" required="true" requiredMessage="#{bundle.comisiones.CreateComisionRequiredMessage_idComision}"/>
-                        <p:outputLabel value="#{bundle.comisiones.CreateComisionLabel_numeroResolucionComision}" for="numeroResolucionComision" />
-                        <p:inputText id="numeroResolucionComision" value="#{comisionController.selected.numeroResolucionComision}" title="#{bundle.comisiones.CreateComisionTitle_numeroResolucionComision}" required="true" requiredMessage="#{bundle.comisiones.CreateComisionRequiredMessage_numeroResolucionComision}"/>
-                        <p:outputLabel value="#{bundle.comisiones.CreateComisionLabel_numeroActaComision}" for="numeroActaComision" />
-                        <p:inputText id="numeroActaComision" value="#{comisionController.selected.numeroActaComision}" title="#{bundle.comisiones.CreateComisionTitle_numeroActaComision}" required="true" requiredMessage="#{bundle.comisiones.CreateComisionRequiredMessage_numeroActaComision}"/>
-                        <p:outputLabel value="#{bundle.comisiones.CreateComisionLabel_fechaSolicitudComision}" for="fechaSolicitudComision" />
-                        <p:calendar id="fechaSolicitudComision" pattern="MM/dd/yyyy" value="#{comisionController.selected.fechaSolicitudComision}" title="#{bundle.comisiones.EditComisionTitle_fechaSolicitudComision}" required="true" requiredMessage="#{bundle.comisiones.EditComisionRequiredMessage_fechaSolicitudComision}" showOn="button"/>
-                        <p:outputLabel value="#{bundle.comisiones.CreateComisionLabel_fechaInicioComision}" for="fechaInicioComision" />
-                        <p:calendar id="fechaInicioComision" pattern="MM/dd/yyyy" value="#{comisionController.selected.fechaInicioComision}" title="#{bundle.comisiones.EditComisionTitle_fechaInicioComision}" required="true" requiredMessage="#{bundle.comisiones.EditComisionRequiredMessage_fechaInicioComision}" showOn="button"/>
-                        <p:outputLabel value="#{bundle.comisiones.CreateComisionLabel_fechaFinComision}" for="fechaFinComision" />
-                        <p:calendar id="fechaFinComision" pattern="MM/dd/yyyy" value="#{comisionController.selected.fechaFinComision}" title="#{bundle.comisiones.EditComisionTitle_fechaFinComision}" required="true" requiredMessage="#{bundle.comisiones.EditComisionRequiredMessage_fechaFinComision}" showOn="button"/>
-                        <p:outputLabel value="#{bundle.comisiones.CreateComisionLabel_organizadoPorComision}" for="organizadoPorComision" />
-                        <p:inputText id="organizadoPorComision" value="#{comisionController.selected.organizadoPorComision}" title="#{bundle.comisiones.CreateComisionTitle_organizadoPorComision}" required="true" requiredMessage="#{bundle.comisiones.CreateComisionRequiredMessage_organizadoPorComision}"/>
-                        <p:outputLabel value="#{bundle.comisiones.CreateComisionLabel_descripcionComision}" for="descripcionComision" />
-                        <p:inputTextarea rows="4" cols="30" id="descripcionComision" value="#{comisionController.selected.descripcionComision}" title="#{bundle.comisiones.CreateComisionTitle_descripcionComision}" required="true" requiredMessage="#{bundle.comisiones.CreateComisionRequiredMessage_descripcionComision}"/>
-                        <p:outputLabel value="#{bundle.comisiones.CreateComisionLabel_idCiudadComision}" for="idCiudadComision" />
-                        <p:selectOneMenu id="idCiudadComision" value="#{comisionController.selected.idCiudadComision}" required="true" requiredMessage="#{bundle.comisiones.EditComisionRequiredMessage_idCiudadComision}">
-                            <f:selectItems value="#{ciudadController.itemsAvailableSelectOne}"
-                                           var="idCiudadComisionItem"
-                                           itemValue="#{idCiudadComisionItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.comisiones.CreateComisionLabel_idTipoParticipacionComision}" for="idTipoParticipacionComision" />
-                        <p:selectOneMenu id="idTipoParticipacionComision" value="#{comisionController.selected.idTipoParticipacionComision}" required="true" requiredMessage="#{bundle.comisiones.EditComisionRequiredMessage_idTipoParticipacionComision}">
-                            <f:selectItems value="#{tipoparticipacionController.itemsAvailableSelectOne}"
-                                           var="idTipoParticipacionComisionItem"
-                                           itemValue="#{idTipoParticipacionComisionItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.comisiones.CreateComisionLabel_idTipoComisionComision}" for="idTipoComisionComision" />
-                        <p:selectOneMenu id="idTipoComisionComision" value="#{comisionController.selected.idTipoComisionComision}" required="true" requiredMessage="#{bundle.comisiones.EditComisionRequiredMessage_idTipoComisionComision}">
-                            <f:selectItems value="#{tipocomisionController.itemsAvailableSelectOne}"
-                                           var="idTipoComisionComisionItem"
-                                           itemValue="#{idTipoComisionComisionItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.comisiones.CreateComisionLabel_idEstadoComision}" for="idEstadoComision" />
-                        <p:selectOneMenu id="idEstadoComision" value="#{comisionController.selected.idEstadoComision}" required="true" requiredMessage="#{bundle.comisiones.EditComisionRequiredMessage_idEstadoComision}">
-                            <f:selectItems value="#{estadocomisionController.itemsAvailableSelectOne}"
-                                           var="idEstadoComisionItem"
-                                           itemValue="#{idEstadoComisionItem}"/>
-                        </p:selectOneMenu>
-                    </p:panelGrid>
-                    <p:commandButton actionListener="#{comisionController.create}" value="#{bundle.comisiones.Save}" update="display,:ComisionListForm:datalist,:growl" oncomplete="handleSubmit(args,'ComisionCreateDialog');"/>
-                    <p:commandButton value="#{bundle.comisiones.Cancel}" onclick="ComisionCreateDialog.hide()"/>
-                </h:panelGroup>
-            </h:form>
-        </p:dialog>
-
-    </ui:composition>
-</html>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
 -->
-
-<html xmlns="http://www.w3.org/1999/xhtml"
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -72,7 +13,7 @@
 
     <h:body>
         <h:form>
-            <p:panel header="Crear Comision Academica">
+            <p:panel header="Crear Año Sabatico">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="3"  rendered="#{realizaController.selected != null}">
 
@@ -163,6 +104,7 @@
                         
                         
                         
+                        
                         <p:outputLabel value="Tipo participación" for="participación" />
                         <!--<p:inputText id="participación" value="#{comisionController.selected.idTipoParticipacionComision}" title="#{bundleProduccion.CreateRevistaTitle_nombreRevista}" required="true" requiredMessage="#{bundleProduccion.CreateRevistaRequiredMessage_nombreRevista}">
                             <f:validator validatorId="ValidarCampoObligatorio"/>
@@ -182,7 +124,7 @@
                  
                    <!-- <p:commandButton actionListener="#{comisionController.create(cargarFormulariosController,3)}"  action ="#{realizaController.recargarRevistas()}" value="#{bundleProduccion.Save}" update=":RevistasListDocenteForm:panel1:datalistRevistas" ajax="false"/>
                    -->
-                   <p:commandButton actionListener="#{comisionController.create(cargarFormulariosController,3)}" value="#{bundleProduccion.Save}" update=":RevistasListDocenteForm:panel1:datalistRevistas" ajax="false"/>
+                   <p:commandButton actionListener="#{comisionController.create(cargarFormulariosController,2)}" value="#{bundleProduccion.Save}" update=":RevistasListDocenteForm:panel1:datalistRevistas" ajax="false"/>
 
                 </h:panelGroup>
             </p:panel> 

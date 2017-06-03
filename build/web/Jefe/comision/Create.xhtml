@@ -161,18 +161,7 @@
                         </p:selectOneMenu>
                         <p:message for="Ciudad" id="nom4" class="message" />
                         
-                        <p:outputLabel value="Tipo comision" for="Tipo" />
-                       <!-- <p:inputText id="Tipo" value="#{comisionController.selected.idTipoComisionComision}" title="#{bundleProduccion.CreateRevistaTitle_nombreRevista}" required="true" requiredMessage="#{bundleProduccion.CreateRevistaRequiredMessage_nombreRevista}">
-                            <f:validator validatorId="ValidarCampoObligatorio"/>
-                            <p:ajax event = "keyup" update="nom5" />
-                        </p:inputText>-->
-                        <p:selectOneMenu id="Tipo" style="width:150px" value="#{comisionController.selected.idTipoComisionComision}">
-                            <f:selectItems value="#{tipocomisionController.itemsAvailableSelectOne}"
-                                           var="tipos"
-                                           itemValue="#{tipos}"
-                                           itemLabel="#{tipos.nombreTipoComision}"/>
-                        </p:selectOneMenu>
-                        <p:message for="Tipo" id="nom5" class="message" />
+                        
                         
                         <p:outputLabel value="Tipo participación" for="participación" />
                         <!--<p:inputText id="participación" value="#{comisionController.selected.idTipoParticipacionComision}" title="#{bundleProduccion.CreateRevistaTitle_nombreRevista}" required="true" requiredMessage="#{bundleProduccion.CreateRevistaRequiredMessage_nombreRevista}">

@@ -2,12 +2,14 @@ package com.unicauca.jefatura.managedbean;
 
 import com.unicauca.jefatura.entidades.CapituloLibro;
 import com.unicauca.jefatura.entidades.Comision;
+import static com.unicauca.jefatura.entidades.Comision_.idTipoComisionComision;
 import com.unicauca.jefatura.entidades.Conferencia;
 import com.unicauca.jefatura.entidades.Docente;
 import com.unicauca.jefatura.entidades.Libro;
 import com.unicauca.jefatura.entidades.Produccionintelectual;
 import com.unicauca.jefatura.entidades.Realiza;
 import com.unicauca.jefatura.entidades.Revista;
+import com.unicauca.jefatura.entidades.Tipocomision;
 import com.unicauca.jefatura.managedbean.util.JsfUtil;
 import com.unicauca.jefatura.managedbean.util.JsfUtil.PersistAction;
 import com.unicauca.jefatura.sessionbean.ComisionFacade;
@@ -34,11 +36,13 @@ public class ComisionController implements Serializable {
 
     @EJB
     private com.unicauca.jefatura.sessionbean.ComisionFacade ejbComisionFacade;
+    @EJB
+    private com.unicauca.jefatura.sessionbean.TipocomisionFacade ejbTipoComision;
     
     private List<Comision> listaComisionesAcademicas=new ArrayList<>();
     private List<Comision> listaComisionesDeEstudio=new ArrayList<>();
     private List<Comision> listaComisionesAnioSabatico=new ArrayList<>();
-    
+    private List<Comision> tipoComision=new ArrayList<>();
     
     private List<Comision> items = null;
     private Comision selected;
@@ -240,30 +244,16 @@ public class ComisionController implements Serializable {
         
 
         switch (tipo) {
-        /*    case 1://crear libro
-                libroSelect = new Libro();
-                libroSelect.setLibroEdicion(1);
-                formularioController.cargarCrearLibro();
-
+           case 1://crear comision de estudios
+               formularioController.cargarCrearComisionEstudios();
+                break;             
+            case 2://crear comision año sabatico
+                formularioController.cargarCrearComisionAnioSabatico();
                 break;
-            case 2://crear capitulo libro
-                capLibroselect = new CapituloLibro();
-                capLibroselect.setLibroEdicion(1);
-                capLibroselect.setCapLibroNumero(1);
-                formularioController.cargarCrearCapituloLibro();
-                break;*/
-            case 3://crear  revista
-                //revistaSelect = new Revista();
-               // revistaSelect.setNumeroEdicion(1);
-                System.out.println("Se creo la revista");
+            case 3://crear  comision academica
                 formularioController.cargarCrearComision();
                 break;
-           /* case 4://crear conferencia
-                conferenciaSelect = new Conferencia();
-                System.out.println("Se creo la conferencias");
-                formularioController.cargarCrearConferencia();
-                break;
-*/
+         
         }
 
         return selected;
@@ -276,39 +266,36 @@ public class ComisionController implements Serializable {
         //idProduccionNueva = produccionIntelectualSelect.getId();
         System.out.println("Hola comision1");
         switch (tipo) {
-            /*case 1://crear libro
-                libroSelect.setLibroId(idProduccionNueva);
-                libroSelect.setProduccionintelectual(produccionIntelectualSelect);
-                ejbLibroFacade.create(libroSelect);
-                produccionIntelectualSelect.setLibro(libroSelect);
-                break;
-            case 2://crear capitulo libro
-                capLibroselect.setCapLibroId(idProduccionNueva);
-                capLibroselect.setProduccionintelectual(produccionIntelectualSelect);
-                ejbCapituloLibroFacade.create(capLibroselect);
-                produccionIntelectualSelect.setCapituloLibro(capLibroselect);
-                break;*/
-            
-            case 3://crear  revista
-                //revistaSelect.setId(idProduccionNueva);
-                //revistaSelect.setProduccionintelectual(produccionIntelectualSelect);
-                //ejbRevistaFacade.create(revistaSelect);
-                //produccionIntelectualSelect.setRevista(revistaSelect);
+            case 1://crear comision de estudios
+               List<Tipocomision> lista= new ArrayList<>();
+                lista=ejbTipoComision.findAll();        
+                selected.setIdTipoComisionComision(lista.get(1)); // obtiene la comision de estudios de la tabla tipoComision
                 selected.setIdDocenteComision(selectDocente);
+                
+                ejbComisionFacade.create(selected);
+                System.out.println("Hola comision2");
+                
+                break;
+            case 2://crear año sabatico
+                List<Tipocomision> lista1= new ArrayList<>();
+                lista1=ejbTipoComision.findAll();        
+                selected.setIdTipoComisionComision(lista1.get(2));// Obtiene la comision Año sabatico de la tabla tipoComision
+                selected.setIdDocenteComision(selectDocente);
+                
                 ejbComisionFacade.create(selected);
                 System.out.println("Hola comision2");
                 break;
+            
+            case 3://crear  comision academica
+                List<Tipocomision> lista2= new ArrayList<>();
+                lista2=ejbTipoComision.findAll();        
+                selected.setIdTipoComisionComision(lista2.get(0));// Obtiene la comision Academica de la tabla  tipoComision
+                selected.setIdDocenteComision(selectDocente);
                 
-                
-           /* case 4://crear conferencia
-                conferenciaSelect.setConferenciaId(idProduccionNueva);
-                conferenciaSelect.setProduccionintelectual(produccionIntelectualSelect);
-
-                ejbConferenciaFacade.create(conferenciaSelect);
-                produccionIntelectualSelect.setConferencia(conferenciaSelect);
+                ejbComisionFacade.create(selected);
+                System.out.println("Hola comision2");
                 break;
-*/
-        }
+       }
 
        // selected.setProId(produccionIntelectualSelect);
         selected.setIdDocenteComision(selectDocente);
@@ -345,6 +332,8 @@ public class ComisionController implements Serializable {
     {
         List<Comision> aux=new ArrayList<>();
         List<Comision> comisiones=new ArrayList<>();
+        comisiones=null;
+        aux=null;
         aux=ejbComisionFacade.findAll();
         for(int i=0;i<aux.size();i++)
         {
