@@ -82,6 +82,13 @@ and open the template in the editor.
                             </f:facet>
                             <h:outputText value="#{item.organizadoPorComision}"/>
                         </p:column>
+                        
+                        <p:column filterBy="#{item.idEstadoComision.nombreEstado}" headerText="#{bundle.ListDocenteTitle_documento}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="Estado Comision"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idEstadoComision.nombreEstado}"/>
+                        </p:column>
 
                         <p:column headerText="COMISIONES" style=" text-align: center;">
 
