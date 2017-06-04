@@ -233,7 +233,7 @@ public class ComisionController implements Serializable {
     public void prepareView(Comision doc, CargarFormularioController formularioController) {
         selected = doc;
         formularioController.cargarVerComisionAcademicauna();
-    limpiarComision();
+        //limpiarComision();
     }
     public void prepareViewItemDocente(Docente selectDocent, CargarFormularioController formularioController) {
         System.out.println("el nombre del docente es:" + selectDocent.getNombres());
