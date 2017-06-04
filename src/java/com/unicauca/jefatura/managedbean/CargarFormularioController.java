@@ -253,4 +253,10 @@ public class CargarFormularioController implements Serializable {
        public void cargarCrearComisionAnioSabatico() {//redirecciona a la interfaz de crear una comision Año sabatico
         this.ruta = "/Jefe/comision/CreateAnioSabatico.xhtml";
     }
+    public void cargarVerComision() {        //Carga una comision para modificarla
+        
+        System.out.println("metodo cargar editar");
+        this.ruta = "/Jefe/comision/Edit.xhtml";
+        
+    }
 }

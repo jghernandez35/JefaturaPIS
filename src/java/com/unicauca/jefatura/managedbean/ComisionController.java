@@ -2,7 +2,6 @@ package com.unicauca.jefatura.managedbean;
 
 import com.unicauca.jefatura.entidades.CapituloLibro;
 import com.unicauca.jefatura.entidades.Comision;
-import static com.unicauca.jefatura.entidades.Comision_.idTipoComisionComision;
 import com.unicauca.jefatura.entidades.Conferencia;
 import com.unicauca.jefatura.entidades.Docente;
 import com.unicauca.jefatura.entidades.Libro;
@@ -131,7 +130,7 @@ public class ComisionController implements Serializable {
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle.comisiones").getString("ComisionUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ComisionUpdated"));
     }
 
     public void destroy() {
@@ -253,6 +252,13 @@ public class ComisionController implements Serializable {
         System.out.println("el nombre del docente es:" + selectDocent.getNombres());
         this.selectDocente = selectDocent;
         formularioController.cargarVerComisionAnioSabatico();
+    }
+    
+    public void prepareUpdate(Comision item, CargarFormularioController formularioController) {
+        //System.out.println("el nombre del docente es:" + selectDocent.getNombres());
+        selected=item;
+        formularioController.cargarVerComision();
+        
     }
     
 
