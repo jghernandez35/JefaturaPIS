@@ -9,21 +9,63 @@
             <h:form id="ComisionEditForm">
                  <p:panel header="#{bundle.EditComisionTitle}">
                     <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{comisionController.selected != null}">                      
+                    <p:panelGrid columns="3" rendered="#{comisionController.selected != null}">   
+                        
+                        <h:outputText value="#{bundleProduccion.ViewProduccionDocenteLabel_Documento}"/>
+                        <h:outputText value="#{comisionController.selectDocente.documento}" title="#{bundleProduccion.ViewProduccionDocenteTitle_Documento}"/>
+                        <h:outputText value=""/>
+                        <h:outputText value="#{bundleProduccion.ViewProduccionDocenteLabel_Nombre}"/>
+                        <h:outputText value="#{comisionController.selectDocente.nombres}" title="#{bundleProduccion.ViewProduccionDocenteTitle_Nombre}"/>
+                        <h:outputText value=""/>
+                        <h:outputText value="#{bundleProduccion.ViewProduccionDocenteLabel_Apellido}"/>
+                        <h:outputText value="#{comisionController.selectDocente.apellidos}" title="#{bundleProduccion.ViewProduccionDocenteTitle_Apellido}"/>
+                        <h:outputText value=""/>
+                        
                         <p:outputLabel value="#{bundle.EditComisionLabel_numeroResolucionComision}" for="numeroResolucionComision" />
-                        <p:inputText id="numeroResolucionComision" value="#{comisionController.selected.numeroResolucionComision}" title="#{bundle.EditComisionTitle_numeroResolucionComision}" required="true" requiredMessage="#{bundle.EditComisionRequiredMessage_numeroResolucionComision}"/>
+                        <p:inputText id="numeroResolucionComision" value="#{comisionController.selected.numeroResolucionComision}" title="#{bundle.EditComisionTitle_numeroResolucionComision}" required="true" requiredMessage="#{bundle.EditComisionRequiredMessage_numeroResolucionComision}">
+                        <f:validator validatorId="ValidarCampoObligatorio"/>
+                        <f:validator validatorId="ValidarCampoMaximo30Caracteres"/>
+                        <p:ajax event = "keyup" update="nom" />
+                        </p:inputText>
+                        <p:message for="numeroResolucionComision" id="nom" class="message" />
+                        
                         <p:outputLabel value="#{bundle.EditComisionLabel_numeroActaComision}" for="numeroActaComision" />
-                        <p:inputText id="numeroActaComision" value="#{comisionController.selected.numeroActaComision}" title="#{bundle.EditComisionTitle_numeroActaComision}" required="true" requiredMessage="#{bundle.EditComisionRequiredMessage_numeroActaComision}"/>
+                        <p:inputText id="numeroActaComision" value="#{comisionController.selected.numeroActaComision}" title="#{bundle.EditComisionTitle_numeroActaComision}" required="true" requiredMessage="#{bundle.EditComisionRequiredMessage_numeroActaComision}">
+                            <f:validator validatorId="ValidarCampoObligatorio"/>
+                            <f:validator validatorId="ValidarCampoMaximo30Caracteres"/>
+                            <p:ajax event = "keyup" update="ned" />
+                           <!-- <p:keyFilter regEx="/[\d]/" />-->
+                        </p:inputText>
+                        <p:message for="numeroActaComision" id="ned" class="message" />
+                            
                         <p:outputLabel value="#{bundle.EditComisionLabel_fechaSolicitudComision}" for="fechaSolicitudComision" />
                         <p:calendar id="fechaSolicitudComision" pattern="MM/dd/yyyy" value="#{comisionController.selected.fechaSolicitudComision}" title="#{bundle.EditComisionTitle_fechaSolicitudComision}" required="true" requiredMessage="#{bundle.EditComisionRequiredMessage_fechaSolicitudComision}" showOn="button"/>
+                        <p:message for="fechaSolicitudComision" id="ned1" class="message" />
+                        
                         <p:outputLabel value="#{bundle.EditComisionLabel_fechaInicioComision}" for="fechaInicioComision" />
                         <p:calendar id="fechaInicioComision" pattern="MM/dd/yyyy" value="#{comisionController.selected.fechaInicioComision}" title="#{bundle.EditComisionTitle_fechaInicioComision}" required="true" requiredMessage="#{bundle.EditComisionRequiredMessage_fechaInicioComision}" showOn="button"/>
+                       <p:message for="fechaInicioComision" id="ned2" class="message" />
+                        
                         <p:outputLabel value="#{bundle.EditComisionLabel_fechaFinComision}" for="fechaFinComision" />
                         <p:calendar id="fechaFinComision" pattern="MM/dd/yyyy" value="#{comisionController.selected.fechaFinComision}" title="#{bundle.EditComisionTitle_fechaFinComision}" required="true" requiredMessage="#{bundle.EditComisionRequiredMessage_fechaFinComision}" showOn="button"/>
+                        <p:message for="fechaFinComision" id="ned3" class="message"/>
+                        
                         <p:outputLabel value="#{bundle.EditComisionLabel_organizadoPorComision}" for="organizadoPorComision" />
-                        <p:inputText id="organizadoPorComision" value="#{comisionController.selected.organizadoPorComision}" title="#{bundle.EditComisionTitle_organizadoPorComision}" required="true" requiredMessage="#{bundle.EditComisionRequiredMessage_organizadoPorComision}"/>
+                        <p:inputText id="organizadoPorComision" value="#{comisionController.selected.organizadoPorComision}" title="#{bundle.EditComisionTitle_organizadoPorComision}" required="true" requiredMessage="#{bundle.EditComisionRequiredMessage_organizadoPorComision}">
+                        <f:validator validatorId="ValidarCampoObligatorio"/>
+                            <f:validator validatorId="ValidarCampoMaximo30Caracteres"/>
+                            <p:ajax event = "keyup" update="nom1" />
+                        </p:inputText>
+                        <p:message for="organizadoPorComision" id="nom1" class="message" />
+                        
                         <p:outputLabel value="#{bundle.EditComisionLabel_descripcionComision}" for="descripcionComision" />
-                        <p:inputTextarea rows="4" cols="30" id="descripcionComision" value="#{comisionController.selected.descripcionComision}" title="#{bundle.EditComisionTitle_descripcionComision}" required="true" requiredMessage="#{bundle.EditComisionRequiredMessage_descripcionComision}"/>                 
+                        <p:inputTextarea rows="4" cols="30" id="descripcionComision" value="#{comisionController.selected.descripcionComision}" title="#{bundle.EditComisionTitle_descripcionComision}" required="true" requiredMessage="#{bundle.EditComisionRequiredMessage_descripcionComision}">                 
+                        <f:validator validatorId="ValidarCampoMaximo800Caracteres"/>
+                            <f:validator validatorId="ValidarCampoObligatorio"/>
+                            <p:ajax event = "keyup" update="nom2" />
+                        </p:inputTextarea>
+                        <p:message for="descripcionComision" id="nom2" class="message" />
+                        
                         <p:outputLabel value="#{bundle.EditComisionLabel_EstadoComision}" for="EstadoComision" />                        
                         <p:selectOneMenu id="EstadoComision" value="#{comisionController.selected.idEstadoComision}" required="true" requiredMessage="#{bundle.EditComisionRequiredMessage_EstadoComision}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -33,6 +75,8 @@
                                            itemLabel="#{EstadoComisionItem.nombreEstado}"
                                            />
                         </p:selectOneMenu>
+                        <p:message for="EstadoComision" id="nom3" class="message" />
+                        
                         <p:outputLabel value="#{bundle.EditComisionLabel_CiudadComision}" for="CiudadComision" />
                         <p:selectOneMenu id="CiudadComision" value="#{comisionController.selected.idCiudadComision}" required="true" requiredMessage="#{bundle.EditComisionRequiredMessage_CiudadComision}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -42,6 +86,8 @@
                                            itemLabel="#{CiudadComisionItem.nombreCiudad}"
                                            />
                         </p:selectOneMenu>
+                        <p:message for="CiudadComision" id="nom4" class="message" />
+                        
                         <p:outputLabel value="#{bundle.EditComisionLabel_TipoParticipacionComision}" for="TipoParticipacionComision" />
                         <p:selectOneMenu id="TipoParticipacionComision" value="#{comisionController.selected.idTipoParticipacionComision}" required="true" requiredMessage="#{bundle.EditComisionRequiredMessage_TipoParticipacionComision}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -51,6 +97,8 @@
                                            itemLabel="#{TipoParticipacionComisionItem.nombreTipoParticipacion}"
                                            />
                         </p:selectOneMenu>
+                        <p:message for="TipoParticipacionComision" id="nom6" class="message" />
+                        
                         <p:outputLabel value="#{bundle.EditComisionLabel_TipoComisionComision}" for="TipoComisionComision" />
                         <p:selectOneMenu id="TipoComisionComision" value="#{comisionController.selected.idTipoComisionComision}" required="true" requiredMessage="#{bundle.EditComisionRequiredMessage_TipoComisionComision}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

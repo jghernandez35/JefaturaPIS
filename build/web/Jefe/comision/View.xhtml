@@ -13,35 +13,46 @@
             <p:panel header="Ver comision">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{comisionController.selected != null}">
-                        <h:outputText value=" N° Resolucion"/>
-                        <h:outputText value="#{comisionController.selected.numeroResolucionComision}" />
-                        <h:outputText value="N° Acta"/>
-                        <h:outputText value="#{comisionController.selected.numeroActaComision}" />
-                        <h:outputText value="Fecha de solicitud"/>
-                        <h:outputText value="#{comisionController.selected.fechaSolicitudComision}">
+                        
+                        <h:outputText value="#{bundleProduccion.ViewProduccionDocenteLabel_Documento}" style="font-weight:bold"/>
+                        <h:outputText value="#{comisionController.selectDocente.documento}"  title="#{bundleProduccion.ViewProduccionDocenteTitle_Documento}"/>
+                        <h:outputText value="#{bundleProduccion.ViewProduccionDocenteLabel_Nombre}" style="font-weight:bold"/>
+                        <h:outputText value="#{comisionController.selectDocente.nombres}" title="#{bundleProduccion.ViewProduccionDocenteTitle_Nombre}"/>
+                        <h:outputText value="#{bundleProduccion.ViewProduccionDocenteLabel_Apellido}" style="font-weight:bold"/>
+                        <h:outputText value="#{comisionController.selectDocente.apellidos}" title="#{bundleProduccion.ViewProduccionDocenteTitle_Apellido}"/>
+                        
+                        <p:outputLabel value="#{bundle.EditComisionLabel_numeroResolucionComision}" for="numeroResolucionComision" />
+                        <h:outputText value="#{comisionController.selected.numeroResolucionComision}" id="numeroResolucionComision" />
+                        <p:outputLabel value="#{bundle.EditComisionLabel_numeroActaComision}" for="numeroActaComision" />
+                        <h:outputText value="#{comisionController.selected.numeroActaComision}" id="numeroActaComision"/>
+                        <p:outputLabel value="#{bundle.EditComisionLabel_fechaSolicitudComision}" for="fechaSolicitudComision" />
+                        <h:outputText value="#{comisionController.selected.fechaSolicitudComision}" id="fechaSolicitudComision">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
-                        <h:outputText value="Fecha de inicio"/>
-                        <h:outputText value="#{comisionController.selected.fechaInicioComision}" >
+                        <p:outputLabel value="#{bundle.EditComisionLabel_fechaInicioComision}"  />
+                         <h:outputText value="#{comisionController.selected.fechaInicioComision}" >
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
-                        <h:outputText value="Fecha de finalización"/>
+                        <p:outputLabel value="#{bundle.EditComisionLabel_fechaFinComision}"  />
                         <h:outputText value="#{comisionController.selected.fechaFinComision}" >
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
-                        <h:outputText value="Organizado por"/>
-                        <h:outputText value="#{comisionController.selected.organizadoPorComision}" />
-                        <h:outputText value="Descripción"/>
-                        <h:outputText value="#{comisionController.selected.descripcionComision}" />
-                      <!--  <h:outputText value="#{bundle.comisiones.ViewComisionLabel_idCiudadComision}"/>
-                        <h:outputText value="#{comisionController.selected.idCiudadComision}" title="#{bundle.comisiones.ViewComisionTitle_idCiudadComision}"/>
-                        <h:outputText value="#{bundle.comisiones.ViewComisionLabel_idTipoParticipacionComision}"/>
-                        <h:outputText value="#{comisionController.selected.idTipoParticipacionComision}" title="#{bundle.comisiones.ViewComisionTitle_idTipoParticipacionComision}"/>
-                        <h:outputText value="#{bundle.comisiones.ViewComisionLabel_idTipoComisionComision}"/>
-                        <h:outputText value="#{comisionController.selected.idTipoComisionComision}" title="#{bundle.comisiones.ViewComisionTitle_idTipoComisionComision}"/>
-                        <h:outputText value="#{bundle.comisiones.ViewComisionLabel_idEstadoComision}"/>
-                        <h:outputText value="#{comisionController.selected.idEstadoComision}" title="#{bundle.comisiones.ViewComisionTitle_idEstadoComision}"/>
-                    -->
+                        <p:outputLabel value="#{bundle.EditComisionLabel_organizadoPorComision}" for="organizadoPorComision" />
+                        <h:outputText value="#{comisionController.selected.organizadoPorComision}" id="organizadoPorComision"/>
+                       <p:outputLabel value="#{bundle.EditComisionLabel_descripcionComision}" for="descripcionComision" />
+                         <h:outputText value="#{comisionController.selected.descripcionComision}" id="descripcionComision"/>
+                       <p:outputLabel value="#{bundle.EditComisionLabel_CiudadComision}" for="CiudadComision" />                      
+                       <h:outputText value="#{comisionController.selected.idCiudadComision.nombreCiudad}" id="CiudadComision"/>
+                        
+                       
+                        
+                        <p:outputLabel value="#{bundle.EditComisionLabel_TipoParticipacionComision}" for="TipoParticipacionComision" />
+                        <h:outputText value="#{comisionController.selected.idTipoParticipacionComision.nombreTipoParticipacion}" id="TipoParticipacionComision"/>
+                        <p:outputLabel value="#{bundle.EditComisionLabel_TipoComisionComision}" for="TipoComisionComision" />
+                        <h:outputText value="#{comisionController.selected.idTipoComisionComision.nombreTipoComision}" id="TipoComisionComision" />
+                       <p:outputLabel value="#{bundle.EditComisionLabel_EstadoComision}" for="EstadoComision" />                        
+                       <h:outputText value="#{comisionController.selected.idEstadoComision.nombreEstado}" id="EstadoComision" />
+                   
                         </p:panelGrid>
                     <p:commandButton value="cerrar" actionListener="#{cargarFormulariosController.cargarGestionComision()}"/>
                 </h:panelGroup>
