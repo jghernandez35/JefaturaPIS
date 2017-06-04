@@ -111,12 +111,23 @@ public class ComisionController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
+    
+    public void cancel(CargarFormularioController formularioController) {
+        limpiarComision();
+        formularioController.cargarGestionComision();
+    }
+    
+    public void limpiarComision()
+    {
+    selected=null;
+    }
 
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle.comisiones").getString("ComisionCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        limpiarComision();
     }
 
     public void update() {
@@ -223,7 +234,7 @@ public class ComisionController implements Serializable {
     public void prepareView(Comision doc, CargarFormularioController formularioController) {
         selected = doc;
         formularioController.cargarVerComisionAcademicauna();
-    
+    limpiarComision();
     }
     public void prepareViewItemDocente(Docente selectDocent, CargarFormularioController formularioController) {
         System.out.println("el nombre del docente es:" + selectDocent.getNombres());
@@ -403,12 +414,15 @@ public class ComisionController implements Serializable {
              //   break;
 
         }
+        limpiarComision();
+        formularioController.cargarGestionComision();
 
     }
     
     public List<Comision> comisiones(int tipo)
     {
-        
+        limpiarComision();
+  
         List<Comision> aux=new ArrayList<>();
         List<Comision> comisiones=new ArrayList<>();
         comisiones=null;

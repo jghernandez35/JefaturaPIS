@@ -20,8 +20,8 @@ and open the template in the editor.
             
             <h:form id="ComisionListForm">
 		 <h:panelGrid  columns="1">
-<!--                //oncomplete="#{docenteController.limpiarDocente()}"-->
-                <p:commandButton icon="ui-icon-plus"   value="#{bundleProduccion.Create}" actionListener="#{comisionController.prepareCreate(cargarFormulariosController,3)}"  ajax="false"/>
+                    
+                     <p:commandButton icon="ui-icon-plus"   value="#{bundleProduccion.Create}" actionListener="#{comisionController.prepareCreate(cargarFormulariosController,3)}" oncomplete="#{comisionController.limpiarComision()}"  ajax="false"/>
                 
             </h:panelGrid>
                
