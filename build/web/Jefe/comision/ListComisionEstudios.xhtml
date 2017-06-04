@@ -89,13 +89,16 @@ and open the template in the editor.
                             <h:outputText value="#{item.idEstadoComision.nombreEstado}"/>
                         </p:column>
 
-                        <p:column headerText="COMISIONES" style=" text-align: center;">
+                        <p:column headerText="Acciones" style=" text-align: center;">
 
                             <p:commandLink title="Ver"  action="#{comisionController.prepareView(item,cargarFormulariosController )}" ajax="false" >                                    
                                 <p:graphicImage  library="img" name="b_view.png"/>
                             </p:commandLink>
                             <p:spacer width="1" height="22" style="position: relative; bottom: -5px;background-color: #A8A8A8; margin-left: 10px;margin-right: 10px" />
                             
+                             <p:commandLink title="Editar" style="margin-left: 5px;" action="#{comisionController.prepareUpdate(item, cargarFormulariosController)}" ajax="false">                                    
+                                <p:graphicImage  library="img" name="b_edit.png"/>
+                            </p:commandLink>  
                            
                         </p:column>
                         
