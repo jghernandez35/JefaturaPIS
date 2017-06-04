@@ -421,18 +421,22 @@ public class ComisionController implements Serializable {
 
         }
         limpiarComision();
-        formularioController.cargarGestionComision();
 
     }
     
     public List<Comision> comisiones(int tipo)
     {
+        listaComisionesAcademicas.clear();
+        listaComisionesDeEstudio.clear();
+        listaComisionesAnioSabatico.clear();
         limpiarComision();
   
         List<Comision> aux=new ArrayList<>();
         List<Comision> comisiones=new ArrayList<>();
-        comisiones=null;
-        aux=null;
+        comisiones.clear();
+        //comisiones=null;
+        //aux=null;
+        aux.clear();
         aux=ejbComisionFacade.findAll();
         for(int i=0;i<aux.size();i++)
         {
@@ -448,12 +452,13 @@ public class ComisionController implements Serializable {
         }
         
         if (tipo==1)
-            comisiones= listaComisionesAcademicas;
+           comisiones= listaComisionesAcademicas;
+        
         if(tipo==2)
            comisiones= listaComisionesDeEstudio;
         if(tipo==3)
             comisiones= listaComisionesAnioSabatico;
-        
+              
         return comisiones;
     }
 }

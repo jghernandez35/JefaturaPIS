@@ -18,24 +18,24 @@ and open the template in the editor.
 
         <h:body>
             
-            <h:form id="ComisionListForm">
-		 <h:panelGrid  columns="1">
+            <h:form id="ComisionListForm">            
+                    <h:panelGrid  columns="1">
                     
-                     <p:commandButton icon="ui-icon-plus"   value="#{bundleProduccion.Create}" actionListener="#{comisionController.prepareCreate(cargarFormulariosController,3)}" oncomplete="#{comisionController.limpiarComision()}"  ajax="false"/>
+                        <p:commandButton icon="ui-icon-plus"   value="#{bundleProduccion.Create}" actionListener="#{comisionController.prepareCreate(cargarFormulariosController,3)}"  ajax="false" update="ComisionListForm"/>
                 
-            </h:panelGrid>
+                    </h:panelGrid>
                
-             
+              
                 <p:panel header="COMISIONES ACADEMICAS">
                 
-                    <p:dataTable id="datalist" value="#{comisionController.comisiones(1)}" var="item"
+                    <p:dataTable id="datalist" value="#{comisionController.comisiones(1)}" var="item" 
                                  
                                  paginator="true"
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  emptyMessage="No hay comisiones con este criterio"
-                                 widgetVar="DocenteListDialog"
+                                 widgetVar="ComisionListDialog"                                 
                                  >
                         
                        <f:facet name="header">
