@@ -1,13 +1,7 @@
 package com.unicauca.jefatura.managedbean;
 
-import com.unicauca.jefatura.entidades.CapituloLibro;
 import com.unicauca.jefatura.entidades.Comision;
-import com.unicauca.jefatura.entidades.Conferencia;
 import com.unicauca.jefatura.entidades.Docente;
-import com.unicauca.jefatura.entidades.Libro;
-import com.unicauca.jefatura.entidades.Produccionintelectual;
-import com.unicauca.jefatura.entidades.Realiza;
-import com.unicauca.jefatura.entidades.Revista;
 import com.unicauca.jefatura.entidades.Tipocomision;
 import com.unicauca.jefatura.managedbean.util.JsfUtil;
 import com.unicauca.jefatura.managedbean.util.JsfUtil.PersistAction;
@@ -49,7 +43,7 @@ public class ComisionController implements Serializable {
     private List<Comision> items = null;
     private Comision selected;
     private Docente selectDocente;
-    
+
     public ComisionController() {
         selected=new Comision();
     }
@@ -339,7 +333,6 @@ public class ComisionController implements Serializable {
        // selected.setProId(produccionIntelectualSelect);
         selected.setIdDocenteComision(selectDocente);
         
-     System.out.println("Hola comision3");
 
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ComisionCreated"));
           
@@ -361,74 +354,25 @@ public class ComisionController implements Serializable {
 
         }
           }
-              /*
-            
+              
         switch (tipo) {
-            case 1://crear comision de estudios
-               List<Tipocomision> lista= new ArrayList<>();
-                lista=ejbTipoComision.findAll();        
-                selected.setIdTipoComisionComision(lista.get(1)); // obtiene la comision de estudios de la tabla tipoComision
-                selected.setIdDocenteComision(selectDocente);
-                
-                ejbComisionFacade.create(selected);
-                System.out.println("Hola comision2");
-                
-                break;
-            case 2://crear año sabatico
-                List<Tipocomision> lista1= new ArrayList<>();
-                lista1=ejbTipoComision.findAll();        
-                selected.setIdTipoComisionComision(lista1.get(2));// Obtiene la comision Año sabatico de la tabla tipoComision
-                selected.setIdDocenteComision(selectDocente);
-                
-                ejbComisionFacade.create(selected);
-                System.out.println("Hola comision2");
-                break;
-            
-            case 3://crear  comision academica
-                List<Tipocomision> lista2= new ArrayList<>();
-                lista2=ejbTipoComision.findAll();        
-                selected.setIdTipoComisionComision(lista2.get(0));// Obtiene la comision Academica de la tabla  tipoComision
-                selected.setIdDocenteComision(selectDocente);
-                
-                ejbComisionFacade.create(selected);
-                System.out.println("Hola comision2");
-                break;
-       }
-
-       // selected.setProId(produccionIntelectualSelect);
-        selected.setIdDocenteComision(selectDocente);
-        
-     System.out.println("Hola comision3");
-
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("RealizaCreated"));
-
-        if (!JsfUtil.isValidationFailed()) {
-            items = null;    // Invalidate list of items to trigger re-query.
-            items = null;
-
-        }*/
-        switch (tipo) {
-            case 1://crear libro
+            case 1://ver comisiones de estudio
                 formularioController.cargarVerComisionEstudio();
 
                 break;
-            case 2://crear capitulo libro
+            case 2://ver comisiones de año sabatico
                 formularioController.cargarVerComisionAnioSabatico();
                 break;
-            case 3://crear  revista
+            case 3://ver comisiones academicas
                 formularioController.cargarVerComisionAcademica();
                 break;
-         //   case 4://crear conferencia
-           //     formularioController.cargarVerConferenciasDocente();
-             //   break;
-
         }
         limpiarComision();
 
     }
     
-    public List<Comision> comisiones(int tipo)
-    {
+    public List<Comision> comisiones(int tipo)//Este metodo permite listar las comisiones de un docente en
+    {                                         //particular
         listaComisionesAcademicas.clear();
         listaComisionesDeEstudio.clear();
         listaComisionesAnioSabatico.clear();
@@ -456,15 +400,15 @@ public class ComisionController implements Serializable {
         }
         
         if (tipo==1)
-           comisiones= listaComisionesAcademicas;
+           comisiones= listaComisionesAcademicas;//Lista de comisiones academicas
         
         if(tipo==2)
-           comisiones= listaComisionesDeEstudio;
+           comisiones= listaComisionesDeEstudio;//Lista de comisiones de estudio
         if(tipo==3)
-            comisiones= listaComisionesAnioSabatico;
+            comisiones= listaComisionesAnioSabatico;// Lista de comisiones de año sabatico
         if(tipo==4)
         {
-        comisiones=listaComisionesGeneral ;
+        comisiones=listaComisionesGeneral ; //Lista de todas las comisiones
         }
             
         

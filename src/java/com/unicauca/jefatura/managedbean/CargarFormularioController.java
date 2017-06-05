@@ -216,6 +216,7 @@ public class CargarFormularioController implements Serializable {
     }    
 	//GESTION DE PROYECTOS JOSE HERNANDEZ  
     
+        //COMISIONES DAVID ERAZO - DIANA SANCHEZ
      public void cargarComision() {
         this.ruta = "/Jefe/comision/List.xhtml";
     }
