@@ -9,7 +9,7 @@
 
     <h:body>
         <h:form>
-            <p:panel header="Crear Comision Academica">
+            <p:panel header="CREAR COMISION ACADEMICA">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="3"  rendered="#{comisionController.selected != null}">
 
@@ -42,24 +42,24 @@
                         <p:message for="numeroActaComision" id="ned" class="message" />
                         
                          <p:outputLabel value="#{bundle.EditComisionLabel_fechaSolicitudComision}" for="fechaSolicitudComision" />
-                        <p:calendar  id="fechaSolicitudComision" placeholder="dd-mm-aaaa" pattern="dd-MM-yyyy" value="#{comisionController.selected.fechaSolicitudComision}" title="#{bundleProduccion.EditProduccionintelectualTitle_fecha}" required="true" requiredMessage="#{bundleProduccion.EditProduccionintelectualRequiredMessage_fecha}" showOn="button"/>
+                        <p:calendar  id="fechaSolicitudComision" placeholder="dd-mm-aaaa" pattern="dd-MM-yyyy" value="#{comisionController.selected.fechaSolicitudComision}" title="#{bundleProduccion.EditProduccionintelectualTitle_fecha}" required="true" requiredMessage="Fecha de solicitud es obligatoria" showOn="button"/>
                          <p:message for="fechaSolicitudComision" id="ned1" class="message" />
                          
                          <p:outputLabel value="#{bundle.EditComisionLabel_fechaInicioComision}" for="fechaInicioComision" />
-                        <p:calendar  id="fechaInicioComision" placeholder="dd-mm-aaaa" pattern="dd-MM-yyyy" value="#{comisionController.selected.fechaInicioComision}" title="#{bundleProduccion.EditProduccionintelectualTitle_fecha}" required="true" requiredMessage="#{bundleProduccion.EditProduccionintelectualRequiredMessage_fecha}" showOn="button"/>
+                        <p:calendar  id="fechaInicioComision" placeholder="dd-mm-aaaa" pattern="dd-MM-yyyy" value="#{comisionController.selected.fechaInicioComision}"  required="true" requiredMessage="Fecha de inicio es obligatoria" showOn="button"/>
                          <p:message for="fechaInicioComision" id="ned2" class="message" />
                          
                          <p:outputLabel value="#{bundle.EditComisionLabel_fechaFinComision}" for="fechaFinComision" />
-                        <p:calendar  id="fechaFinComision" placeholder="dd-mm-aaaa" pattern="dd-MM-yyyy" value="#{comisionController.selected.fechaFinComision}" title="#{bundleProduccion.EditProduccionintelectualTitle_fecha}" required="true" requiredMessage="#{bundleProduccion.EditProduccionintelectualRequiredMessage_fecha}" showOn="button"/>
+                        <p:calendar  id="fechaFinComision" placeholder="dd-mm-aaaa" pattern="dd-MM-yyyy" value="#{comisionController.selected.fechaFinComision}"  required="true" requiredMessage="Fecha de fin es obligatoria" showOn="button"/>
                         <p:message for="fechaFinComision" id="ned3" class="message"/>
                         
                         <p:outputLabel value="#{bundle.EditComisionLabel_organizadoPorComision}" for="organizadoPorComision" />
-                       <p:inputText id="organizadoPorComision" value="#{comisionController.selected.organizadoPorComision}" title="#{bundleProduccion.CreateRevistaTitle_nombreRevista}" required="true" requiredMessage="#{bundleProduccion.CreateRevistaRequiredMessage_nombreRevista}">
+                       <p:inputText id="organizadoPorComision" value="#{comisionController.selected.organizadoPorComision}" title="#{bundleProduccion.CreateRevistaTitle_nombreRevista}" required="true" requiredMessage="es obligatorio el campo 'Organizado por'">
                             <f:validator validatorId="ValidarCampoObligatorio"/>
                             <f:validator validatorId="ValidarCampoMaximo30Caracteres"/>
-                            <p:ajax event = "keyup" update="nom1" />
+                            <p:ajax event = "keyup" update="ErrorOrga" />
                         </p:inputText>
-                        <p:message for="organizadoPorComision" id="nom1" class="message" />
+                        <p:message for="organizadoPorComision" id="ErrorOrga" class="message" />
                         
                         <p:outputLabel value="#{bundle.EditComisionLabel_descripcionComision}" for="descripcionComision" />
                         <p:inputTextarea rows="6" cols="25" id="descripcionComision" value="#{comisionController.selected.descripcionComision}">
@@ -116,7 +116,7 @@
             </p:panel> 
         </h:form>
         <h:form>
-            <p:commandButton action="#{comisionController.cancel(cargarFormulariosController,3)}" value="#{bundleProduccion.Cancel}" ajax="false"/>
+            <p:commandButton action="#{comisionController.prepareViewItemDocente(comisionController.selectDocente,cargarFormulariosController)}" value="#{bundleProduccion.Cancel}" ajax="false"/>
         </h:form>
     </h:body>
 </html>

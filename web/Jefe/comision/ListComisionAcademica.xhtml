@@ -21,7 +21,7 @@ and open the template in the editor.
             <h:form id="ComisionListForm">            
                     <h:panelGrid  columns="1">
                     
-                        <p:commandButton icon="ui-icon-plus"   value="#{bundleProduccion.Create}" actionListener="#{comisionController.prepareCreate(cargarFormulariosController,3)}"  ajax="false" update="ComisionListForm"/>
+                        <p:commandButton icon="ui-icon-plus" value="#{bundleProduccion.Create}" actionListener="#{comisionController.prepareCreate(cargarFormulariosController,3)}"  ajax="false" update="ComisionListForm"/>
                 
                     </h:panelGrid>
                
@@ -112,6 +112,8 @@ and open the template in the editor.
                         
                         <!--action="#{docenteController.destroy(item, cargarFormulariosController)}"-->
                     </p:dataTable>
+                    <p:commandButton action="#{comisionController.cancel(cargarFormulariosController)}" value="Atras" ajax="false"/>
+        
                 </p:panel>
             </h:form>    
         </h:body>

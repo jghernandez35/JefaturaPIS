@@ -13,7 +13,7 @@ and open the template in the editor.
 
     <h:body>
         <h:form>
-            <p:panel header="Crear Año Sabatico">
+            <p:panel header="CREAR AÑO SABATICO">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="3"  rendered="#{realizaController.selected != null}">
 
@@ -57,7 +57,7 @@ and open the template in the editor.
                         <p:message for="fechaFinComision" id="ned3" class="message"/>
                         
                         <p:outputLabel value="#{bundle.EditComisionLabel_organizadoPorComision}" for="organizadoPorComision" />
-                       <p:inputText id="organizadoPorComision" value="#{comisionController.selected.organizadoPorComision}" title="#{bundleProduccion.CreateRevistaTitle_nombreRevista}" required="true" requiredMessage="#{bundleProduccion.CreateRevistaRequiredMessage_nombreRevista}">
+                       <p:inputText id="organizadoPorComision" value="#{comisionController.selected.organizadoPorComision}" required="true" requiredMessage="es obligatorio el campo 'Organizado por'">
                             <f:validator validatorId="ValidarCampoObligatorio"/>
                             <f:validator validatorId="ValidarCampoMaximo30Caracteres"/>
                             <p:ajax event = "keyup" update="nom1" />
@@ -124,7 +124,7 @@ and open the template in the editor.
             </p:panel> 
         </h:form>
         <h:form>
-            <p:commandButton action="#{comisionController.cancel(cargarFormulariosController,2)}" value="#{bundleProduccion.Cancel}" ajax="false"/>
+            <p:commandButton action="#{comisionController.prepareViewItemDocenteAnioSabatico(comisionController.selectDocente,cargarFormulariosController)}" value="#{bundleProduccion.Cancel}" ajax="false"/>
         </h:form>
     </h:body>
 </html>

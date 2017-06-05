@@ -43,11 +43,17 @@ public class ComisionController implements Serializable {
     private List<Comision> items = null;
     private Comision selected;
     private Docente selectDocente;
+   //private CargarFormularioController cf=new CargarFormularioController();
 
     public ComisionController() {
         selected=new Comision();
     }
 
+   /* public void atras()
+    {
+    cf.cargarGestionComision();
+    }
+   */ 
     public Docente getSelectDocente() {
         return selectDocente;
     }
@@ -107,9 +113,15 @@ public class ComisionController implements Serializable {
     }
     
     public void cancel(CargarFormularioController formularioController) {
+        System.out.print("hola cancel");
         limpiarComision();
+         System.out.print("hola cancel2");
         formularioController.cargarGestionComision();
+         System.out.print("hola cancel3");
     }
+    
+    
+    
     
     public void limpiarComision()
     {
@@ -137,10 +149,9 @@ public class ComisionController implements Serializable {
     }*/
     
     public void destroy(Comision comi,CargarFormularioController formularioController) {
-        System.out.print("Hola Eliminar");
+       
        
         selected=comi;
-        System.out.print("Hola Eliminar"+ selected.getNumeroResolucionComision());
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("ComisionDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             limpiarComision(); // Remove selection
