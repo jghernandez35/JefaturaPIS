@@ -128,13 +128,28 @@ public class ComisionController implements Serializable {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ComisionUpdated"));
     }
 
-    public void destroy() {
+   /* public void destroy() {
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle.comisiones").getString("ComisionDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
+    }*/
+    
+    public void destroy(Comision comi,CargarFormularioController formularioController) {
+        System.out.print("Hola Eliminar");
+       
+        selected=comi;
+        System.out.print("Hola Eliminar"+ selected.getNumeroResolucionComision());
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("ComisionDeleted"));
+        if (!JsfUtil.isValidationFailed()) {
+            limpiarComision(); // Remove selection
+            items = null;    // Invalidate list of items to trigger re-query.
+        }
+        formularioController.cargarGestionComision();
     }
+    
+    
 
     public List<Comision> getItems() {
         if (items == null) {
@@ -294,7 +309,6 @@ public class ComisionController implements Serializable {
       Date fechaFin=selected.getFechaFinComision();
       
       if((fechaSolicitud.compareTo(fechaInicio))==0 || fechaSolicitud.compareTo(fechaInicio)<0){
-          System.out.print("Comparar fecha solicitud einicio"+fechaSolicitud.compareTo(fechaInicio));
           if((fechaInicio.compareTo(fechaFin))==0 || (fechaInicio.compareTo(fechaFin))<0)
           {
               System.out.print("Comparar fecha inicio y fin"+fechaInicio.compareTo(fechaFin));
