@@ -11,7 +11,7 @@
         <h:form>
             <p:panel header="Crear Comision Academica">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="3"  rendered="#{realizaController.selected != null}">
+                    <p:panelGrid columns="3"  rendered="#{comisionController.selected != null}">
 
                         <h:outputText value="#{bundleProduccion.ViewProduccionDocenteLabel_Documento}"/>
                         <h:outputText value="#{comisionController.selectDocente.documento}" title="#{bundleProduccion.ViewProduccionDocenteTitle_Documento}"/>
@@ -62,9 +62,8 @@
                         <p:message for="organizadoPorComision" id="nom1" class="message" />
                         
                         <p:outputLabel value="#{bundle.EditComisionLabel_descripcionComision}" for="descripcionComision" />
-                        <p:inputTextarea rows="6" cols="33" id="descripcionComision" value="#{comisionController.selected.descripcionComision}">
-                        <!--<p:inputText id="Descripcion" value="#{comisionController.selected.descripcionComision}" title="#{bundleProduccion.CreateRevistaTitle_nombreRevista}" required="true" requiredMessage="#{bundleProduccion.CreateRevistaRequiredMessage_nombreRevista}">
-                       -->
+                        <p:inputTextarea rows="6" cols="25" id="descripcionComision" value="#{comisionController.selected.descripcionComision}">
+                        
                             <f:validator validatorId="ValidarCampoMaximo800Caracteres"/>
                             <f:validator validatorId="ValidarCampoObligatorio"/>
                             <p:ajax event = "keyup" update="nom2" />
@@ -72,11 +71,8 @@
                         <p:message for="descripcionComision" id="nom2" class="message" />
                         
                        <p:outputLabel value="#{bundle.EditComisionLabel_EstadoComision}" for="EstadoComision" />                        
-                        <!-- <p:inputText id="Estado" value="#{comisionController.selected.idEstadoComision}" title="#{bundleProduccion.CreateRevistaTitle_nombreRevista}" required="true" requiredMessage="#{bundleProduccion.CreateRevistaRequiredMessage_nombreRevista}">
-                            <f:validator validatorId="ValidarCampoObligatorio"/>
-                            <p:ajax event = "keyup" update="nom3" />
-                        </p:inputText>-->
-                        <p:selectOneMenu id="EstadoComision" style="width:150px" value="#{comisionController.selected.idEstadoComision}" >
+                      
+                        <p:selectOneMenu id="EstadoComision" style="width:170px" value="#{comisionController.selected.idEstadoComision}" >
                             <f:selectItems value="#{estadocomisionController.itemsAvailableSelectOne}"
                                            var="estados"
                                            
@@ -87,11 +83,8 @@
                         <p:message for="EstadoComision" id="nom3" class="message" />
                         
                        <p:outputLabel value="#{bundle.EditComisionLabel_CiudadComision}" for="CiudadComision" />
-                         <!-- <p:inputText id="Ciudad" value="#{comisionController.selected.idCiudadComision}" title="#{bundleProduccion.CreateRevistaTitle_nombreRevista}" required="true" requiredMessage="#{bundleProduccion.CreateRevistaRequiredMessage_nombreRevista}">
-                            <f:validator validatorId="ValidarCampoObligatorio"/>
-                            <p:ajax event = "keyup" update="nom4" />
-                        </p:inputText>-->
-                        <p:selectOneMenu id="CiudadComision" style="width:150px" value="#{comisionController.selected.idCiudadComision}">
+                        
+                        <p:selectOneMenu id="CiudadComision" style="width:170px" value="#{comisionController.selected.idCiudadComision}">
                             <f:selectItems value="#{ciudadController.itemsAvailableSelectOne}"
                                            var="ciudades"
                                            itemValue="#{ciudades}"
@@ -102,31 +95,28 @@
                         
                         
                         <p:outputLabel value="#{bundle.EditComisionLabel_TipoParticipacionComision}" for="TipoParticipacionComision" />
-                        <!--<p:inputText id="participación" value="#{comisionController.selected.idTipoParticipacionComision}" title="#{bundleProduccion.CreateRevistaTitle_nombreRevista}" required="true" requiredMessage="#{bundleProduccion.CreateRevistaRequiredMessage_nombreRevista}">
-                            <f:validator validatorId="ValidarCampoObligatorio"/>
-                            <p:ajax event = "keyup" update="nom6" />
-                        </p:inputText>-->
-                        <p:selectOneMenu id="TipoParticipacionComision" style="width:150px" value="#{comisionController.selected.idTipoParticipacionComision}">
+                      
+                        <p:selectOneMenu id="TipoParticipacionComision" style="width:170px" value="#{comisionController.selected.idTipoParticipacionComision}">
                             <f:selectItems value="#{tipoparticipacionController.itemsAvailableSelectOne}"
                                            var="tiposP"
                                            itemValue="#{tiposP}"
                                            itemLabel="#{tiposP.nombreTipoParticipacion}"/>
                         </p:selectOneMenu>
                         <p:message for="TipoParticipacionComision" id="nom6" class="message" />
+                       
                    
-                   
-                        <h:outputText value=""/>
+                        <h:outputText value="Adjuntar soporte:"/>
+                         <p:fileUpload mode="simple"  />
                     </p:panelGrid>
                  
-                   <!-- <p:commandButton actionListener="#{comisionController.create(cargarFormulariosController,3)}"  action ="#{realizaController.recargarRevistas()}" value="#{bundleProduccion.Save}" update=":RevistasListDocenteForm:panel1:datalistRevistas" ajax="false"/>
-                   -->
-                   <p:commandButton actionListener="#{comisionController.create(cargarFormulariosController,3)}" value="#{bundleProduccion.Save}" update=":RevistasListDocenteForm:panel1:datalistRevistas" ajax="false"/>
+                   
+                   <p:commandButton actionListener="#{comisionController.create(cargarFormulariosController,3)}" value="#{bundle.Save}" ajax="false"/>
 
                 </h:panelGroup>
             </p:panel> 
         </h:form>
         <h:form>
-            <p:commandButton action="#{realizaController.cancel(cargarFormulariosController,3)}" value="#{bundleProduccion.Cancel}" ajax="false"/>
+            <p:commandButton action="#{comisionController.cancel(cargarFormulariosController,3)}" value="#{bundleProduccion.Cancel}" ajax="false"/>
         </h:form>
     </h:body>
 </html>

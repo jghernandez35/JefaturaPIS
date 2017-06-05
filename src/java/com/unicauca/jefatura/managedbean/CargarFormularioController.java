@@ -242,6 +242,10 @@ public class CargarFormularioController implements Serializable {
         this.ruta = "/Jefe/comision/ListComisionAnioSabatico.xhtml";
     }
     
+     public void cargarVerComisionTodas() {
+        this.ruta = "/Jefe/comision/ListComisionAll.xhtml";
+    }
+    
      public void cargarCrearComision() { //redirecciona a la interfaz de crear una comision Academica
         this.ruta = "/Jefe/comision/Create.xhtml";
     }

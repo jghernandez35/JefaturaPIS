@@ -43,6 +43,7 @@ public class ComisionController implements Serializable {
     private List<Comision> listaComisionesAcademicas=new ArrayList<>();
     private List<Comision> listaComisionesDeEstudio=new ArrayList<>();
     private List<Comision> listaComisionesAnioSabatico=new ArrayList<>();
+    private List<Comision> listaComisionesGeneral=new ArrayList<>();
     private List<Comision> tipoComision=new ArrayList<>();
     
     private List<Comision> items = null;
@@ -236,22 +237,24 @@ public class ComisionController implements Serializable {
         //limpiarComision();
     }
     public void prepareViewItemDocente(Docente selectDocent, CargarFormularioController formularioController) {
-        System.out.println("el nombre del docente es:" + selectDocent.getNombres());
-        this.selectDocente = selectDocent;
+       this.selectDocente = selectDocent;
         formularioController.cargarVerComisionAcademica();
         
     }
     
     public void prepareViewItemDocenteComisionEstudios(Docente selectDocent, CargarFormularioController formularioController) {
-        System.out.println("el nombre del docente es:" + selectDocent.getNombres());
         this.selectDocente = selectDocent;
         formularioController.cargarVerComisionEstudio();
     }
     
     public void prepareViewItemDocenteAnioSabatico(Docente selectDocent, CargarFormularioController formularioController) {
-        System.out.println("el nombre del docente es:" + selectDocent.getNombres());
         this.selectDocente = selectDocent;
         formularioController.cargarVerComisionAnioSabatico();
+    }
+    
+     public void prepareViewItemDocenteAll(Docente selectDocent, CargarFormularioController formularioController) {
+        this.selectDocente = selectDocent;
+        formularioController.cargarVerComisionTodas();
     }
     
     public void prepareUpdate(Comision item, CargarFormularioController formularioController) {
@@ -338,7 +341,7 @@ public class ComisionController implements Serializable {
         
      System.out.println("Hola comision3");
 
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("RealizaCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ComisionCreated"));
           
           }
     
@@ -429,26 +432,27 @@ public class ComisionController implements Serializable {
         listaComisionesAcademicas.clear();
         listaComisionesDeEstudio.clear();
         listaComisionesAnioSabatico.clear();
+        listaComisionesGeneral.clear();
+        
         limpiarComision();
   
         List<Comision> aux=new ArrayList<>();
         List<Comision> comisiones=new ArrayList<>();
         comisiones.clear();
-        //comisiones=null;
-        //aux=null;
         aux.clear();
         aux=ejbComisionFacade.findAll();
         for(int i=0;i<aux.size();i++)
         {
             int auxiliar=aux.get(i).getIdTipoComisionComision().getIdTipoComision();
             System.out.println(auxiliar);
-            //System.out.println("IDDDDDDDDDDDDD"+aux.get(i).getIdDocenteComision().getId());
             if(auxiliar==1&& aux.get(i).getIdDocenteComision().getId().equals(selectDocente.getId()))
                 listaComisionesAcademicas.add(aux.get(i));
             if(auxiliar==2 && aux.get(i).getIdDocenteComision().getId().equals(selectDocente.getId()))
                 listaComisionesDeEstudio.add(aux.get(i));
             if(auxiliar==3 && aux.get(i).getIdDocenteComision().getId().equals(selectDocente.getId()))
                 listaComisionesAnioSabatico.add(aux.get(i));
+            if(aux.get(i).getIdDocenteComision().getId().equals(selectDocente.getId()))
+                listaComisionesGeneral.add(aux.get(i));
         }
         
         if (tipo==1)
@@ -458,6 +462,12 @@ public class ComisionController implements Serializable {
            comisiones= listaComisionesDeEstudio;
         if(tipo==3)
             comisiones= listaComisionesAnioSabatico;
+        if(tipo==4)
+        {
+        comisiones=listaComisionesGeneral ;
+        }
+            
+        
               
         return comisiones;
     }
