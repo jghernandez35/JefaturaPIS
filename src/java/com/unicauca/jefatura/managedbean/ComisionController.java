@@ -377,6 +377,9 @@ public class ComisionController implements Serializable {
           }
     
           else{
+              
+               FacesContext.getCurrentInstance().addMessage("ContratacionCreateForm:fechaInicio", new FacesMessage(FacesMessage.SEVERITY_ERROR, "la fecha de inicio no puede ser mayor a la fecha de fin.", "la fecha de inicio no puede ser mayor a la fecha de fin."));
+             
            if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
             items = null;
@@ -386,10 +389,12 @@ public class ComisionController implements Serializable {
     }
               
       else{
+              FacesContext.getCurrentInstance().addMessage("ContratacionCreateForm:fechaInicio", new FacesMessage(FacesMessage.SEVERITY_ERROR, "la fecha de solicitud no puede ser mayor a la fecha de Inicio.", "la fecha de solicitud no puede ser mayor a la fecha de Inicio."));
+             
            if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
             items = null;
-
+            
         }
           }
               
