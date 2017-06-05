@@ -116,7 +116,7 @@ public class ComisionController implements Serializable {
         System.out.print("hola cancel");
         limpiarComision();
          System.out.print("hola cancel2");
-        formularioController.cargarGestionComision();
+        formularioController.cargarComision();
          System.out.print("hola cancel3");
     }
     

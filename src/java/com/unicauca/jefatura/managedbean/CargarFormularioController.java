@@ -9,7 +9,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 
-@Named(value = "cargarFormulariosController")
+@Named("cargarFormulariosController")
 @SessionScoped
 public class CargarFormularioController implements Serializable {
 
@@ -264,4 +264,5 @@ public class CargarFormularioController implements Serializable {
         this.ruta = "/Jefe/comision/Edit.xhtml";
         
     }
+     //COMISIONES DAVID ERAZO - DIANA SANCHEZ
 }
