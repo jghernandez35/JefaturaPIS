@@ -111,7 +111,7 @@
                         
                     </p:panelGrid>
                         <p:commandButton actionListener="#{comisionController.update(cargarFormulariosController)}" value="#{bundle.Save}" ajax="false"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="ComisionEditDialog.hide()"/>
+                   <p:commandButton value="Cancelar" action="#{comisionController.atrasVer(cargarFormulariosController)}" ajax="false"/>
                 </h:panelGroup>
                  </p:panel>
             </h:form>
