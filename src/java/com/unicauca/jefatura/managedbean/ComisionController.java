@@ -149,8 +149,48 @@ public class ComisionController implements Serializable {
         limpiarComision();
     }
 
-    public void update() {
+    public void update(CargarFormularioController formularioController) {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ComisionUpdated"));
+    
+      Date fechaSolicitud=selected.getFechaSolicitudComision();
+      Date fechaInicio=selected.getFechaInicioComision();
+      Date fechaFin=selected.getFechaFinComision();
+      
+      if((fechaSolicitud.compareTo(fechaInicio))==0 || fechaSolicitud.compareTo(fechaInicio)<0){
+          if((fechaInicio.compareTo(fechaFin))==0 || (fechaInicio.compareTo(fechaFin))<0)
+          {
+       // selected.setIdDocenteComision(selectDocente);
+        
+
+         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ComisionUpdated"));
+      
+          }
+    
+          else{
+              
+               FacesContext.getCurrentInstance().addMessage("ContratacionCreateForm:fechaInicio", new FacesMessage(FacesMessage.SEVERITY_ERROR, "la fecha de inicio no puede ser mayor a la fecha de fin.", "la fecha de inicio no puede ser mayor a la fecha de fin."));
+             
+           if (!JsfUtil.isValidationFailed()) {
+            items = null;    // Invalidate list of items to trigger re-query.
+            items = null;
+
+        }
+          }
+    }
+              
+      else{
+              FacesContext.getCurrentInstance().addMessage("ContratacionCreateForm:fechaInicio", new FacesMessage(FacesMessage.SEVERITY_ERROR, "la fecha de solicitud no puede ser mayor a la fecha de Inicio.", "la fecha de solicitud no puede ser mayor a la fecha de Inicio."));
+             
+           if (!JsfUtil.isValidationFailed()) {
+            items = null;    // Invalidate list of items to trigger re-query.
+            items = null;
+            
+        }
+          }
+              
+       
+        limpiarComision();
+
     }
 
    /* public void destroy() {
