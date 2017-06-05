@@ -225,7 +225,22 @@ public class ComisionController implements Serializable {
             limpiarComision(); // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
-        formularioController.cargarGestionComision();
+        if(null!=comi.getIdTipoComisionComision().getIdTipoComision())
+            switch (comi.getIdTipoComisionComision().getIdTipoComision()) {
+            case 1:
+                formularioController.cargarVerComisionAcademica();
+                break;
+            case 2:
+                formularioController.cargarVerComisionEstudio();    
+                break;
+            case 3:
+                formularioController.cargarVerComisionAnioSabatico();
+                break;
+            default:
+                formularioController.cargarComision();
+                break;
+        }   
+        limpiarComision();
     }
     
     
