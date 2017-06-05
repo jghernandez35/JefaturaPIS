@@ -110,7 +110,7 @@
                         </p:selectOneMenu>
                         
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{comisionController.update}" value="#{bundle.Save}" ajax="false"/>
+                        <p:commandButton actionListener="#{comisionController.update(cargarFormulariosController)}" value="#{bundle.Save}" ajax="false"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ComisionEditDialog.hide()"/>
                 </h:panelGroup>
                  </p:panel>

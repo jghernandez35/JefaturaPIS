@@ -150,7 +150,7 @@ public class ComisionController implements Serializable {
     }
 
     public void update(CargarFormularioController formularioController) {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ComisionUpdated"));
+        
     
       Date fechaSolicitud=selected.getFechaSolicitudComision();
       Date fechaInicio=selected.getFechaInicioComision();
@@ -189,8 +189,23 @@ public class ComisionController implements Serializable {
           }
               
        
+        
+        if(null!=selected.getIdTipoComisionComision().getIdTipoComision())
+            switch (selected.getIdTipoComisionComision().getIdTipoComision()) {
+            case 1:
+                formularioController.cargarVerComisionAcademica();
+                break;
+            case 2:
+                formularioController.cargarVerComisionEstudio();    
+                break;
+            case 3:
+                formularioController.cargarVerComisionAnioSabatico();
+                break;
+            default:
+                formularioController.cargarComision();
+                break;
+        }   
         limpiarComision();
-
     }
 
    /* public void destroy() {
