@@ -54,7 +54,7 @@
                        <h:outputText value="#{comisionController.selected.idEstadoComision.nombreEstado}" id="EstadoComision" />
                    
                         </p:panelGrid>
-                    <p:commandButton value="Atras" actionListener="#{comisionController.cancel(cargarFormulariosController)}"/>
+                    <p:commandButton value="Atras" action="#{comisionController.atrasVer(cargarFormulariosController)}" ajax="false"/>
                 </h:panelGroup>
             </p:panel>
         </h:form>
