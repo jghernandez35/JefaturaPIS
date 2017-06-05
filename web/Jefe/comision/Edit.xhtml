@@ -108,6 +108,12 @@
                                            itemLabel="#{TipoComisionComisionItem.nombreTipoComision}"
                                            />
                         </p:selectOneMenu>
+                         <p:message for="TipoComisionComision" id="nom7" class="message" />
+                        
+                        
+                        <h:outputText value="Adjuntar soporte:"/>
+                         <p:fileUpload mode="simple"  />
+                    
                         
                     </p:panelGrid>
                         <p:commandButton actionListener="#{comisionController.update(cargarFormulariosController)}" value="#{bundle.Save}" ajax="false"/>
