@@ -443,31 +443,6 @@ public class ComisionController implements Serializable {
         
 
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ComisionCreated"));
-          
-          }
-    
-          else{
-              
-               FacesContext.getCurrentInstance().addMessage("ContratacionCreateForm:fechaInicio", new FacesMessage(FacesMessage.SEVERITY_ERROR, "la fecha de inicio no puede ser mayor a la fecha de fin.", "la fecha de inicio no puede ser mayor a la fecha de fin."));
-             
-           if (!JsfUtil.isValidationFailed()) {
-            items = null;    // Invalidate list of items to trigger re-query.
-            items = null;
-
-        }
-          }
-    }
-              
-      else{
-              FacesContext.getCurrentInstance().addMessage("ContratacionCreateForm:fechaInicio", new FacesMessage(FacesMessage.SEVERITY_ERROR, "la fecha de solicitud no puede ser mayor a la fecha de Inicio.", "la fecha de solicitud no puede ser mayor a la fecha de Inicio."));
-             
-           if (!JsfUtil.isValidationFailed()) {
-            items = null;    // Invalidate list of items to trigger re-query.
-            items = null;
-            
-        }
-          }
-              
         switch (tipo) {
             case 1://ver comisiones de estudio
                 formularioController.cargarVerComisionEstudio();
@@ -480,8 +455,58 @@ public class ComisionController implements Serializable {
                 formularioController.cargarVerComisionAcademica();
                 break;
         }
-        limpiarComision();
+          
+          }
+    
+          else{
+              
+               FacesContext.getCurrentInstance().addMessage("ContratacionCreateForm:fechaInicio", new FacesMessage(FacesMessage.SEVERITY_ERROR, "la fecha de inicio no puede ser mayor a la fecha de fin.", "la fecha de inicio no puede ser mayor a la fecha de fin."));
+             
+          /* if (!JsfUtil.isValidationFailed()) {
+            items = null;    // Invalidate list of items to trigger re-query.
+            items = null;
 
+                                              }
+            switch (tipo) {
+            case 1://Permanece en la misma interfaz ya que hubo error en las fechas
+                formularioController.cargarVerComisionEstudio();
+
+                break;
+            case 2://Permanece en la misma interfaz ya que hubo error en las fechas
+                formularioController.cargarVerComisionAnioSabatico();
+                break;
+            case 3://Permanece en la misma interfaz ya que hubo error en las fechas
+                formularioController.cargarVerComisionAcademica();
+                break;*/
+        }
+           
+          
+    }
+              
+      else{
+              FacesContext.getCurrentInstance().addMessage("ContratacionCreateForm:fechaInicio", new FacesMessage(FacesMessage.SEVERITY_ERROR, "la fecha de solicitud no puede ser mayor a la fecha de Inicio.", "la fecha de solicitud no puede ser mayor a la fecha de Inicio."));
+             
+          /* if (!JsfUtil.isValidationFailed()) {
+            items = null;    // Invalidate list of items to trigger re-query.
+            items = null;
+            
+            switch (tipo) {
+            case 1://Permanece en la misma interfaz ya que hubo error en las fechas
+                formularioController.cargarVerComisionEstudio();
+
+                break;
+            case 2://Permanece en la misma interfaz ya que hubo error en las fechas
+                formularioController.cargarVerComisionAnioSabatico();
+                break;
+            case 3://Permanece en la misma interfaz ya que hubo error en las fechas
+                formularioController.cargarVerComisionAcademica();
+                break;
+            
+        }
+          }*/
+              
+      }
+     
     }
     
     public List<Comision> comisiones(int tipo)//Este metodo permite listar las comisiones de un docente en

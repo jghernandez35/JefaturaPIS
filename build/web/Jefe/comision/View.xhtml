@@ -10,7 +10,7 @@
     <h:body>
 
         <h:form id="DocenteViewForm">
-            <p:panel header="VER COMISIÓN">
+            <p:panel header="Ver Comisión Docente #{comisionController.selectDocente.nombres} #{comisionController.selectDocente.apellidos}">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{comisionController.selected != null}">
                         
@@ -54,7 +54,7 @@
                        <h:outputText value="#{comisionController.selected.idEstadoComision.nombreEstado}" id="EstadoComision" />
                    
                         </p:panelGrid>
-                    <p:commandButton value="Atras" action="#{comisionController.atrasVer(cargarFormulariosController)}" ajax="false"/>
+                    <p:commandButton value="Atras" action="#{comisionController.atrasVer(cargarFormulariosController)}" icon="fa fa-arrow-left" ajax="false"/>
                 </h:panelGroup>
             </p:panel>
         </h:form>

@@ -13,7 +13,7 @@ and open the template in the editor.
 
     <h:body>
         <h:form>
-            <p:panel header="CREAR COMISION DE ESTUDIOS">
+            <p:panel header="Nueva Comisión De Estudios Docente #{comisionController.selectDocente.nombres} #{comisionController.selectDocente.apellidos}">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="3"  rendered="#{realizaController.selected != null}">
 
@@ -28,7 +28,7 @@ and open the template in the editor.
                         <h:outputText value=""/>
 
                         <p:outputLabel value="#{bundle.EditComisionLabel_numeroResolucionComision}" for="numeroResolucionComision" />
-                        <p:inputText id="numeroResolucionComision" value="#{comisionController.selected.numeroResolucionComision}" title="Hola" required="true" requiredMessage="Codigo de la resolucion es obligatorio">
+                        <p:inputText id="numeroResolucionComision" value="#{comisionController.selected.numeroResolucionComision}" placeholder="numeros y/o letras" required="true" requiredMessage="Codigo de la resolucion es obligatorio">
                             <f:validator validatorId="ValidarCampoObligatorio"/>
                             <f:validator validatorId="ValidarCampoMaximo30Caracteres"/>
                             <p:ajax event = "keyup" update="nom" />
@@ -36,7 +36,7 @@ and open the template in the editor.
                         <p:message for="numeroResolucionComision" id="nom" class="message" />
                         
                        <p:outputLabel value="#{bundle.EditComisionLabel_numeroActaComision}" for="numeroActaComision" />
-                        <p:inputText  id="numeroActaComision" value="#{comisionController.selected.numeroActaComision}"  required="true" requiredMessage="Codigo del Acta es Obligatorio">
+                        <p:inputText  id="numeroActaComision" value="#{comisionController.selected.numeroActaComision}"  placeholder="numeros y/o letras" required="true" requiredMessage="Codigo del Acta es Obligatorio">
                             <f:validator validatorId="ValidarCampoObligatorio"/>
                             <f:validator validatorId="ValidarCampoMaximo30Caracteres"/>
                             <p:ajax event = "keyup" update="ned" />
@@ -57,7 +57,7 @@ and open the template in the editor.
                         <p:message for="fechaFinComision" id="ned3" class="message"/>
                         
                         <p:outputLabel value="#{bundle.EditComisionLabel_organizadoPorComision}" for="organizadoPorComision" />
-                       <p:inputText id="organizadoPorComision" value="#{comisionController.selected.organizadoPorComision}" required="true" requiredMessage="es obligatorio el campo 'Organizado por'">
+                       <p:inputText id="organizadoPorComision" value="#{comisionController.selected.organizadoPorComision}" required="true" placeholder="ejm: Universidad de Granada" requiredMessage="Es obligatorio especificar el organizador">
                             <f:validator validatorId="ValidarCampoObligatorio"/>
                             <f:validator validatorId="ValidarCampoMaximo30Caracteres"/>
                             <p:ajax event = "keyup" update="nom1" />
@@ -75,10 +75,6 @@ and open the template in the editor.
                         <p:message for="descripcionComision" id="nom2" class="message" />
                         
                         <p:outputLabel value="#{bundle.EditComisionLabel_EstadoComision}" for="EstadoComision" />                        
-                        <!-- <p:inputText id="Estado" value="#{comisionController.selected.idEstadoComision}" title="#{bundleProduccion.CreateRevistaTitle_nombreRevista}" required="true" requiredMessage="#{bundleProduccion.CreateRevistaRequiredMessage_nombreRevista}">
-                            <f:validator validatorId="ValidarCampoObligatorio"/>
-                            <p:ajax event = "keyup" update="nom3" />
-                        </p:inputText>-->
                         <p:selectOneMenu id="EstadoComision" style="width:170px" value="#{comisionController.selected.idEstadoComision}" >
                             <f:selectItems value="#{estadocomisionController.itemsAvailableSelectOne}"
                                            var="estados"
@@ -90,10 +86,6 @@ and open the template in the editor.
                         <p:message for="EstadoComision" id="nom3" class="message" />
                         
                         <p:outputLabel value="#{bundle.EditComisionLabel_CiudadComision}" for="CiudadComision" />
-                         <!-- <p:inputText id="Ciudad" value="#{comisionController.selected.idCiudadComision}" title="#{bundleProduccion.CreateRevistaTitle_nombreRevista}" required="true" requiredMessage="#{bundleProduccion.CreateRevistaRequiredMessage_nombreRevista}">
-                            <f:validator validatorId="ValidarCampoObligatorio"/>
-                            <p:ajax event = "keyup" update="nom4" />
-                        </p:inputText>-->
                         <p:selectOneMenu id="CiudadComision" style="width:170px" value="#{comisionController.selected.idCiudadComision}">
                             <f:selectItems value="#{ciudadController.itemsAvailableSelectOne}"
                                            var="ciudades"
@@ -121,16 +113,14 @@ and open the template in the editor.
                          <h:outputText value="Adjuntar soporte:"/>
                          <p:fileUpload mode="simple" />
                     </p:panelGrid>
-                 
-                   <!-- <p:commandButton actionListener="#{comisionController.create(cargarFormulariosController,3)}"  action ="#{realizaController.recargarRevistas()}" value="#{bundleProduccion.Save}" update=":RevistasListDocenteForm:panel1:datalistRevistas" ajax="false"/>
-                   -->
-                   <p:commandButton actionListener="#{comisionController.create(cargarFormulariosController,1)}" value="#{bundleProduccion.Save}" update=":RevistasListDocenteForm:panel1:datalistRevistas" ajax="false"/>
+
+                   <p:commandButton actionListener="#{comisionController.create(cargarFormulariosController,1)}" value="#{bundleProduccion.Save}" icon="fa fa-save" ajax="false"/>
 
                 </h:panelGroup>
             </p:panel> 
         </h:form>
         <h:form>
-            <p:commandButton action="#{comisionController.prepareViewItemDocenteComisionEstudios(comisionController.selectDocente,cargarFormulariosController)}" value="#{bundleProduccion.Cancel}" ajax="false"/>
+            <p:commandButton action="#{comisionController.prepareViewItemDocenteComisionEstudios(comisionController.selectDocente,cargarFormulariosController)}" value="#{bundle.Cancel}" icon="fa fa-close" ajax="false"/>
         </h:form>
     </h:body>
 </html>

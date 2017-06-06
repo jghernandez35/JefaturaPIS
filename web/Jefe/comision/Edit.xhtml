@@ -6,8 +6,9 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
+    <h:body>
             <h:form id="ComisionEditForm">
-                 <p:panel header="EDITAR COMISIÓN">
+                 <p:panel header="Editar Comisión Docente #{comisionController.selectDocente.nombres} #{comisionController.selectDocente.apellidos}">
                     <h:panelGroup id="display">
                     <p:panelGrid columns="3" rendered="#{comisionController.selected != null}">   
                         
@@ -22,7 +23,7 @@
                         <h:outputText value=""/>
                         
                         <p:outputLabel value="#{bundle.EditComisionLabel_numeroResolucionComision}" for="numeroResolucionComision" />
-                        <p:inputText id="numeroResolucionComision" value="#{comisionController.selected.numeroResolucionComision}" title="#{bundle.EditComisionTitle_numeroResolucionComision}" required="true" requiredMessage="#{bundle.EditComisionRequiredMessage_numeroResolucionComision}">
+                        <p:inputText id="numeroResolucionComision" value="#{comisionController.selected.numeroResolucionComision}" title="#{bundle.EditComisionTitle_numeroResolucionComision}" placeholder="numeros y/o letras" required="true" requiredMessage="#{bundle.EditComisionRequiredMessage_numeroResolucionComision}">
                         <f:validator validatorId="ValidarCampoObligatorio"/>
                         <f:validator validatorId="ValidarCampoMaximo30Caracteres"/>
                         <p:ajax event = "keyup" update="nom" />
@@ -30,7 +31,7 @@
                         <p:message for="numeroResolucionComision" id="nom" class="message" />
                         
                         <p:outputLabel value="#{bundle.EditComisionLabel_numeroActaComision}" for="numeroActaComision" />
-                        <p:inputText id="numeroActaComision" value="#{comisionController.selected.numeroActaComision}" title="#{bundle.EditComisionTitle_numeroActaComision}" required="true" requiredMessage="#{bundle.EditComisionRequiredMessage_numeroActaComision}">
+                        <p:inputText id="numeroActaComision" value="#{comisionController.selected.numeroActaComision}" title="#{bundle.EditComisionTitle_numeroActaComision}" placeholder="numeros y/o letras" required="true" requiredMessage="#{bundle.EditComisionRequiredMessage_numeroActaComision}">
                             <f:validator validatorId="ValidarCampoObligatorio"/>
                             <f:validator validatorId="ValidarCampoMaximo30Caracteres"/>
                             <p:ajax event = "keyup" update="ned" />
@@ -51,7 +52,7 @@
                         <p:message for="fechaFinComision" id="ned3" class="message"/>
                         
                         <p:outputLabel value="#{bundle.EditComisionLabel_organizadoPorComision}" for="organizadoPorComision" />
-                        <p:inputText id="organizadoPorComision" value="#{comisionController.selected.organizadoPorComision}" title="#{bundle.EditComisionTitle_organizadoPorComision}" required="true" requiredMessage="#{bundle.EditComisionRequiredMessage_organizadoPorComision}">
+                        <p:inputText id="organizadoPorComision" value="#{comisionController.selected.organizadoPorComision}" title="#{bundle.EditComisionTitle_organizadoPorComision}" placeholder="ejm: Universidad de Granada"  required="true" requiredMessage="Es obligatorio especificar el organizador">
                         <f:validator validatorId="ValidarCampoObligatorio"/>
                             <f:validator validatorId="ValidarCampoMaximo30Caracteres"/>
                             <p:ajax event = "keyup" update="nom1" />
@@ -59,7 +60,7 @@
                         <p:message for="organizadoPorComision" id="nom1" class="message" />
                         
                         <p:outputLabel value="#{bundle.EditComisionLabel_descripcionComision}" for="descripcionComision" />
-                        <p:inputTextarea rows="4" cols="30" id="descripcionComision" value="#{comisionController.selected.descripcionComision}" title="#{bundle.EditComisionTitle_descripcionComision}" required="true" requiredMessage="#{bundle.EditComisionRequiredMessage_descripcionComision}">                 
+                        <p:inputTextarea rows="4" cols="32" id="descripcionComision" value="#{comisionController.selected.descripcionComision}" title="#{bundle.EditComisionTitle_descripcionComision}" required="true" requiredMessage="La descripcion no puede estar vacía">                 
                         <f:validator validatorId="ValidarCampoMaximo800Caracteres"/>
                             <f:validator validatorId="ValidarCampoObligatorio"/>
                             <p:ajax event = "keyup" update="nom2" />
@@ -116,9 +117,13 @@
                     
                         
                     </p:panelGrid>
-                        <p:commandButton actionListener="#{comisionController.update(cargarFormulariosController)}" value="#{bundle.Save}" ajax="false"/>
-                   <p:commandButton value="Cancelar" action="#{comisionController.atrasVer(cargarFormulariosController)}" ajax="false"/>
+                        <p:commandButton actionListener="#{comisionController.update(cargarFormulariosController)}" value="#{bundle.Save}" icon="fa fa-save" ajax="false"/>
+                   
                 </h:panelGroup>
                  </p:panel>
             </h:form>
+            <h:form>
+                <p:commandButton action="#{comisionController.atrasVer(cargarFormulariosController)}" value="#{bundle.Cancel}" icon="fa fa-close" ajax="false"/>
+            </h:form>
+    </h:body>
 </html>
